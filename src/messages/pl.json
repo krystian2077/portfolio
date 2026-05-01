@@ -68,5 +68,149 @@
       "description": "Ta strona - premium personal brand website zbudowany w Next.js 15 z naciskiem na wydajnosc, i18n i UX.",
       "cta": "Zobacz kod"
     }
+  },
+
+  ,
+  "projects": {
+    "staymap": {
+      "hero": {
+        "badge": "Flagship Project",
+        "title": "StayMap Polska",
+        "subtitle": "Map-first marketplace for domestic accommodation in Poland. Dynamic pricing, AI search, real-time chat.",
+        "cta": { "live": "Live Demo", "github": "GitHub" },
+        "links": { "live": "https://staymap-polska.vercel.app/", "github": "https://github.com/krystian2077/staymap-polska" }
+      },
+      "problem": { "title": "Problem", "body": "Brak lokalnej platformy z mapą jako głównym interfejsem odkrywania ofert oraz brak uwzględnienia polskiej sezonowości w cenach." },
+      "role": { "title": "Moja rola", "body": "Backend-focused: API, geosearch, pricing engine, WebSocket chat, Celery tasks, infra." },
+      "architecture": { "title": "Architektura", "body": "Next.js (BFF) → Daphne ASGI → Django REST + Channels → PostgreSQL+PostGIS + Redis + Celery" },
+      "features": { "title": "Kluczowe funkcje", "items": ["Map-first discovery", "Dynamic pricing engine", "AI search po polsku","Realtime chat (WebSocket)","Blind-release reviews","Host panel + moderacja"] },
+      "challenges": { "title": "Największe wyzwania", "items": ["Integracja PostGIS i ranking ofert","Redis w trzech rolach","ASGI + WebSocket + REST w jednej architekturze"] },
+      "whatILearned": { "title": "Czego się nauczyłem", "body": "Geospatial queries, ASGI architecture, complex pricing rules, production-grade integrations." },
+      "next": { "title": "Roadmap", "body": "Dalsze testy E2E, monitoring, optymalizacja zapytań geograficznych." }
+    },
+    "prokom": {
+      "hero": {
+        "badge": "Business Solution",
+        "title": "PRO-KOM Serwis System",
+        "subtitle": "System zarządzania naprawami sprzętu elektronicznego: klient, pracownik, admin, automatyzacja.",
+        "cta": { "github": "GitHub" },
+        "links": { "github": "https://github.com/krystian2077/prokom-system" }
+      },
+      "problem": { "title": "Problem", "body": "Małe i średnie serwisy potrzebują automatyzacji procesu napraw i real-time tracking statusu." },
+      "role": { "title": "Moja rola", "body": "Projekt architektury, backend, Celery async jobs, raportowanie i integracje." },
+      "architecture": { "title": "Architektura", "body": "Django REST → PostgreSQL → Redis → Celery → Next.js frontend, Docker, Nginx" },
+      "features": { "title": "Kluczowe funkcje", "items": ["Zgłaszanie napraw online","Kanban board dla pracowników","Automatyzacja powiadomień","RBAC i audit log","Eksport raportów","Kalendarz harmonogramów"] },
+      "challenges": { "title": "Największe wyzwania", "items": ["Model danych naprawy i historii","Optymalizacja kolejek Celery","Bezpieczeństwo i RBAC"] },
+      "whatILearned": { "title": "Czego się nauczyłem", "body": "Design procesów biznesowych, modularne Django apps, skalowanie z Redis i Celery." },
+      "next": { "title": "Roadmap", "body": "UX improvements, integracja z zewnętrznymi systemami księgowymi, automatyczne backupy." }
+    }
   }
-}
+  "proofOfWork": {
+    "eyebrow": "Proof of work",
+    "title": "Proof of Work - nie ikonki, konkretne dowody",
+    "subtitle": "Tu pokazuje gdzie konkretnie i po co uzylem kluczowych technologii.",
+    "items": {
+      "djangoDrf": {
+        "title": "Django + DRF",
+        "description": "REST API StayMap: rezerwacje, auth, panel hosta, moderacja i AI search."
+      },
+      "postgis": {
+        "title": "PostGIS + GeoDjango",
+        "description": "Geosearch noclegow na mapie z rankingiem wynikow pod realny use case rynku PL."
+      },
+      "celeryRedis": {
+        "title": "Celery + Redis",
+        "description": "Redis w 3 rolach i zadania async: cleanup, auto-anulowanie, przypomnienia, odswiezanie cache."
+      },
+      "channelsWebsocket": {
+        "title": "WebSocket + Django Channels",
+        "description": "Realtime chat w StayMap na architekturze ASGI + Daphne z eventami wiadomosci i typing."
+      },
+      "jwtGoogle": {
+        "title": "JWT + Google OAuth",
+        "description": "Logowanie i autoryzacja z tokenami oraz bezpieczna obsluga sesji uzytkownika."
+      },
+      "dockerCompose": {
+        "title": "Docker Compose",
+        "description": "Srodowisko dev/prod dla obu projektow: backend, baza danych, redis i worker."
+      },
+      "nextAppRouter": {
+        "title": "Next.js App Router",
+        "description": "Frontend/BFF dla StayMap i PRO-KOM: SSR/CSR oraz modularna struktura widokow."
+      },
+      "testing": {
+        "title": "pytest + Playwright",
+        "description": "Testy backend i E2E frontend, z naciskiem na stabilnosc kluczowych flow uzytkownika."
+      },
+      "aiIntegration": {
+        "title": "AI Integration",
+        "description": "OpenAI API w StayMap oraz praktyczne wykorzystanie LLM i prompt engineering w workflow."
+      },
+      "swagger": {
+        "title": "Swagger/OpenAPI",
+        "description": "Automatyczna dokumentacja API przez drf-spectacular, gotowa dla integracji i review."
+      }
+    }
+  }
+  ,
+  "timeline": {
+    "eyebrow": "Doświadczenie",
+    "title": "Doświadczenie i edukacja",
+    "subtitle": "Timeline: studia, kursy, projekty i praca — w kolejności od najnowszych.",
+    "items": {
+      "student": {
+              "projects": {
+                "eyebrow": "Projekty featured",
+                "title": "Case studies, nie tylko zrzuty ekranu",
+                "subtitle": "Dwa glowne projekty rozwiazujace realne problemy biznesowe oraz ta strona jako osobny projekt engineeringowy.",
+                "actions": {
+                  "liveDemo": "Live Demo",
+                  "github": "GitHub",
+                  "caseStudy": "Case study"
+                },
+                "staymap": {
+                  "badge": "Flagship Project",
+                  "title": "StayMap Polska",
+                  "description": "Produkcyjna platforma marketplace noclegow w Polsce. Map-first UX, AI search po polsku, dynamic pricing, real-time chat, pelny panel hosta i moderacja.",
+                  "stats": "12 modulow · 44 widoki · 25 plikow testowych · 9 trybow podrozy",
+                  "hero": {
+                    "badge": "Flagship Project",
+                    "title": "StayMap Polska",
+                    "subtitle": "Map-first marketplace for domestic accommodation in Poland. Dynamic pricing, AI search, real-time chat.",
+                    "cta": { "live": "Live Demo", "github": "GitHub" },
+                    "links": { "live": "https://staymap-polska.vercel.app/", "github": "https://github.com/krystian2077/staymap-polska" }
+                  },
+                  "problem": { "title": "Problem", "body": "Brak lokalnej platformy z mapą jako głównym interfejsem odkrywania ofert oraz brak uwzględnienia polskiej sezonowości w cenach." },
+                  "role": { "title": "Moja rola", "body": "Backend-focused: API, geosearch, pricing engine, WebSocket chat, Celery tasks, infra." },
+                  "architecture": { "title": "Architektura", "body": "Next.js (BFF) → Daphne ASGI → Django REST + Channels → PostgreSQL+PostGIS + Redis + Celery" },
+                  "features": { "title": "Kluczowe funkcje", "items": ["Map-first discovery", "Dynamic pricing engine", "AI search po polsku","Realtime chat (WebSocket)","Blind-release reviews","Host panel + moderacja"] },
+                  "challenges": { "title": "Największe wyzwania", "items": ["Integracja PostGIS i ranking ofert","Redis w trzech rolach","ASGI + WebSocket + REST w jednej architekturze"] },
+                  "whatILearned": { "title": "Czego się nauczyłem", "body": "Geospatial queries, ASGI architecture, complex pricing rules, production-grade integrations." },
+                  "next": { "title": "Roadmap", "body": "Dalsze testy E2E, monitoring, optymalizacja zapytań geograficznych." }
+                },
+                "prokom": {
+                  "badge": "Business Solution",
+                  "title": "PRO-KOM Serwis System",
+                  "description": "System zarzadzania naprawami elektroniki dla serwisow. Panele klienta, pracownika i admina, Kanban board, Celery async, tracking statusu i automatyzacja procesu.",
+                  "stats": "3 panele uzytkownika · RBAC · Audit log · SSL/TLS",
+                  "hero": {
+                    "badge": "Business Solution",
+                    "title": "PRO-KOM Serwis System",
+                    "subtitle": "System zarządzania naprawami sprzętu elektronicznego: klient, pracownik, admin, automatyzacja.",
+                    "cta": { "github": "GitHub" },
+                    "links": { "github": "https://github.com/krystian2077/prokom-system" }
+                  },
+                  "problem": { "title": "Problem", "body": "Małe i średnie serwisy potrzebują automatyzacji procesu napraw i real-time tracking statusu." },
+                  "role": { "title": "Moja rola", "body": "Projekt architektury, backend, Celery async jobs, raportowanie i integracje." },
+                  "architecture": { "title": "Architektura", "body": "Django REST → PostgreSQL → Redis → Celery → Next.js frontend, Docker, Nginx" },
+                  "features": { "title": "Kluczowe funkcje", "items": ["Zgłaszanie napraw online","Kanban board dla pracowników","Automatyzacja powiadomień","RBAC i audit log","Eksport raportów","Kalendarz harmonogramów"] },
+                  "challenges": { "title": "Największe wyzwania", "items": ["Model danych naprawy i historii","Optymalizacja kolejek Celery","Bezpieczeństwo i RBAC"] },
+                  "whatILearned": { "title": "Czego się nauczyłem", "body": "Design procesów biznesowych, modularne Django apps, skalowanie z Redis i Celery." },
+                  "next": { "title": "Roadmap", "body": "UX improvements, integracja z zewnętrznymi systemami księgowymi, automatyczne backupy." }
+                },
+                "portfolio": {
+                  "title": "Portfolio Website",
+                  "description": "Ta strona - premium personal brand website zbudowany w Next.js 15 z naciskiem na wydajnosc, i18n i UX.",
+                  "cta": "Zobacz kod"
+                }
+              },

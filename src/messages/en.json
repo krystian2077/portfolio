@@ -68,5 +68,139 @@
       "description": "This website - a premium personal brand site built with Next.js 15, focused on performance, i18n, and UX.",
       "cta": "View code"
     }
+  },
+
+      ,
+      "projects": {
+        "staymap": {
+          "hero": {
+            "badge": "Flagship Project",
+            "title": "StayMap Polska",
+            "subtitle": "Map-first marketplace for domestic accommodation in Poland. Dynamic pricing, AI search, real-time chat.",
+            "cta": { "live": "Live Demo", "github": "GitHub" },
+            "links": { "live": "https://staymap-polska.vercel.app/", "github": "https://github.com/krystian2077/staymap-polska" }
+          },
+          "problem": { "title": "Problem", "body": "Lack of a local map-first accommodation marketplace and pricing adapted to Polish seasonality." },
+          "role": { "title": "My role", "body": "Backend-focused: API, geosearch, pricing engine, WebSocket chat, Celery tasks, infra." },
+          "architecture": { "title": "Architecture", "body": "Next.js (BFF) → Daphne ASGI → Django REST + Channels → PostgreSQL+PostGIS + Redis + Celery" },
+          "features": { "title": "Key features", "items": ["Map-first discovery","Dynamic pricing engine","AI search (Polish)","Realtime chat (WebSocket)","Blind-release reviews","Host panel + moderation"] },
+          "challenges": { "title": "Biggest challenges", "items": ["PostGIS integration and ranking","Redis in three roles","ASGI + WebSocket + REST architecture"] },
+          "whatILearned": { "title": "What I learned", "body": "Geospatial queries, ASGI architecture, complex pricing rules, production-grade integrations." },
+          "next": { "title": "Roadmap", "body": "More E2E tests, monitoring, geosearch query optimization." }
+        },
+        "prokom": {
+          "hero": {
+            "badge": "Business Solution",
+            "title": "PRO-KOM Service System",
+            "subtitle": "Repair management system: client, staff, admin panels, automation.",
+            "cta": { "github": "GitHub" },
+            "links": { "github": "https://github.com/krystian2077/prokom-system" }
+          },
+          "problem": { "title": "Problem", "body": "SME repair shops need process automation and real-time status tracking." },
+          "role": { "title": "My role", "body": "System design, backend, Celery async jobs, reporting and integrations." },
+          "architecture": { "title": "Architecture", "body": "Django REST → PostgreSQL → Redis → Celery → Next.js frontend, Docker, Nginx" },
+          "features": { "title": "Key features", "items": ["Online repair reporting","Kanban board for staff","Automated notifications","RBAC & audit log","Report exports","Scheduling calendar"] },
+          "challenges": { "title": "Biggest challenges", "items": ["Repair data model and history","Celery queue optimization","Security and RBAC"] },
+          "whatILearned": { "title": "What I learned", "body": "Translating business processes to data models, modular Django apps, scaling with Redis & Celery." },
+          "next": { "title": "Roadmap", "body": "UX improvements, external accounting integrations, automated backups." }
+        }
+      }
+  "proofOfWork": {
+    "eyebrow": "Proof of work",
+    "title": "Proof of Work - not logos, real implementation evidence",
+    "subtitle": "This section shows where each technology was used and why it mattered.",
+    "items": {
+      "djangoDrf": {
+        "title": "Django + DRF",
+        "description": "StayMap REST API for bookings, auth, host flows, moderation, and AI search."
+      },
+      "postgis": {
+        "title": "PostGIS + GeoDjango",
+        "description": "Map-based accommodation geosearch with ranking tuned for real product behavior."
+      },
+      "celeryRedis": {
+        "title": "Celery + Redis",
+        "description": "Redis in three roles and async jobs: cleanup, auto-cancel, reminders, cache refresh."
+      },
+      "channelsWebsocket": {
+        "title": "WebSocket + Django Channels",
+        "description": "Realtime StayMap chat on ASGI + Daphne with message and typing events."
+      },
+      "jwtGoogle": {
+        "title": "JWT + Google OAuth",
+        "description": "Authentication and authorization with token-based sessions and secure flows."
+      },
+      "dockerCompose": {
+        "title": "Docker Compose",
+        "description": "Development and production-like environments for both projects in containers."
+      },
+      "nextAppRouter": {
+        "title": "Next.js App Router",
+        "description": "Frontend/BFF architecture for StayMap and PRO-KOM with SSR/CSR composition."
+      },
+      "testing": {
+        "title": "pytest + Playwright",
+        "description": "Backend and E2E coverage focused on critical user flows and reliability."
+      },
+      "aiIntegration": {
+        "title": "AI Integration",
+        "description": "OpenAI API in StayMap and practical LLM usage with prompt engineering in workflow."
+      },
+      "swagger": {
+        "title": "Swagger/OpenAPI",
+        "description": "Auto-generated API documentation with drf-spectacular for faster integration."
+      }
+    }
+  }
+  ,
+  "timeline": {
+    "eyebrow": "Experience",
+    "title": "Experience & Education",
+    "subtitle": "Timeline: studies, courses, projects and work — newest first.",
+    "items": {
+      "student": {
+        "date": "2024–2026",
+        "title": "CS student",
+        "body": "Programista Aplikacji Biznesowych course — C#, Java, PHP, React, databases and more."
+      },
+      "learnit": {
+        "date": "Nov 2025",
+        "title": "Python + Django + AI course — LearnIt",
+        "body": "Curriculum: Python, Django, DRF, Celery, Docker, AWS, FastAPI, WebSockets and AI."
+      },
+      "ready4ai": {
+        "date": "Oct–Dec 2025",
+        "title": "Ready4AI — completed",
+        "body": "Work with LLMs, chatbots, LangChain, prompt engineering and deployments."
+      },
+      "projects": {
+        "date": "2025–2026",
+        "title": "Projects: StayMap, PRO-KOM",
+        "body": "Building production web applications: map-first marketplace, service management system."
+      },
+      "prokomJob": {
+        "date": "Nov 2023–May 2026",
+        "title": "Sales Specialist — PRO-KOM",
+        "body": "Customer support B2B/B2C, quotations, orders and real business exposure."
+      },
+      "technikum": {
+        "date": "before 2024",
+        "title": "IT technical school",
+        "body": "Foundations in networking, hardware and programming — the basis for further career."
+      }
+    }
+  }
+  ,
+  "contact": {
+    "title": "Contact",
+    "description": "Have a question or a project? Write to me — I reply quickly. The form sends an email.",
+    "name": "Name",
+    "email": "Email",
+    "company": "Company (optional)",
+    "message": "Message",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent. Thanks!",
+    "error": "Something went wrong. Please try again."
   }
 }
