@@ -2,6 +2,8 @@ import { Sora, DM_Mono } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { ThemeProvider } from 'next-themes'
+import { Navbar } from '@/components/layout/Navbar'
+import { Footer } from '@/components/layout/Footer'
 import '../globals.css'
 
 const sora = Sora({
@@ -31,7 +33,11 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className={`${sora.variable} ${dmMono.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+          <NextIntlClientProvider messages={messages}>
+            <Navbar />
+            <main className="pt-16">{children}</main>
+            <Footer />
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>

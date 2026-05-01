@@ -1,1 +1,13 @@
-{}
+{
+  "nav": {
+    "about": "O mnie",
+    "projects": "Projekty",
+    "contact": "Kontakt",
+    "available": "Dostępny do pracy",
+    "hire": "Zatrudnij mnie"
+  },
+  "footer": {
+    "copyright": "Krystian Potaczek. Wszelkie prawa zastrzeżone.",
+    "tagline": "Projektowanie i kod — z myślą o ludziach."
+  }
+}

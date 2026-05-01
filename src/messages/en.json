@@ -1,1 +1,13 @@
-{}
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact",
+    "available": "Available for hire",
+    "hire": "Hire me"
+  },
+  "footer": {
+    "copyright": "Krystian Potaczek. All rights reserved.",
+    "tagline": "Design and code — built for people."
+  }
+}
