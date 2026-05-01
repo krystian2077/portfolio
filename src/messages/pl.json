@@ -9,5 +9,64 @@
   "footer": {
     "copyright": "Krystian Potaczek. Wszelkie prawa zastrzeżone.",
     "tagline": "Projektowanie i kod — z myślą o ludziach."
+  },
+  "hero": {
+    "badge": "Dostępny do pracy",
+    "headline": "Junior Python / Django Developer",
+    "subheadline": "Buduję aplikacje webowe oparte na realnych problemach biznesowych.",
+    "description": "Backend-focused. Full-stack aware. AI-assisted workflow.",
+    "cta": {
+      "primary": "Zobacz projekty →",
+      "secondary": "Pobierz CV ↓"
+    },
+    "trust": "2 projekty live  •  Student informatyki  •  Ready4AI  •  EN B1/B2"
+  },
+  "trustBar": {
+    "fact1": "2 projekty produkcyjne z live demo",
+    "fact2": "7 przeczytanych książek technicznych",
+    "fact3": "Kurs Python + Django + AI (600h+)",
+    "fact4": "Ready4AI - LLM, agenty, MCP, prompt engineering",
+    "fact5": "2,5 roku w środowisku IT (PRO-KOM)"
+  },
+  "about": {
+    "eyebrow": "O mnie",
+    "title": "Od technikum do produkcyjnych aplikacji Django",
+    "intro": "Nie trafiłem do programowania przypadkowo. Interesuje mnie od technikum - zacząłem od podstaw sieci i sprzętu, potem coraz głębiej w kod. Praca w PRO-KOM przez ponad 2 lata dała mi coś, czego często brakuje początkującym developerom: kontakt z realnym klientem, realnym problemem i realnym procesem biznesowym. Dlatego gdy buduję aplikacje, patrzę nie tylko na kod, ale też na to, czy system rozwiązuje prawdziwy problem i czy ma sens dla użytkownika.",
+    "philosophy": {
+      "title": "Jak podchodzę do projektów",
+      "body": "Nie zaczynam od frameworka. Najpierw próbuję zrozumieć problem, użytkownika i proces. Dopiero potem dobieram technologię, projektuję strukturę danych, API i przepływ aplikacji."
+    },
+    "ai": {
+      "title": "AI workflow",
+      "body": "Korzystam z AI świadomie - Claude, ChatGPT, Copilot i Cursor to moje narzędzia pracy, nie wyrocznie. Weryfikuję każdy wynik, rozumiem kod, który przychodzi z AI, i biorę pełną odpowiedzialność za to, co dostarczam."
+    }
+  },
+  "projects": {
+    "eyebrow": "Projekty featured",
+    "title": "Case studies, nie tylko zrzuty ekranu",
+    "subtitle": "Dwa glowne projekty rozwiazujace realne problemy biznesowe oraz ta strona jako osobny projekt engineeringowy.",
+    "actions": {
+      "liveDemo": "Live Demo",
+      "github": "GitHub",
+      "caseStudy": "Case study"
+    },
+    "staymap": {
+      "badge": "Flagship Project",
+      "title": "StayMap Polska",
+      "description": "Produkcyjna platforma marketplace noclegow w Polsce. Map-first UX, AI search po polsku, dynamic pricing, real-time chat, pelny panel hosta i moderacja.",
+      "stats": "12 modulow · 44 widoki · 25 plikow testowych · 9 trybow podrozy"
+    },
+    "prokom": {
+      "badge": "Business Solution",
+      "title": "PRO-KOM Serwis System",
+      "description": "System zarzadzania naprawami elektroniki dla serwisow. Panele klienta, pracownika i admina, Kanban board, Celery async, tracking statusu i automatyzacja procesu.",
+      "stats": "3 panele uzytkownika · RBAC · Audit log · SSL/TLS",
+      "livePending": "Live demo w trakcie"
+    },
+    "portfolio": {
+      "title": "Portfolio Website",
+      "description": "Ta strona - premium personal brand website zbudowany w Next.js 15 z naciskiem na wydajnosc, i18n i UX.",
+      "cta": "Zobacz kod"
+    }
   }
 }
