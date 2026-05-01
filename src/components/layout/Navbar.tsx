@@ -1,19 +1,17 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import { ArrowRight, Menu, Moon, Sun, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
 
-type NavLink = {
-  id: 'about' | 'projects' | 'stack' | 'experience' | 'contact'
-  label: string
-}
+type NavSectionId = 'about' | 'projects' | 'stack' | 'experience' | 'contact'
 
 export function Navbar() {
+  const t = useTranslations('nav')
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
@@ -21,37 +19,25 @@ export function Navbar() {
   const [mounted, setMounted] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [activeSection, setActiveSection] = useState<NavLink['id']>('about')
+  const [activeSection, setActiveSection] = useState<NavSectionId | null>('about')
 
-  const navLinks = useMemo<NavLink[]>(() => {
-    if (locale === 'en') {
-      return [
-        { id: 'about', label: 'About' },
-        { id: 'projects', label: 'Projects' },
-        { id: 'stack', label: 'Stack' },
-        { id: 'experience', label: 'Experience' },
-        { id: 'contact', label: 'Contact' },
-      ]
-    }
-
+  const navLinks = useMemo(() => {
     return [
-      { id: 'about', label: 'O mnie' },
-      { id: 'projects', label: 'Projekty' },
-      { id: 'stack', label: 'Stack' },
-      { id: 'experience', label: 'Doświadczenie' },
-      { id: 'contact', label: 'Kontakt' },
+      { id: 'about' as const, label: t('about') },
+      { id: 'projects' as const, label: t('projects') },
+      { id: 'stack' as const, label: t('stack') },
+      { id: 'experience' as const, label: t('experience') },
+      { id: 'contact' as const, label: t('contact') },
     ]
-  }, [locale])
+  }, [t])
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-
-      let current: NavLink['id'] = 'about'
+    function computeActiveFromScroll() {
+      let current: NavSectionId | null = null
 
       for (const link of navLinks) {
         const section = document.getElementById(link.id)
@@ -63,13 +49,29 @@ export function Navbar() {
         }
       }
 
-      setActiveSection(current)
+      setActiveSection(current ?? 'about')
+    }
+
+    function handleScroll() {
+      setScrolled(window.scrollY > 50)
+
+      if (pathname === '/contact') {
+        setActiveSection('contact')
+        return
+      }
+
+      if (pathname !== '/') {
+        setActiveSection(null)
+        return
+      }
+
+      computeActiveFromScroll()
     }
 
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [navLinks])
+  }, [pathname, navLinks])
 
   useEffect(() => {
     if (isMobileOpen) document.body.style.overflow = 'hidden'
@@ -89,7 +91,23 @@ export function Navbar() {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
 
+  function navHref(sectionId: NavSectionId): string {
+    if (sectionId === 'contact') return '/contact'
+    return `/#${sectionId}`
+  }
+
+  function isNavLinkHighlighted(linkId: NavSectionId): boolean {
+    if (pathname === '/') {
+      return activeSection === linkId
+    }
+    if (pathname === '/contact') {
+      return linkId === 'contact'
+    }
+    return false
+  }
+
   const isDark = mounted ? theme === 'dark' : true
+  const ariaHome = t('homeAria')
 
   return (
     <>
@@ -105,7 +123,7 @@ export function Navbar() {
           <Link
             href="/"
             className="font-dm-mono rounded-lg border border-[rgba(34,211,238,0.3)] px-3 py-1 text-xl font-bold text-[#22D3EE] transition hover:bg-[rgba(34,211,238,0.08)]"
-            aria-label="Krystian Potaczek — strona główna"
+            aria-label={ariaHome}
           >
             KP
           </Link>
@@ -114,10 +132,10 @@ export function Navbar() {
             {navLinks.map((link) => (
               <Link
                 key={link.id}
-                href={`/#${link.id}`}
+                href={navHref(link.id)}
                 className={cn(
                   'text-sm transition-colors',
-                  activeSection === link.id
+                  isNavLinkHighlighted(link.id)
                     ? 'text-[#22D3EE]'
                     : 'text-[#7EA8BD] hover:text-[#F0F9FF]',
                 )}
@@ -128,10 +146,24 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center justify-end gap-2">
+            <div className="hidden items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 md:inline-flex">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+              </span>
+              <span className="font-dm-mono text-[11px] text-emerald-300">{t('available')}</span>
+            </div>
+
+            <span
+              className="inline-flex size-2 rounded-full bg-emerald-400 md:hidden"
+              aria-label={t('available')}
+              title={t('available')}
+            />
+
             <button
               onClick={toggleLocale}
               className="hidden font-dm-mono text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE] md:inline-flex"
-              aria-label={locale === 'pl' ? 'Przelacz jezyk na angielski' : 'Switch language to Polish'}
+              aria-label={locale === 'pl' ? t('switchToEn') : t('switchToPl')}
             >
               PL / EN
             </button>
@@ -139,23 +171,23 @@ export function Navbar() {
             <button
               onClick={toggleTheme}
               className="hidden h-8 w-8 items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE] md:inline-flex"
-              aria-label={isDark ? 'Wlacz jasny motyw' : 'Wlacz ciemny motyw'}
+              aria-label={isDark ? t('themeLight') : t('themeDark')}
             >
               {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
             </button>
 
             <Link
-              href="/#contact"
+              href="/contact"
               className="hidden items-center gap-2 rounded-lg bg-[#22D3EE] px-4 py-2 text-sm font-semibold text-[#050D12] transition hover:bg-[#67E8F9] md:inline-flex"
             >
-              {locale === 'en' ? 'Contact me' : 'Napisz do mnie'}
+              {t('hire')}
               <ArrowRight size={14} />
             </Link>
 
             <button
               onClick={() => setIsMobileOpen((prev) => !prev)}
               className="inline-flex h-8 w-8 items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE] md:hidden"
-              aria-label={isMobileOpen ? 'Zamknij menu' : 'Otworz menu'}
+              aria-label={isMobileOpen ? t('closeMenu') : t('openMenu')}
             >
               {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -176,11 +208,11 @@ export function Navbar() {
               {navLinks.map((link) => (
                 <Link
                   key={link.id}
-                  href={`/#${link.id}`}
+                  href={navHref(link.id)}
                   onClick={() => setIsMobileOpen(false)}
                   className={cn(
                     'text-sm transition-colors',
-                    activeSection === link.id
+                    isNavLinkHighlighted(link.id)
                       ? 'text-[#22D3EE]'
                       : 'text-[#7EA8BD] hover:text-[#F0F9FF]',
                   )}
@@ -190,25 +222,33 @@ export function Navbar() {
               ))}
 
               <div className="flex items-center gap-4 border-t border-[rgba(34,211,238,0.08)] pt-4">
+                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1">
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+                  </span>
+                  <span className="font-dm-mono text-[11px] text-emerald-300">{t('available')}</span>
+                </div>
                 <button
                   onClick={toggleLocale}
                   className="font-dm-mono text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                  aria-label={locale === 'pl' ? t('switchToEn') : t('switchToPl')}
                 >
                   PL / EN
                 </button>
                 <button
                   onClick={toggleTheme}
                   className="inline-flex h-8 w-8 items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE]"
-                  aria-label={isDark ? 'Wlacz jasny motyw' : 'Wlacz ciemny motyw'}
+                  aria-label={isDark ? t('themeLight') : t('themeDark')}
                 >
                   {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
                 </button>
                 <Link
-                  href="/#contact"
+                  href="/contact"
                   onClick={() => setIsMobileOpen(false)}
                   className="ml-auto inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-4 py-2 text-sm font-semibold text-[#050D12] transition hover:bg-[#67E8F9]"
                 >
-                  {locale === 'en' ? 'Contact me' : 'Napisz do mnie'}
+                  {t('hire')}
                   <ArrowRight size={14} />
                 </Link>
               </div>

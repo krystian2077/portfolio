@@ -243,6 +243,14 @@ export function HeroSection() {
               {t('headline')}
             </motion.h1>
 
+            <motion.p
+              variants={itemVariants}
+              className="max-w-xl text-base leading-relaxed md:text-lg"
+              style={{ color: '#CBDCE6', fontFamily: 'var(--font-sora)' }}
+            >
+              {t('lead')}
+            </motion.p>
+
             {/* Subheadline */}
             <motion.p
               variants={itemVariants}

@@ -2,6 +2,8 @@ import { Sora, DM_Mono } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { ThemeProvider } from 'next-themes'
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import '../globals.css'
@@ -37,6 +39,8 @@ export default async function LocaleLayout({
             <Navbar />
             <main>{children}</main>
             <Footer />
+            <Analytics />
+            <SpeedInsights />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>

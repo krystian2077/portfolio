@@ -133,7 +133,7 @@ export function FeaturedProjectsSection() {
             <p className="font-dm-mono text-xs text-(--text-muted)">{t('prokom.stats')}</p>
 
             <div className="flex flex-wrap gap-3">
-              <ExternalButton label={t('prokom.livePending')} />
+              <ExternalButton href="https://prokomserwis.pl/" label={t('actions.liveDemo')} />
               <ExternalButton href="https://github.com/krystian2077/prokom-system" label={t('actions.github')} />
               <Link href="/projects/prokom-system" className={cn(buttonVariants({ variant: 'ghost', size: 'md' }))}>
                 {t('actions.caseStudy')}
@@ -150,7 +150,7 @@ export function FeaturedProjectsSection() {
               <p className="max-w-2xl text-sm text-(--text-secondary)">{t('portfolio.description')}</p>
             </div>
             <a
-              href="https://github.com/krystian2077"
+              href="https://github.com/krystian2077/portfolio"
               target="_blank"
               rel="noopener noreferrer"
               className={cn(buttonVariants({ variant: 'secondary', size: 'sm' }))}

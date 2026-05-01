@@ -30,7 +30,7 @@ export function ProofOfWorkSection() {
   const t = useTranslations('proofOfWork')
 
   return (
-    <Section id="stack" className="py-20">
+    <Section id="proof-of-work" className="py-20">
       <div className="space-y-10">
         <div className="space-y-4">
           <p className="font-dm-mono text-xs uppercase tracking-[0.2em] text-(--accent-cyan)">
