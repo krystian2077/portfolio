@@ -14,7 +14,21 @@ const NAV_LINKS = [
   { label: 'Kontakt', href: '#contact' },
 ] as const
 
+const NAV_LINKS_EN = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Stack', href: '#stack' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Contact', href: '#contact' },
+] as const
+
 const PROJECT_LINKS = [
+  { label: 'StayMap Polska', href: '/projects/staymap-polska', internal: true },
+  { label: 'PRO-KOM System', href: '/projects/prokom-system', internal: true },
+  { label: 'Portfolio', href: 'https://github.com/krystian2077/portfolio', internal: false },
+] as const
+
+const PROJECT_LINKS_EN = [
   { label: 'StayMap Polska', href: '/projects/staymap-polska', internal: true },
   { label: 'PRO-KOM System', href: '/projects/prokom-system', internal: true },
   { label: 'Portfolio', href: 'https://github.com/krystian2077/portfolio', internal: false },
@@ -36,6 +50,9 @@ export function Footer() {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const year = new Date().getFullYear()
+  const isEn = locale === 'en'
+  const navLinks = isEn ? NAV_LINKS_EN : NAV_LINKS
+  const projectLinks = isEn ? PROJECT_LINKS_EN : PROJECT_LINKS
 
   useEffect(() => {
     setMounted(true)
@@ -64,7 +81,9 @@ export function Footer() {
             </Link>
             <p className="mt-1 text-sm text-[#7EA8BD]">Junior Python / Django Developer</p>
             <p className="mt-2 text-xs leading-relaxed text-[#3A5F73]">
-              Buduję aplikacje webowe oparte na realnych problemach biznesowych.
+              {isEn
+                ? 'I build web applications around real business problems.'
+                : 'Buduję aplikacje webowe oparte na realnych problemach biznesowych.'}
             </p>
           </div>
 
@@ -74,10 +93,10 @@ export function Footer() {
             {/* Column 1: Navigation */}
             <div>
               <h4 className="mb-4 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
-                Nawigacja
+                {isEn ? 'Navigation' : 'Nawigacja'}
               </h4>
               <ul className="space-y-2">
-                {NAV_LINKS.map((link) => (
+                {navLinks.map((link) => (
                   <li key={link.label}>
                     <a href={link.href} className={linkClass}>
                       {link.label}
@@ -90,10 +109,10 @@ export function Footer() {
             {/* Column 2: Projects */}
             <div>
               <h4 className="mb-4 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
-                Projekty
+                {isEn ? 'Projects' : 'Projekty'}
               </h4>
               <ul className="space-y-2">
-                {PROJECT_LINKS.map((link) =>
+                {projectLinks.map((link) =>
                   link.internal ? (
                     <li key={link.label}>
                       <Link
@@ -162,7 +181,15 @@ export function Footer() {
               type="button"
               onClick={() => setTheme(isDark ? 'light' : 'dark')}
               className="flex h-8 w-8 items-center justify-center rounded-md border border-[rgba(34,211,238,0.15)] bg-[#081420] text-[#7EA8BD] transition-colors hover:border-[rgba(34,211,238,0.4)] hover:text-[#22D3EE]"
-              aria-label={isDark ? 'Przełącz na jasny motyw' : 'Przełącz na ciemny motyw'}
+              aria-label={
+                isEn
+                  ? isDark
+                    ? 'Switch to light theme'
+                    : 'Switch to dark theme'
+                  : isDark
+                    ? 'Przełącz na jasny motyw'
+                    : 'Przełącz na ciemny motyw'
+              }
             >
               {mounted ? (
                 isDark ? <Sun size={14} /> : <Moon size={14} />

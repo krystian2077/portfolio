@@ -1,6 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
@@ -46,25 +48,14 @@ function StatPill({ label }: { label: string }) {
   )
 }
 
-function ImagePlaceholder() {
-  return (
-    <div className="flex h-64 w-full items-center justify-center rounded-xl bg-[#0C2030]">
-      <span
-        className="text-xs text-[#3A5F73]"
-        style={{ fontFamily: 'var(--font-dm-mono)' }}
-      >
-        Screenshot projektu
-      </span>
-    </div>
-  )
-}
-
 export function Projects() {
+  const locale = useLocale()
+  const isEn = locale === 'en'
+
   return (
     <section id="projects" className="py-20" style={{ backgroundColor: '#050D12' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -76,22 +67,23 @@ export function Projects() {
             className="text-xs uppercase tracking-widest text-[#22D3EE]"
             style={{ fontFamily: 'var(--font-dm-mono)' }}
           >
-            PROJEKTY
+            {isEn ? 'PROJECTS' : 'PROJEKTY'}
           </p>
           <h2
             className="text-3xl font-bold leading-tight text-[#F0F9FF] md:text-4xl"
             style={{ fontFamily: 'var(--font-sora)' }}
           >
-            Realne aplikacje. Działające demo.
+            {isEn ? 'Real applications. Working demos.' : 'Realne aplikacje. Działające demo.'}
           </h2>
           <p className="max-w-2xl text-base leading-relaxed text-[#7EA8BD]">
-            Nie ćwiczenia techniczne — systemy zbudowane żeby rozwiązywać prawdziwe problemy.
+            {isEn
+              ? 'Not just technical exercises - systems built to solve real problems.'
+              : 'Nie ćwiczenia techniczne - systemy zbudowane żeby rozwiązywać prawdziwe problemy.'}
           </p>
         </motion.div>
 
         <div className="space-y-8">
 
-          {/* ── KARTA 1: StayMap Polska ── */}
           <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -105,13 +97,12 @@ export function Projects() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr]">
 
-              {/* Left: description */}
               <div className="p-8 lg:p-10">
                 <span
                   className="mb-4 inline-block rounded-full bg-[rgba(34,211,238,0.1)] px-3 py-1 text-xs text-[#22D3EE]"
                   style={{ fontFamily: 'var(--font-dm-mono)' }}
                 >
-                  🚀 Flagship Project
+                  🚀 {isEn ? 'Flagship Project' : 'Flagship Project'}
                 </span>
 
                 <h3
@@ -122,17 +113,22 @@ export function Projects() {
                 </h3>
 
                 <p className="mb-4 text-sm text-[#7EA8BD]">
-                  Produkcyjna platforma marketplace noclegów w Polsce z podejściem map-first.
+                  {isEn
+                    ? 'A full-stack accommodation booking platform in Poland with a map-first approach.'
+                    : 'Produkcyjna platforma marketplace noclegów w Polsce z podejściem map-first.'}
                 </p>
 
                 <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                  AI search po polsku, dynamic pricing engine, real-time chat przez WebSocket,
-                  pełny panel hosta i moderacja treści. Zbudowana na Django 5 + DRF z PostGIS
-                  do geowyszukiwania i Celery do zadań asynchronicznych.
+                  {isEn
+                    ? 'Polish AI search, dynamic pricing engine, real-time chat via WebSocket, full host panel and content moderation. Built with Django 5 + DRF, PostGIS for geospatial search and Celery for asynchronous tasks.'
+                    : 'AI search po polsku, dynamic pricing engine, real-time chat przez WebSocket, pełny panel hosta i moderacja treści. Zbudowana na Django 5 + DRF z PostGIS do geowyszukiwania i Celery do zadań asynchronicznych.'}
                 </p>
 
                 <div className="my-4 flex flex-wrap gap-6">
-                  {['12 modułów', '44 widoki', '25 testów', '9 trybów podróży'].map((s) => (
+                  {(isEn
+                    ? ['12 modules', '44 views', '25 tests', '9 travel modes']
+                    : ['12 modułów', '44 widoki', '25 testów', '9 trybów podróży']
+                  ).map((s) => (
                     <StatPill key={s} label={s} />
                   ))}
                 </div>
@@ -169,15 +165,25 @@ export function Projects() {
                 </div>
               </div>
 
-              {/* Right: image placeholder */}
               <div className="flex items-center justify-center p-6 lg:p-8">
-                <ImagePlaceholder />
+                <div className="relative w-full h-64 rounded-xl overflow-hidden border border-[rgba(34,211,238,0.1)]">
+                  <Image
+                    src="/images/staymap-main.png"
+                    alt={
+                      isEn
+                        ? 'StayMap Polska - accommodation booking platform in Poland'
+                        : 'StayMap Polska - platforma rezerwacji noclegów w Polsce'
+                    }
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
 
             </div>
           </motion.div>
 
-          {/* ── KARTA 2: PRO-KOM Serwis System (reversed) ── */}
           <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -191,18 +197,28 @@ export function Projects() {
           >
             <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr]">
 
-              {/* Left on desktop: image placeholder (order-2 on mobile) */}
               <div className="order-2 flex items-center justify-center p-6 lg:order-1 lg:p-8">
-                <ImagePlaceholder />
+                <div className="relative w-full h-64 rounded-xl overflow-hidden border border-[rgba(34,211,238,0.1)]">
+                  <Image
+                    src="/images/main.png"
+                    alt={
+                      isEn
+                        ? 'PRO-KOM Serwis System - electronics repair management system'
+                        : 'PRO-KOM Serwis System - system zarządzania naprawami elektroniki'
+                    }
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover object-top hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
 
-              {/* Right on desktop: description (order-1 on mobile) */}
               <div className="order-1 p-8 lg:order-2 lg:p-10">
                 <span
                   className="mb-4 inline-block rounded-full bg-[rgba(34,211,238,0.08)] px-3 py-1 text-xs text-[#22D3EE]"
                   style={{ fontFamily: 'var(--font-dm-mono)' }}
                 >
-                  💼 Business Solution
+                  💥 {isEn ? 'Business Solution' : 'Business Solution'}
                 </span>
 
                 <h3
@@ -213,17 +229,19 @@ export function Projects() {
                 </h3>
 
                 <p className="mb-4 text-sm text-[#7EA8BD]">
-                  System zarządzania naprawami elektroniki dla małych i średnich serwisów.
+                  {isEn
+                    ? 'A repair management system for small and medium electronics service businesses.'
+                    : 'System zarządzania naprawami elektroniki dla małych i średnich serwisów.'}
                 </p>
 
                 <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                  Pełna automatyzacja procesu serwisowego — od przyjęcia urządzenia do odbioru
-                  przez klienta. Trzy panele: klient, pracownik (Kanban), admin. Celery do zadań
-                  async, real-time tracking statusów, audit log i RBAC.
+                  {isEn
+                    ? 'End-to-end automation of the repair workflow - from device intake to customer pickup. Three panels: customer, staff Kanban board and admin dashboard. Celery for async tasks, real-time status tracking, audit log and RBAC.'
+                    : 'Pełna automatyzacja procesu serwisowego - od przyjęcia urządzenia do odbioru przez klienta. Trzy panele: klient, pracownik (Kanban), admin. Celery do zadań async, real-time tracking statusów, audit log i RBAC.'}
                 </p>
 
                 <div className="my-4 flex flex-wrap gap-6">
-                  {['3 panele', 'RBAC', 'Audit log', 'SSL/TLS'].map((s) => (
+                  {(isEn ? ['3 panels', 'RBAC', 'Audit log', 'SSL/TLS'] : ['3 panele', 'RBAC', 'Audit log', 'SSL/TLS']).map((s) => (
                     <StatPill key={s} label={s} />
                   ))}
                 </div>
@@ -263,7 +281,6 @@ export function Projects() {
             </div>
           </motion.div>
 
-          {/* ── KARTA 3: Portfolio Website (mała) ── */}
           <motion.div
             variants={cardVariants}
             initial="hidden"
@@ -275,7 +292,7 @@ export function Projects() {
               className="mb-3 inline-block rounded-full bg-[rgba(34,211,238,0.08)] px-3 py-1 text-xs text-[#22D3EE]"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
-              ⚡ This Website
+              ⚡ {isEn ? 'This Website' : 'This Website'}
             </span>
 
             <h3
@@ -286,8 +303,9 @@ export function Projects() {
             </h3>
 
             <p className="mb-4 text-sm leading-relaxed text-[#7EA8BD]">
-              Ta strona — premium personal brand website zbudowany w Next.js 15,
-              TypeScript i Tailwind CSS v4.
+              {isEn
+                ? 'This website - a premium personal brand portfolio built with Next.js 15, TypeScript and Tailwind CSS v4.'
+                : 'Ta strona - premium personal brand website zbudowany w Next.js 15, TypeScript i Tailwind CSS v4.'}
             </p>
 
             <div className="mb-5 flex flex-wrap gap-2">
@@ -300,7 +318,7 @@ export function Projects() {
               href="#"
               className="inline-flex rounded-lg border border-[rgba(34,211,238,0.4)] px-5 py-2.5 text-sm text-[#22D3EE] transition-colors hover:bg-[rgba(34,211,238,0.08)] active:bg-[rgba(34,211,238,0.12)]"
             >
-              📂 Kod źródłowy
+              📂 {isEn ? 'Source code' : 'Kod źródłowy'}
             </a>
           </motion.div>
 

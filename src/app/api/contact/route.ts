@@ -6,6 +6,7 @@ const ContactSchema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
   company: z.string().optional(),
+  subject: z.string().optional(),
   message: z.string().min(10),
   hp: z.string().optional(),
 })
@@ -38,6 +39,7 @@ export async function POST(request: Request) {
       <p><strong>Name:</strong> ${parsed.data.name}</p>
       <p><strong>Email:</strong> ${parsed.data.email}</p>
       <p><strong>Company:</strong> ${parsed.data.company ?? '-'}</p>
+      <p><strong>Subject:</strong> ${parsed.data.subject ?? '-'}</p>
       <p><strong>Message:</strong></p>
       <p>${parsed.data.message.replace(/\n/g, '<br/>')}</p>
     `
@@ -45,7 +47,9 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: 'Krystian Potaczek <no-reply@krystianpotaczek.dev>',
       to: CONTACT_TO,
-      subject: `Portfolio contact from ${parsed.data.name}`,
+      subject: parsed.data.subject
+        ? `Portfolio contact: ${parsed.data.subject}`
+        : `Portfolio contact from ${parsed.data.name}`,
       html,
     })
 
@@ -55,4 +59,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'server_error' }, { status: 500 })
   }
 }
-

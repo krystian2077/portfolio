@@ -1,24 +1,27 @@
 export const projects = {
-  eyebrow: 'Featured projects',
-  title: 'Case studies, not just screenshots',
+  eyebrow: 'PROJECTS',
+  title: 'Real applications. Working demos.',
   subtitle:
-    'Two core projects solving real business problems, plus this website as a separate engineering project.',
+    'Not just technical exercises - systems built to solve real problems.',
   actions: {
     liveDemo: 'Live Demo',
     github: 'GitHub',
-    caseStudy: 'Case Study',
+    caseStudy: 'Case Study ->',
   },
   staymap: {
     badge: 'Flagship Project',
     title: 'StayMap Polska',
     description:
-      'Production marketplace for accommodation in Poland. Map-first UX, Polish AI search, dynamic pricing, real-time chat, full host panel, and moderation.',
-    stats: '12 modules · 44 views · 25 test files · 9 travel modes',
+      'A full-stack accommodation booking platform in Poland with a map-first approach.',
+    longDescription:
+      'Polish AI search, dynamic pricing engine, real-time chat via WebSocket, full host panel and content moderation. Built with Django 5 + DRF, PostGIS for geospatial search and Celery for asynchronous tasks.',
+    stats: '12 modules - 44 views - 25 tests - 9 travel modes',
+    imageAlt: 'StayMap Polska - accommodation booking platform in Poland',
     hero: {
       badge: 'Flagship Project',
       title: 'StayMap Polska',
       subtitle:
-        'Map-first marketplace for domestic accommodation in Poland. Dynamic pricing, AI search, and real-time chat.',
+        'A full-stack accommodation booking platform in Poland with a map-first approach.',
       cta: {
         live: 'Live Demo',
         github: 'GitHub',
@@ -34,30 +37,25 @@ export const projects = {
     },
     role: {
       title: 'My role',
-      body: 'Backend-focused ownership: API, geosearch, pricing engine, WebSocket chat, Celery tasks, and integrations.',
+      body: 'Backend-focused ownership: API, geospatial search, pricing engine, WebSocket chat, Celery tasks and integrations.',
     },
     myRole: {
       title: 'My role',
       items: [
-        'Designed and implemented the Django + DRF backend (domain modules, API contracts, validation rules).',
-        'Implemented PostGIS-powered geosearch and ranking logic for map-first discovery.',
-        'Built a dynamic pricing engine (seasonality, holidays, guest surcharges, long-stay discounts).',
-        'Implemented realtime chat with Django Channels (message, typing, read events).',
-        'Integrated external services: OpenAI-compatible API, Nominatim, Overpass, SMTP, and OAuth.',
+        'Designed and implemented the Django + DRF backend: domain modules, API contracts and validation rules.',
+        'Implemented PostGIS-powered geospatial search and ranking logic for map-first discovery.',
+        'Built a dynamic pricing engine covering seasonality, holidays, guest surcharges and long-stay discounts.',
+        'Implemented real-time chat with Django Channels: message, typing and read events.',
+        'Integrated external services: OpenAI-compatible API, Nominatim, Overpass, SMTP and OAuth.',
       ],
     },
     architecture: {
       title: 'Architecture',
-      body: 'Next.js (BFF) -> Daphne ASGI -> Django REST + Channels -> PostgreSQL + PostGIS + Redis + Celery',
+      body: 'Next.js BFF -> Daphne ASGI -> Django REST + Channels -> PostgreSQL + PostGIS + Redis + Celery',
     },
     metrics: {
       title: 'Project scale',
-      items: [
-        '12 backend modules (Django apps)',
-        '44 frontend views (Next.js)',
-        '25 test files',
-        '9 travel modes',
-      ],
+      items: ['12 modules', '44 views', '25 tests', '9 travel modes'],
     },
     features: {
       title: 'Key features',
@@ -65,7 +63,7 @@ export const projects = {
         'Map-first discovery',
         'Dynamic pricing engine',
         'Polish AI search',
-        'Realtime chat (WebSocket)',
+        'Real-time chat via WebSocket',
         'Blind-release reviews',
         'Host panel and moderation',
       ],
@@ -81,14 +79,14 @@ export const projects = {
             'Implemented a dedicated geospatial query layer and tuned ranking behavior for real discovery patterns.',
         },
         {
-          problem: 'Using Redis in three roles: cache, Celery broker, and channel layer.',
+          problem: 'Using Redis as cache, Celery broker and Channels layer.',
           solution:
             'Separated configuration boundaries and operating patterns to avoid performance contention.',
         },
         {
           problem: 'Running REST and WebSocket traffic in one ASGI architecture.',
           solution:
-            'Set up a coherent Daphne + Channels setup with clear boundaries and reliable realtime event flow.',
+            'Set up a coherent Daphne + Channels architecture with clear boundaries and reliable real-time event flow.',
         },
       ],
     },
@@ -101,11 +99,11 @@ export const projects = {
         },
         {
           tech: 'PostgreSQL + PostGIS',
-          why: 'Essential for geosearch, location filters, and map-based ranking.',
+          why: 'Essential for geospatial search, location filters and map-based ranking.',
         },
         {
           tech: 'Redis + Celery + Channels',
-          why: 'Enables async jobs and realtime messaging in one backend architecture.',
+          why: 'Enables asynchronous jobs and real-time messaging in one backend architecture.',
         },
         {
           tech: 'Next.js App Router',
@@ -116,27 +114,31 @@ export const projects = {
     screens: {
       title: 'Screens / mockups',
       placeholder: 'Coming soon - final product screenshots.',
-      items: ['Listing map + filters', 'Host dashboard', 'Realtime chat', 'Booking flow'],
+      items: ['Listing map + filters', 'Host dashboard', 'Real-time chat', 'Booking flow'],
     },
     whatILearned: {
       title: 'What I learned',
-      body: 'Geospatial queries, ASGI architecture, complex pricing rules, and production-grade integrations.',
+      body: 'Geospatial queries, ASGI architecture, complex pricing rules and production-grade integrations.',
     },
     next: {
       title: 'Roadmap',
-      body: 'More E2E tests, stronger monitoring, and geosearch query optimization.',
+      body: 'More E2E tests, stronger monitoring and geospatial query optimization.',
     },
   },
   prokom: {
     badge: 'Business Solution',
-    title: 'PRO-KOM Service System',
+    title: 'PRO-KOM Serwis System',
     description:
-      'Repair management system for electronics service teams. Client, staff, and admin panels, Kanban board, Celery async jobs, and process automation.',
-    stats: '3 user panels · RBAC · Audit log · SSL/TLS',
+      'A repair management system for small and medium electronics service businesses.',
+    longDescription:
+      'End-to-end automation of the repair workflow - from device intake to customer pickup. Three panels: customer, staff Kanban board and admin dashboard. Celery for async tasks, real-time status tracking, audit log and RBAC.',
+    stats: '3 panels - RBAC - Audit log - SSL/TLS',
+    imageAlt: 'PRO-KOM Serwis System - electronics repair management system',
     hero: {
       badge: 'Business Solution',
-      title: 'PRO-KOM Service System',
-      subtitle: 'Advanced repair workflow platform with client, staff, and admin panels.',
+      title: 'PRO-KOM Serwis System',
+      subtitle:
+        'A repair management system for small and medium electronics service businesses.',
       cta: {
         live: 'Live Demo',
         github: 'GitHub',
@@ -152,14 +154,14 @@ export const projects = {
     },
     role: {
       title: 'My role',
-      body: 'System design, backend implementation, Celery async jobs, reporting, and operational flows.',
+      body: 'System design, backend implementation, Celery async jobs, reporting and operational flows.',
     },
     myRole: {
       title: 'My role',
       items: [
-        'Mapped the full repair lifecycle from intake to completion and handover.',
-        'Implemented Django REST APIs for client, staff, and admin workflows.',
-        'Automated operations using Celery (notifications, reports, scheduled jobs).',
+        'Mapped the full repair lifecycle from device intake to completion and pickup.',
+        'Implemented Django REST APIs for customer, staff and admin workflows.',
+        'Automated operations using Celery: notifications, reports and scheduled jobs.',
         'Designed RBAC access model and auditable change history.',
         'Aligned frontend-backend flow for practical day-to-day service operations.',
       ],
@@ -170,22 +172,17 @@ export const projects = {
     },
     metrics: {
       title: 'Project scale',
-      items: [
-        '3 user panels (client, staff, admin)',
-        'RBAC + audit log',
-        'Operational workflow automation',
-        'Docker + Nginx + TLS infrastructure',
-      ],
+      items: ['3 panels', 'RBAC', 'Audit log', 'SSL/TLS'],
     },
     features: {
       title: 'Key features',
       items: [
         'Online repair submission',
-        'Kanban workflow for staff',
-        'Automated notifications',
-        'RBAC and audit log',
-        'Exportable reports',
-        'Scheduling calendar',
+        'Staff Kanban board',
+        'Admin dashboard',
+        'Real-time status tracking',
+        'Audit log and RBAC',
+        'Asynchronous tasks with Celery',
       ],
     },
     challenges: {
@@ -234,21 +231,22 @@ export const projects = {
     screens: {
       title: 'Screens / mockups',
       placeholder: 'Coming soon - final service system screenshots.',
-      items: ['Client panel', 'Staff Kanban board', 'Admin panel', 'Schedule view'],
+      items: ['Customer panel', 'Staff Kanban board', 'Admin panel', 'Schedule view'],
     },
     whatILearned: {
       title: 'What I learned',
-      body: 'Translating business processes into data models, modular Django architecture, and Redis/Celery scaling.',
+      body: 'Translating business processes into data models, modular Django architecture and Redis/Celery scaling.',
     },
     next: {
       title: 'Roadmap',
-      body: 'UX improvements, accounting integrations, and automated backups.',
+      body: 'UX improvements, accounting integrations and automated backups.',
     },
   },
   portfolio: {
+    badge: 'This Website',
     title: 'Portfolio Website',
     description:
-      'This website - a premium personal brand experience built with Next.js 15, focused on performance, i18n, and UX.',
-    cta: 'View code',
+      'This website - a premium personal brand portfolio built with Next.js 15, TypeScript and Tailwind CSS v4.',
+    cta: 'Source code',
   },
 }

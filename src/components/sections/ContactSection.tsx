@@ -1,61 +1,151 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { Download, FolderGit2, IdCard, Loader2, Mail } from 'lucide-react'
+import { Download, FolderGit2, IdCard, Loader2, Mail, MapPin } from 'lucide-react'
+import { useLocale } from 'next-intl'
 
-const schema = z.object({
-  name: z.string().min(2, 'Min. 2 znaki'),
-  email: z.string().email('Nieprawidłowy email'),
-  company: z.string().optional(),
-  message: z.string().min(10, 'Min. 10 znaków'),
-  hp: z.string().optional(),
-})
-
-type FormValues = z.infer<typeof schema>
-
-const CONTACT_LINKS = [
-  {
-    icon: FolderGit2,
-    label: 'GitHub',
-    value: 'github.com/krystian2077',
-    href: 'https://github.com/krystian2077',
-    external: true,
-    highlight: false,
-  },
-  {
-    icon: IdCard,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/krystian-potaczek',
-    href: 'https://www.linkedin.com/in/krystian-potaczek-952968257/',
-    external: true,
-    highlight: false,
-  },
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'kontakt wkrótce',
-    href: '#',
-    external: false,
-    highlight: false,
-  },
-  {
-    icon: Download,
-    label: 'Curriculum Vitae',
-    value: 'Pobierz PDF',
-    href: '#',
-    external: false,
-    highlight: true,
-  },
-] as const
+type FormValues = {
+  name: string
+  email: string
+  company?: string
+  subject?: string
+  message: string
+  hp?: string
+}
 
 const inputClass =
   'w-full rounded-lg border border-[rgba(34,211,238,0.15)] bg-[#081420] px-4 py-3 text-sm text-[#F0F9FF] placeholder-[#3A5F73] outline-none transition focus:border-[rgba(34,211,238,0.5)] focus:ring-1 focus:ring-[rgba(34,211,238,0.2)]'
 
 export function ContactSection() {
+  const locale = useLocale()
+  const isEn = locale === 'en'
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+
+  const copy = isEn
+    ? {
+        minName: 'Min. 2 characters',
+        invalidEmail: 'Please enter a valid email address',
+        minMessage: 'Message must be at least 10 characters',
+        sending: 'Sending...',
+        sent: 'Message sent. Thank you!',
+        error: 'Something went wrong. Please try again.',
+        submit: 'Send message →',
+        label: 'CONTACT',
+        heading: 'Looking for a junior who understands code and business?',
+        subheading: "Let's talk.",
+        description:
+          'I am open to Junior Python / Django Developer and Junior Backend Developer roles - remote, hybrid or on-site in Poland. I usually reply within 24 hours.',
+        badge: 'Available for hire',
+        name: 'Full name *',
+        namePlaceholder: 'John Smith',
+        email: 'Email *',
+        emailPlaceholder: 'john@company.com',
+        company: 'Company',
+        companyPlaceholder: 'Company name (optional)',
+        subject: 'Subject',
+        subjectPlaceholder: 'Junior Python Developer / collaboration / project question',
+        message: 'Message *',
+        messagePlaceholder: "Hi, I'd like to talk about...",
+        legal:
+          'By sending this message, you agree to be contacted back regarding your inquiry.',
+        quick: 'Quick contact',
+        cv: 'coming soon',
+        availability: 'Availability',
+        availabilityValue: 'Remote / hybrid / Poland',
+        response: 'I usually reply within 24h',
+      }
+    : {
+        minName: 'Min. 2 znaki',
+        invalidEmail: 'Nieprawidłowy email',
+        minMessage: 'Min. 10 znaków',
+        sending: 'Wysyłanie...',
+        sent: '✓ Wiadomość wysłana!',
+        error: 'Błąd wysyłania - spróbuj ponownie',
+        submit: 'Wyślij wiadomość →',
+        label: 'KONTAKT',
+        heading: 'Szukasz juniora, który rozumie kod i biznes?',
+        subheading: 'Porozmawiajmy.',
+        description:
+          'Jestem otwarty na role Junior Python / Django Developer oraz Junior Backend Developer - zdalnie, hybrydowo lub stacjonarnie w Polsce. Odpowiadam zwykle w ciągu 24 godzin.',
+        badge: 'Dostępny do pracy',
+        name: 'Imię i nazwisko *',
+        namePlaceholder: 'Jan Kowalski',
+        email: 'Email *',
+        emailPlaceholder: 'jan@firma.pl',
+        company: 'Firma',
+        companyPlaceholder: 'Nazwa firmy (opcjonalnie)',
+        subject: 'Temat',
+        subjectPlaceholder: 'Junior Python Developer / współpraca / pytanie o projekt',
+        message: 'Wiadomość *',
+        messagePlaceholder: 'Cześć, chciałbym porozmawiać o...',
+        legal:
+          'Wysyłając wiadomość, zgadzasz się na kontakt zwrotny w sprawie przesłanego zapytania.',
+        quick: 'Szybki kontakt',
+        cv: 'wkrótce dostępne',
+        availability: 'Dostępność',
+        availabilityValue: 'Zdalnie / hybrydowo / Polska',
+        response: 'Odpowiadam zwykle w ciągu 24h',
+      }
+
+  const schema = useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, copy.minName),
+        email: z.string().email(copy.invalidEmail),
+        company: z.string().optional(),
+        subject: z.string().optional(),
+        message: z.string().min(10, copy.minMessage),
+        hp: z.string().optional(),
+      }),
+    [copy.invalidEmail, copy.minMessage, copy.minName],
+  )
+
+  const contactLinks = [
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'krystian.potaczek07@gmail.com',
+      href: 'mailto:krystian.potaczek07@gmail.com',
+      external: false,
+      highlight: false,
+    },
+    {
+      icon: IdCard,
+      label: 'LinkedIn',
+      value: 'linkedin.com/in/krystian-potaczek',
+      href: 'https://www.linkedin.com/in/krystian-potaczek-952968257/',
+      external: true,
+      highlight: false,
+    },
+    {
+      icon: FolderGit2,
+      label: 'GitHub',
+      value: 'github.com/krystian2077',
+      href: 'https://github.com/krystian2077',
+      external: true,
+      highlight: false,
+    },
+    {
+      icon: Download,
+      label: 'Curriculum Vitae',
+      value: copy.cv,
+      href: null,
+      external: false,
+      highlight: true,
+    },
+    {
+      icon: MapPin,
+      label: copy.availability,
+      value: copy.availabilityValue,
+      detail: copy.response,
+      href: null,
+      external: false,
+      highlight: false,
+    },
+  ] as const
 
   const {
     register,
@@ -85,48 +175,44 @@ export function ContactSection() {
   }
 
   const submitLabel =
-    status === 'sending' ? null
-    : status === 'success' ? '✓ Wiadomość wysłana!'
-    : status === 'error' ? 'Błąd wysyłania — spróbuj ponownie'
-    : 'Wyślij wiadomość →'
+    status === 'sending'
+      ? null
+      : status === 'success'
+        ? copy.sent
+        : status === 'error'
+          ? copy.error
+          : copy.submit
 
   const submitBg =
-    status === 'success' ? 'bg-green-400'
-    : status === 'error' ? 'bg-red-400'
-    : 'bg-[#22D3EE] hover:bg-[#67E8F9]'
+    status === 'success'
+      ? 'bg-green-400'
+      : status === 'error'
+        ? 'bg-red-400'
+        : 'bg-[#22D3EE] hover:bg-[#67E8F9]'
 
   return (
     <section id="contact" className="border-t border-[rgba(34,211,238,0.08)] py-20">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-
-        {/* Centered header */}
         <div className="mb-12 flex flex-col items-center text-center">
-          <p className="mb-3 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
-            KONTAKT
+          <p className="font-dm-mono mb-3 text-xs tracking-widest text-[#22D3EE] uppercase">
+            {copy.label}
           </p>
           <h2 className="mb-3 text-4xl font-semibold text-[#F0F9FF]">
-            Szukasz juniora który dowiezie projekt?
+            {copy.heading}
           </h2>
-          <p className="mb-4 text-xl font-medium text-[#22D3EE]">Porozmawiajmy.</p>
-          <p className="mb-6 max-w-lg text-[#7EA8BD]">
-            Otwarty na propozycje: Junior Python / Django Developer, remote lub hybrid. Odpowiem w
-            ciągu 24 godzin.
-          </p>
-          <div className="flex items-center gap-2 rounded-full border border-[rgba(74,222,128,0.2)] bg-[rgba(74,222,128,0.1)] px-4 py-2 font-dm-mono text-sm text-[#4ADE80]">
+          <p className="mb-4 text-xl font-medium text-[#22D3EE]">{copy.subheading}</p>
+          <p className="mb-6 max-w-lg text-[#7EA8BD]">{copy.description}</p>
+          <div className="font-dm-mono flex items-center gap-2 rounded-full border border-[rgba(74,222,128,0.2)] bg-[rgba(74,222,128,0.1)] px-4 py-2 text-sm text-[#4ADE80]">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4ADE80] opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#4ADE80]" />
             </span>
-            Open to work
+            {copy.badge}
           </div>
         </div>
 
-        {/* Two-column layout */}
         <div className="grid gap-10 lg:grid-cols-[3fr_2fr]">
-
-          {/* Left: Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Honeypot */}
             <input
               type="text"
               {...register('hp')}
@@ -136,22 +222,17 @@ export function ContactSection() {
             />
 
             <div>
-              <label className="mb-1 block text-sm text-[#7EA8BD]">Imię i nazwisko *</label>
-              <input
-                {...register('name')}
-                placeholder="Jan Kowalski"
-                className={inputClass}
-                autoComplete="name"
-              />
+              <label className="mb-1 block text-sm text-[#7EA8BD]">{copy.name}</label>
+              <input {...register('name')} placeholder={copy.namePlaceholder} className={inputClass} autoComplete="name" />
               {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>}
             </div>
 
             <div>
-              <label className="mb-1 block text-sm text-[#7EA8BD]">Email *</label>
+              <label className="mb-1 block text-sm text-[#7EA8BD]">{copy.email}</label>
               <input
                 {...register('email')}
                 type="email"
-                placeholder="jan@firma.pl"
+                placeholder={copy.emailPlaceholder}
                 className={inputClass}
                 autoComplete="email"
               />
@@ -159,22 +240,18 @@ export function ContactSection() {
             </div>
 
             <div>
-              <label className="mb-1 block text-sm text-[#7EA8BD]">Firma</label>
-              <input
-                {...register('company')}
-                placeholder="Nazwa firmy (opcjonalne)"
-                className={inputClass}
-              />
+              <label className="mb-1 block text-sm text-[#7EA8BD]">{copy.company}</label>
+              <input {...register('company')} placeholder={copy.companyPlaceholder} className={inputClass} />
             </div>
 
             <div>
-              <label className="mb-1 block text-sm text-[#7EA8BD]">Wiadomość *</label>
-              <textarea
-                {...register('message')}
-                rows={5}
-                placeholder="Cześć, chciałbym..."
-                className={inputClass}
-              />
+              <label className="mb-1 block text-sm text-[#7EA8BD]">{copy.subject}</label>
+              <input {...register('subject')} placeholder={copy.subjectPlaceholder} className={inputClass} />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm text-[#7EA8BD]">{copy.message}</label>
+              <textarea {...register('message')} rows={5} placeholder={copy.messagePlaceholder} className={inputClass} />
               {errors.message && (
                 <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
               )}
@@ -188,48 +265,57 @@ export function ContactSection() {
               {status === 'sending' ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  Wysyłanie...
+                  {copy.sending}
                 </span>
               ) : (
                 submitLabel
               )}
             </button>
+
+            <p className="text-xs leading-relaxed text-[#7EA8BD]">{copy.legal}</p>
           </form>
 
-          {/* Right: Contact info */}
           <aside>
-            <h3 className="mb-4 text-sm font-semibold text-[#F0F9FF]">Szybki kontakt</h3>
+            <h3 className="mb-4 text-sm font-semibold text-[#F0F9FF]">{copy.quick}</h3>
 
             <div className="space-y-3">
-              {CONTACT_LINKS.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.external ? '_blank' : undefined}
-                  rel={link.external ? 'noopener noreferrer' : undefined}
-                  className={`flex items-center gap-3 rounded-xl border p-4 transition hover:border-[rgba(34,211,238,0.25)] ${
-                    link.highlight
-                      ? 'border-[rgba(34,211,238,0.3)] bg-[rgba(34,211,238,0.08)]'
-                      : 'border-[rgba(34,211,238,0.1)] bg-[#081420]'
-                  }`}
-                >
-                  <link.icon className="h-4 w-4 shrink-0 text-[#22D3EE]" />
-                  <div>
-                    <p className="text-xs text-[#7EA8BD]">{link.label}</p>
-                    <p className="text-sm text-[#F0F9FF]">{link.value}</p>
-                  </div>
-                </a>
-              ))}
-            </div>
+              {contactLinks.map((link) => {
+                const cardClass = `flex items-center gap-3 rounded-xl border p-4 transition ${
+                  link.href ? 'hover:border-[rgba(34,211,238,0.25)]' : ''
+                } ${
+                  link.highlight
+                    ? 'border-[rgba(34,211,238,0.3)] bg-[rgba(34,211,238,0.08)]'
+                    : 'border-[rgba(34,211,238,0.1)] bg-[#081420]'
+                }`
+                const content = (
+                  <>
+                    <link.icon className="h-4 w-4 shrink-0 text-[#22D3EE]" />
+                    <div>
+                      <p className="text-xs text-[#7EA8BD]">{link.label}</p>
+                      <p className="text-sm text-[#F0F9FF]">{link.value}</p>
+                      {'detail' in link && (
+                        <p className="mt-1 text-xs leading-relaxed text-[#7EA8BD]">{link.detail}</p>
+                      )}
+                    </div>
+                  </>
+                )
 
-            <div className="mt-3 rounded-xl border border-[rgba(74,222,128,0.15)] bg-[#081420] p-4">
-              <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                🟢 Dostępny do pracy
-                <br />
-                Remote lub hybrid · Polska
-                <br />
-                Odpowiem w ciągu 24h
-              </p>
+                return link.href ? (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    className={cardClass}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <div key={link.label} className={cardClass}>
+                    {content}
+                  </div>
+                )
+              })}
             </div>
           </aside>
         </div>

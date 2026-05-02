@@ -4,7 +4,7 @@ const messages = {
   nav: {
     about: 'O mnie',
     projects: 'Projekty',
-    stack: 'Stack',
+    stack: 'Technologie',
     experience: 'Doświadczenie',
     contact: 'Kontakt',
     available: 'Dostępny do pracy',
@@ -258,50 +258,52 @@ const messages = {
     },
   },
   books: {
-    eyebrow: 'Książki techniczne',
-    title: 'Czytam, bo chcę — nie dlatego, że muszę',
-    subtitle: 'Pasja do rzemiosła, nie tylko do frameworków.',
+    eyebrow: 'BIBLIOTEKA',
+    title: 'Książki, które ukształtowały moje podejście do programowania',
+    subtitle:
+      'Czytam je nie dla CV, tylko dlatego, że naprawdę chcę lepiej rozumieć kod, jakość i odpowiedzialność w pracy developera.',
     items: {
       cleanCode: {
         title: 'Czysty Kod',
         author: 'Robert C. Martin',
-        insight: 'Kod piszemy dla ludzi, nie dla maszyn.',
+        insight:
+          'Kod piszemy dla ludzi, nie tylko dla maszyn. Czytelność, nazewnictwo i prostota to część profesjonalizmu.',
       },
       pragmatic: {
         title: 'Pragmatyczny Programista',
-        author: 'Hunt & Thomas',
+        author: 'Andrew Hunt, David Thomas',
         insight:
-          'Odpowiedzialność za własne rzemiosło i za decyzje techniczne.',
+          'Bierz odpowiedzialność, automatyzuj, szukaj lepszych rozwiązań i stale rozwijaj swój warsztat.',
       },
       craftsman: {
         title: 'Software Craftsman',
         author: 'Sandro Mancuso',
         insight:
-          'Profesjonalizm i jakość przewyższają przelotową modę technologiczną.',
+          'Programowanie to rzemiosło — liczy się jakość, odpowiedzialność i długoterminowa wartość kodu.',
       },
       cleanCoder: {
-        title: 'Mistrz czystego kodu',
+        title: 'Mistrz Czystego Kodu',
         author: 'Robert C. Martin',
         insight:
-          'Architektura to zbiór decyzji, których koszt rośnie z czasem.',
+          'Profesjonalizm to nie tylko kod, ale też komunikacja, odpowiedzialność i uczciwe podejście do pracy.',
       },
       tdd: {
-        title: 'TDD: Sztuka Tworzenia Dobrego Kodu',
-        author: 'Robert C. Martin',
+        title: 'TDD: Sztuka tworzenia dobrego kodu',
+        author: 'Kent Beck',
         insight:
-          'Testy to żywa dokumentacja i bezpieczna podstawa pod refaktoryzację.',
+          'Testy pomagają lepiej rozumieć wymagania i projektować zachowanie systemu przed implementacją.',
       },
       algorithms: {
-        title: 'Algorytmy',
-        author: 'Sedgewick & Wayne',
+        title: 'Algorytmy. Ilustrowany przewodnik',
+        author: 'Aditya Bhargava',
         insight:
-          'Fundamenty, które przetrwają niezależnie od konkretnego frameworka.',
+          'Algorytmy uczą myślenia o problemach — jak wybrać rozwiązanie prostsze, szybsze i bardziej skalowalne.',
       },
       cpp: {
         title: 'C++ Opus Magnum',
-        author: 'Jerzy Grebosz',
+        author: 'Jerzy Grębosz',
         insight:
-          'Moment, kiedy zaczyna się głębokie rozumienie kompilatora i pamięci.',
+          'Fundamenty C++ pomagają lepiej rozumieć pamięć, strukturę programu i to, co dzieje się pod spodem.',
       },
     },
   },

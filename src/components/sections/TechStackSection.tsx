@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Server, Database, Monitor, Cloud, Shield, Bot, type LucideIcon } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import { Section } from '@/components/ui'
 
 interface TechGroup {
@@ -10,88 +11,58 @@ interface TechGroup {
   tags: string[]
 }
 
-const groups: TechGroup[] = [
-  {
-    icon: Server,
-    title: 'Backend',
-    tags: [
-      'Python 3.12',
-      'Django 5',
-      'DRF',
-      'FastAPI',
-      'Flask',
-      'GeoDjango',
-      'Celery',
-      'SQLAlchemy',
-      'Alembic',
-    ],
-  },
-  {
-    icon: Database,
-    title: 'Bazy danych',
-    tags: ['PostgreSQL', 'PostGIS', 'Redis', 'SQLite', 'Alembic migrations'],
-  },
-  {
-    icon: Monitor,
-    title: 'Frontend',
-    tags: [
-      'Next.js 15',
-      'React 18',
-      'TypeScript',
-      'Tailwind CSS',
-      'Framer Motion',
-      'Zustand',
-      'React Query',
-      'Radix UI',
-    ],
-  },
-  {
-    icon: Cloud,
-    title: 'DevOps & Infra',
-    tags: [
-      'Docker',
-      'Docker Compose',
-      'Nginx',
-      'GitHub Actions',
-      'AWS (EC2/S3/RDS)',
-      'Vercel',
-      'Render',
-      'Certbot SSL',
-    ],
-  },
-  {
-    icon: Shield,
-    title: 'Auth & Testing',
-    tags: [
-      'JWT',
-      'Google OAuth',
-      'SimpleJWT',
-      'pytest',
-      'pytest-django',
-      'Playwright',
-      'Coverage',
-      'Faker',
-    ],
-  },
-  {
-    icon: Bot,
-    title: 'AI & Narzędzia',
-    tags: [
-      'OpenAI API',
-      'LangChain',
-      'Ollama',
-      'MCP servers',
-      'Claude',
-      'GitHub Copilot',
-      'Cursor',
-      'Git',
-      'Postman',
-      'Swagger',
-    ],
-  },
+const sharedGroups = {
+  backend: [
+    'Python 3.12',
+    'Django 5',
+    'DRF',
+    'REST API',
+    'FastAPI',
+    'Flask',
+    'Celery',
+    'GeoDjango',
+    'SQLAlchemy',
+    'Alembic',
+  ],
+  databases: ['PostgreSQL', 'PostGIS', 'Redis', 'SQLite', 'SQL'],
+  frontend: [
+    'Next.js 15',
+    'React',
+    'TypeScript',
+    'Tailwind CSS',
+    'Framer Motion',
+    'Zustand',
+    'React Query',
+    'Radix UI',
+  ],
+  devops: ['Docker', 'Docker Compose', 'Nginx', 'GitHub Actions', 'Vercel', 'Render', 'Certbot SSL'],
+  quality: ['JWT', 'Google OAuth', 'SimpleJWT', 'pytest', 'pytest-django', 'Playwright', 'Coverage', 'Faker'],
+  ai: ['OpenAI API', 'LangChain', 'Claude', 'ChatGPT', 'GitHub Copilot', 'Cursor', 'Codex', 'Git', 'Postman', 'Swagger'],
+}
+
+const groupsPl: TechGroup[] = [
+  { icon: Server, title: 'Backend', tags: sharedGroups.backend },
+  { icon: Database, title: 'Bazy danych', tags: sharedGroups.databases },
+  { icon: Monitor, title: 'Frontend', tags: sharedGroups.frontend },
+  { icon: Cloud, title: 'DevOps & Infra', tags: sharedGroups.devops },
+  { icon: Shield, title: 'Auth & Quality', tags: sharedGroups.quality },
+  { icon: Bot, title: 'AI & Narzędzia', tags: sharedGroups.ai },
+]
+
+const groupsEn: TechGroup[] = [
+  { icon: Server, title: 'Backend', tags: sharedGroups.backend },
+  { icon: Database, title: 'Databases', tags: sharedGroups.databases },
+  { icon: Monitor, title: 'Frontend', tags: sharedGroups.frontend },
+  { icon: Cloud, title: 'DevOps & Infra', tags: sharedGroups.devops },
+  { icon: Shield, title: 'Auth & Quality', tags: sharedGroups.quality },
+  { icon: Bot, title: 'AI & Tools', tags: sharedGroups.ai },
 ]
 
 export function TechStackSection() {
+  const locale = useLocale()
+  const isEn = locale === 'en'
+  const groups = isEn ? groupsEn : groupsPl
+
   return (
     <Section id="stack" className="py-20">
       <div className="space-y-10">
@@ -100,10 +71,12 @@ export function TechStackSection() {
             TECH STACK
           </p>
           <h2 className="font-sora text-3xl font-semibold text-[#F0F9FF]">
-            Technologie których używam
+            {isEn ? 'Technologies I use' : 'Technologie, których używam'}
           </h2>
           <p className="text-base text-[#7EA8BD]">
-            Nie lista do CV — narzędzia z których korzystam w realnych projektach.
+            {isEn
+              ? 'Not a random list of tools - only technologies I use in real projects.'
+              : 'Nie przypadkowa lista technologii - tylko narzędzia, których używam w projektach.'}
           </p>
         </div>
 

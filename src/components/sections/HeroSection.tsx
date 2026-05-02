@@ -2,8 +2,27 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { Mail } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
+
+// ─── Social icons (lucide-react v1.14 lacks Github/Linkedin) ─────────────────
+
+function IconGithub({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c.955.005 1.917.128 2.805.374 2.292-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.769.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+    </svg>
+  )
+}
+
+function IconLinkedin({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  )
+}
 
 // ─── Terminal ─────────────────────────────────────────────────────────────────
 
@@ -11,18 +30,19 @@ type TermLine = { text: string; color: string }
 
 const TERMINAL_LINES: TermLine[] = [
   { text: '$ python manage.py startproject krystian_potaczek', color: '#22D3EE' },
-  { text: '✓ Project initialized successfully', color: '#4ADE80' },
+  { text: '✓ Portfolio initialized successfully', color: '#4ADE80' },
   { text: '', color: '' },
-  { text: '$ git commit -m "Add Django REST API"', color: '#22D3EE' },
-  { text: '✓ [main] Backend API ready — 47 endpoints', color: '#4ADE80' },
+  { text: '$ git commit -m "Build real Django projects"', color: '#22D3EE' },
+  { text: '✓ StayMap Polska ready — live demo', color: '#4ADE80' },
+  { text: '✓ PRO-KOM System ready — live demo', color: '#4ADE80' },
   { text: '', color: '' },
-  { text: '$ docker-compose up --build', color: '#22D3EE' },
+  { text: '$ docker compose up --build', color: '#22D3EE' },
   { text: '✓ PostgreSQL connected', color: '#7EA8BD' },
   { text: '✓ Redis running', color: '#7EA8BD' },
   { text: '✓ Celery worker started', color: '#7EA8BD' },
   { text: '', color: '' },
-  { text: '$ echo "Ready to ship 🚀"', color: '#22D3EE' },
-  { text: 'Ready to ship 🚀', color: '#F0F9FF' },
+  { text: '$ echo "Ready to join your team 🚀"', color: '#22D3EE' },
+  { text: 'Ready to join your team 🚀', color: '#F0F9FF' },
 ]
 
 const CHAR_MS = 50
@@ -100,7 +120,7 @@ function TerminalWindow() {
 
       {/* Terminal content */}
       <div
-        className="min-h-80 p-5 text-xs leading-7 sm:text-sm"
+        className="min-h-96 p-6 text-sm leading-7"
         style={{ fontFamily: 'var(--font-dm-mono)' }}
       >
         {/* Completed lines */}
@@ -148,7 +168,7 @@ function TerminalWindow() {
 
 // ─── Static data ──────────────────────────────────────────────────────────────
 
-const TECH_TAGS = ['Python', 'Django', 'DRF', 'PostgreSQL', 'Docker', 'React/Next.js']
+const TECH_TAGS = ['Python', 'Django', 'REST API', 'PostgreSQL', 'Docker', 'Next.js / React']
 
 // ─── Framer Motion ────────────────────────────────────────────────────────────
 
@@ -170,11 +190,12 @@ const itemVariants = {
 
 export function HeroSection() {
   const t = useTranslations('hero')
+  const locale = useLocale()
 
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden pt-16"
+      className="relative flex min-h-screen items-center overflow-hidden pt-[70px]"
       style={{ backgroundColor: '#050D12' }}
     >
       {/* Background grid */}
@@ -199,11 +220,11 @@ export function HeroSection() {
       />
 
       {/* Main grid */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
           {/* ── Left column: terminal ── */}
-          <div className="order-1">
+          <div className="order-1 shadow-[0_0_60px_rgba(34,211,238,0.06)]">
             <TerminalWindow />
           </div>
 
@@ -234,10 +255,20 @@ export function HeroSection() {
               </span>
             </motion.div>
 
+            {/* Name above headline */}
+            <motion.p
+              variants={itemVariants}
+              className="mb-2 text-sm tracking-wide"
+              style={{ fontFamily: 'var(--font-dm-mono)', color: '#7EA8BD' }}
+            >
+              {locale === 'en' ? "Hi, I'm" : 'Cześć, jestem'}{' '}
+              <span style={{ color: '#F0F9FF', fontWeight: 500 }}>Krystian Potaczek</span>
+            </motion.p>
+
             {/* Headline */}
             <motion.h1
               variants={itemVariants}
-              className="text-4xl font-bold leading-tight xl:text-5xl"
+              className="text-5xl font-bold leading-tight xl:text-6xl"
               style={{ color: '#F0F9FF', fontFamily: 'var(--font-sora)' }}
             >
               Junior Python /<br />
@@ -298,11 +329,45 @@ export function HeroSection() {
               </Link>
             </motion.div>
 
+            {/* Social links */}
+            <motion.div variants={itemVariants} className="mt-4 flex items-center gap-4">
+              <a
+                href="https://github.com/krystian2077"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                style={{ fontFamily: 'var(--font-dm-mono)' }}
+              >
+                <IconGithub className="h-3.5 w-3.5" />
+                GitHub
+              </a>
+              <span style={{ color: '#1E3A4A' }}>·</span>
+              <a
+                href="https://www.linkedin.com/in/krystian-potaczek-952968257/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                style={{ fontFamily: 'var(--font-dm-mono)' }}
+              >
+                <IconLinkedin className="h-3.5 w-3.5" />
+                LinkedIn
+              </a>
+              <span style={{ color: '#1E3A4A' }}>·</span>
+              <a
+                href="mailto:placeholder@email.pl"
+                className="flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                style={{ fontFamily: 'var(--font-dm-mono)' }}
+              >
+                <Mail className="h-3.5 w-3.5" />
+                Email
+              </a>
+            </motion.div>
+
             {/* Trust stats */}
             <motion.p
               variants={itemVariants}
               className="mt-2 text-xs"
-              style={{ fontFamily: 'var(--font-dm-mono)', color: '#3A5F73' }}
+              style={{ fontFamily: 'var(--font-dm-mono)', color: '#5B8EA6' }}
             >
               {t('trust')}
             </motion.p>

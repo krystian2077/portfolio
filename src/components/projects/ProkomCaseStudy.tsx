@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import {
   ClipboardList,
   Calendar,
@@ -17,8 +18,12 @@ import {
   Layers,
   Zap,
   ShieldAlert,
+  ArrowRight,
 } from 'lucide-react'
 import Link from 'next/link'
+import { projects as projectsContent } from '@/content/pl/projects'
+import { prokomArchitecture } from '@/content/projectArchitecture'
+import { ProjectArchitecture } from './ProjectArchitecture'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -50,8 +55,12 @@ const STACK_BADGES = [
   'GitHub Actions',
 ]
 
+const GALLERY_PATH = projectsContent.prokom.screens.galleryPath
+
+const PROKOM_SCREENSHOTS = projectsContent.prokom.screens.items
+
 const PROKOM_ASCII = `┌─────────────────────────────────────────┐
-│    Nginx (Reverse Proxy + SSL/TLS)      │
+│    Nginx (Reverse Proxy + HTTPS/TLS)    │
 │         Port 80/443                     │
 └───────────┬─────────────┬───────────────┘
             │             │
@@ -72,7 +81,7 @@ const PROKOM_ASCII = `┌──────────────────�
 │ Primary DB     │  │ Cache/  │  │  Workers   │
 │                │  │ Queue   │  │            │
 │ ├ Repairs      │  │         │  │ ├ Emails   │
-│ ├ Clients      │  │         │  │ ├ SMS/WA   │
+│ ├ Clients      │  │         │  │ ├ Reminders│
 │ ├ Inventory    │  │         │  │ ├ Backups  │
 │ └ Audit Log    │  │         │  │ └ Reports  │
 └────────────────┘  └─────────┘  └────────────┘`
@@ -80,17 +89,15 @@ const PROKOM_ASCII = `┌──────────────────�
 export default function ProkomCaseStudy() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#050D12' }}>
-
       {/* ── HERO ── */}
       <section
-        className="relative overflow-hidden pb-16 pt-12"
+        className="relative overflow-hidden pt-12 pb-16"
         style={{
           background:
             'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34,211,238,0.08) 0%, transparent 70%), #050D12',
         }}
       >
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-
           {/* Breadcrumb */}
           <motion.div {...fadeUp(0)} className="mb-8">
             <Link
@@ -130,20 +137,18 @@ export default function ProkomCaseStudy() {
             {...fadeUp(0.15)}
             className="mb-8 max-w-2xl text-xl leading-relaxed text-[#7EA8BD]"
           >
-            System zarządzania naprawami sprzętu elektronicznego — od zgłoszenia do odbioru.
-            Inspirowany 2,5-letnim doświadczeniem w realnym serwisie.
+            System do zarządzania procesem napraw sprzętu elektronicznego — od przyjęcia zgłoszenia,
+            przez diagnozę i statusy, aż po odbiór przez klienta. Projekt inspirowany 2,5-letnim
+            doświadczeniem w realnym środowisku serwisowym.
           </motion.p>
 
           {/* Stats */}
-          <motion.div
-            {...fadeUp(0.2)}
-            className="mb-8 flex flex-wrap gap-3"
-          >
+          <motion.div {...fadeUp(0.2)} className="mb-8 flex flex-wrap gap-3">
             {[
               { value: '3', label: 'panele użytkownika' },
               { value: 'RBAC', label: 'system uprawnień' },
               { value: '8+', label: 'zadań Celery async' },
-              { value: 'SSL', label: "Let's Encrypt" },
+              { value: 'HTTPS', label: "Let's Encrypt" },
             ].map((stat) => (
               <div
                 key={stat.label}
@@ -189,10 +194,12 @@ export default function ProkomCaseStudy() {
               📂 GitHub
             </a>
             <a
-              href="#"
+              href="https://github.com/krystian2077/prokom-system"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm text-[#7EA8BD] transition-colors hover:text-[#F0F9FF]"
             >
-              📖 API Docs
+              📖 API w repo
             </a>
           </motion.div>
 
@@ -215,12 +222,29 @@ export default function ProkomCaseStudy() {
         </div>
       </section>
 
+      {/* ── SCREENSHOT ── */}
+      <section className="py-8">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <motion.div {...fadeUp(0.1)}>
+            <div className="relative h-80 w-full overflow-hidden rounded-xl border border-[rgba(34,211,238,0.1)]">
+              <Image
+                src="/images/main.png"
+                alt="PRO-KOM Serwis System"
+                fill
+                sizes="100vw"
+                className="object-cover object-top"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── PROBLEM ── */}
       <section className="py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()}>
             <p
-              className="mb-2 text-xs uppercase tracking-widest text-[#22D3EE]"
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
               GENEZA
@@ -229,7 +253,7 @@ export default function ProkomCaseStudy() {
               className="mb-8 text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Problem który rozwiązuje
+              Problem, który rozwiązuję
             </h2>
           </motion.div>
 
@@ -240,10 +264,10 @@ export default function ProkomCaseStudy() {
             style={{ backgroundColor: '#081420' }}
           >
             <p className="text-sm leading-relaxed text-[#7EA8BD]">
-              Ten projekt zbudowałem z perspektywy kogoś, kto przez{' '}
-              <span className="text-[#F0F9FF]">2,5 roku pracował w serwisie elektroniki</span>.
-              Wiedziałem dokładnie jakie procesy są nieefektywne, gdzie gubi się informacja
-              i czego klientom brakuje.
+              Ten projekt zbudowałem z perspektywy osoby, która przez{' '}
+              <span className="text-[#F0F9FF]">2,5 roku pracowała w serwisie elektroniki</span>.
+              Dzięki temu dobrze rozumiałem, gdzie w codziennym procesie napraw ginie informacja, co
+              spowalnia obsługę i czego realnie potrzebuje klient, pracownik oraz właściciel.
             </p>
           </motion.div>
 
@@ -256,18 +280,18 @@ export default function ProkomCaseStudy() {
               {[
                 {
                   Icon: ClipboardList,
-                  title: 'Brak transparentności dla klienta',
-                  desc: 'Klient nie wiedział co dzieje się z jego urządzeniem bez dzwonienia do serwisu. Brak powiadomień, brak self-service panelu.',
+                  title: 'Brak samoobsługowego statusu naprawy',
+                  desc: 'Klient musiał kontaktować się telefonicznie, żeby dowiedzieć się, co dzieje się z jego urządzeniem. System rozwiązuje to przez panel statusu, powiadomienia i przejrzystą historię zgłoszenia.',
                 },
                 {
                   Icon: Calendar,
-                  title: 'Ręczne zarządzanie harmonogramem',
-                  desc: 'Pracownicy żonglowali notatkami i excelem. Brak widoku priorytetów, brak Kanban board, brak automatycznych przypomnień.',
+                  title: 'Ręczne zarządzanie pracą serwisu',
+                  desc: 'Proces opierał się na notatkach, arkuszach i ręcznym pilnowaniu priorytetów. Panel pracownika porządkuje naprawy w widoku Kanban, pokazuje statusy, przypisania i zadania wymagające reakcji.',
                 },
                 {
                   Icon: BarChart,
-                  title: 'Brak danych do decyzji',
-                  desc: 'Właściciel nie miał dostępu do analityki — czas napraw, wydajność pracowników, popularne usterki, stan magazynu.',
+                  title: 'Brak jednego widoku danych operacyjnych',
+                  desc: 'Właściciel potrzebuje szybkiego dostępu do danych: czasu napraw, obciążenia pracowników, popularnych usterek, przychodów i stanu magazynu. Panel admina zbiera te informacje w jednym miejscu.',
                 },
               ].map(({ Icon, title, desc }) => (
                 <div key={title} className="space-y-3">
@@ -286,7 +310,7 @@ export default function ProkomCaseStudy() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
             <p
-              className="mb-2 text-xs uppercase tracking-widest text-[#22D3EE]"
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
               ZAKRES
@@ -306,26 +330,26 @@ export default function ProkomCaseStudy() {
             {[
               {
                 Icon: Server,
-                title: 'Domain Modeling',
-                desc: 'Przełożyłem realne procesy serwisowe na model danych Django. Lifecycle naprawy: PENDING → ACCEPTED → IN_PROGRESS → READY → DELIVERED.',
+                title: 'Modelowanie domeny',
+                desc: 'Przełożyłem realny proces serwisowy na model danych Django: zgłoszenia, urządzenia, klienci, statusy, wyceny, części, historia zmian i lifecycle naprawy.',
                 delay: 0,
               },
               {
                 Icon: Layers,
-                title: 'Trzy panele UX',
-                desc: 'Różne przepływy dla klienta, pracownika i admina. Kanban board drag-drop dla staff, self-service dla klienta bez logowania.',
+                title: 'Trzy panele użytkownika',
+                desc: 'Zaprojektowałem osobne przepływy dla klienta, pracownika i administratora: self-service dla klienta, Kanban dla staffu oraz panel zarządczy dla admina.',
                 delay: 0.05,
               },
               {
                 Icon: Zap,
-                title: 'Async & Notifications',
-                desc: 'Celery do emaili, SMS/WhatsApp, automatycznych backupów i raportów. Redis jako broker i cache.',
+                title: 'Zadania async i powiadomienia',
+                desc: 'Wykorzystałem Celery i Redis do obsługi powiadomień, automatycznych przypomnień, backupów oraz zadań wykonywanych poza głównym request-response cycle.',
                 delay: 0.1,
               },
               {
                 Icon: ShieldAlert,
-                title: 'Security & Compliance',
-                desc: 'RBAC + ABAC, JWT auth, HTTPS z Let\'s Encrypt, audit log (django-simple-history), GDPR/RODO.',
+                title: 'Bezpieczeństwo i audyt',
+                desc: 'Zaimplementowałem system ról i uprawnień, JWT auth, historię zmian, audit log oraz mechanizmy wspierające kontrolę dostępu do danych.',
                 delay: 0.15,
               },
             ].map(({ Icon, title, desc, delay }) => (
@@ -344,66 +368,14 @@ export default function ProkomCaseStudy() {
         </div>
       </section>
 
-      {/* ── ARCHITEKTURA ── */}
-      <section className="py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeUp()} className="mb-8">
-            <p
-              className="mb-2 text-xs uppercase tracking-widest text-[#22D3EE]"
-              style={{ fontFamily: 'var(--font-dm-mono)' }}
-            >
-              DESIGN
-            </p>
-            <h2
-              className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
-              style={{ fontFamily: 'var(--font-sora)' }}
-            >
-              Architektura systemu
-            </h2>
-          </motion.div>
-
-          <motion.div
-            {...fadeUp(0.1)}
-            className="overflow-hidden rounded-xl border p-6"
-            style={{
-              backgroundColor: '#0A1628',
-              borderColor: 'rgba(34,211,238,0.15)',
-            }}
-          >
-            <pre
-              className="overflow-x-auto text-xs leading-relaxed text-[#22D3EE]"
-              style={{ fontFamily: 'var(--font-dm-mono)' }}
-            >
-              {PROKOM_ASCII}
-            </pre>
-          </motion.div>
-
-          <motion.div {...fadeUp(0.15)} className="mt-6 grid gap-4 sm:grid-cols-3">
-            {[
-              { label: 'Frontend', desc: 'Next.js 14, React Query, Zustand' },
-              { label: 'Backend', desc: 'Django 5.1, DRF, Gunicorn, Nginx' },
-              { label: 'Data', desc: 'PostgreSQL 16, Redis 7, Celery' },
-            ].map(({ label, desc }) => (
-              <div key={label} className="text-sm">
-                <span
-                  className="text-[#22D3EE]"
-                  style={{ fontFamily: 'var(--font-dm-mono)' }}
-                >
-                  {label}:
-                </span>{' '}
-                <span className="text-[#7EA8BD]">{desc}</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      <ProjectArchitecture content={prokomArchitecture} technicalDiagram={PROKOM_ASCII} />
 
       {/* ── KLUCZOWE FUNKCJE ── */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
             <p
-              className="mb-2 text-xs uppercase tracking-widest text-[#22D3EE]"
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
               FUNKCJE
@@ -420,38 +392,38 @@ export default function ProkomCaseStudy() {
             {[
               {
                 Icon: LayoutDashboard,
-                title: 'Kanban Board dla Staff',
-                desc: 'Drag-drop zmiana statusów napraw. Kolumny: Przyjęte → W trakcie → Gotowe → Odebrane. Widok priorytetów i przypisań do pracowników.',
+                title: 'Kanban Board dla pracowników',
+                desc: 'Drag-and-drop zmiana statusów napraw. Kolumny: Przyjęte → W trakcie → Gotowe → Odebrane. Widok priorytetów, przypisań i zgłoszeń wymagających reakcji.',
                 delay: 0,
               },
               {
                 Icon: Bell,
                 title: 'Automatyczne powiadomienia',
-                desc: 'Celery Beat wysyła emaile przy każdej zmianie statusu. Klient śledzi naprawę bez dzwonienia do serwisu.',
+                desc: 'Celery Beat uruchamia zadania związane ze zmianą statusów, przypomnieniami i komunikacją z klientem. Klient może śledzić naprawę bez telefonowania do serwisu.',
                 delay: 0.05,
               },
               {
                 Icon: ShieldCheck,
                 title: 'RBAC + Audit Log',
-                desc: 'Role: klient, pracownik, admin. django-simple-history śledzi każdą zmianę w systemie. Pełna historia dla compliance i audytu.',
+                desc: 'Role: klient, pracownik, administrator. System zapisuje historię zmian statusów, edycji zgłoszeń i działań użytkowników, co ułatwia kontrolę oraz audyt.',
                 delay: 0.1,
               },
               {
                 Icon: Package,
                 title: 'Zarządzanie magazynem',
-                desc: 'Katalog części zamiennych, rezerwacja przy naprawie, stany magazynowe. Zamówienia hurtowni z powiadomieniami o niskim stanie.',
+                desc: 'Katalog części zamiennych, rezerwacja części pod naprawę, stany magazynowe, zamówienia hurtowni oraz powiadomienia o niskim stanie.',
                 delay: 0.15,
               },
               {
                 Icon: BarChart2,
                 title: 'Analityka i raporty',
-                desc: 'Dashboard dla admina: czas napraw, wydajność pracowników, przychody, najpopularniejsze usterki. Eksport CSV/PDF.',
+                desc: 'Dashboard admina pokazuje czas napraw, obciążenie pracowników, przychody, najpopularniejsze usterki i dane potrzebne do podejmowania decyzji.',
                 delay: 0.2,
               },
               {
                 Icon: Lock,
-                title: 'Security Production-ready',
-                desc: "HTTPS z Let's Encrypt (Certbot), CSRF, XSS prevention, rate limiting, SQL injection prevention przez ORM, PBKDF2 password hashing.",
+                title: 'Bezpieczeństwo i wdrożenie',
+                desc: "HTTPS przez Let's Encrypt, ochrona CSRF/XSS, rate limiting, walidacja danych, autoryzacja po rolach oraz hashowanie haseł po stronie Django.",
                 delay: 0.25,
               },
             ].map(({ Icon, title, desc, delay }) => (
@@ -470,12 +442,104 @@ export default function ProkomCaseStudy() {
         </div>
       </section>
 
+      {/* DEMO VIEWS */}
+      <section className="py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <motion.div {...fadeUp()} className="mb-8">
+            <p
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
+              style={{ fontFamily: 'var(--font-dm-mono)' }}
+            >
+              DEMO
+            </p>
+            <h2
+              className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
+              style={{ fontFamily: 'var(--font-sora)' }}
+            >
+              System w praktyce
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
+              Najważniejsze widoki panelu pracownika i administratora pokazujące realny workflow
+              serwisu: obsługę zgłoszeń, Kanban, szczegóły naprawy, historię zmian, dashboard oraz
+              zarządzanie procesem.
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...fadeUp(0.05)}
+            className="mb-8 rounded-2xl border border-[rgba(34,211,238,0.14)] p-6 shadow-[0_0_40px_rgba(34,211,238,0.05)]"
+            style={{ backgroundColor: '#081420' }}
+          >
+            <div className="flex gap-4">
+              <Lock className="mt-1 h-5 w-5 shrink-0 text-[#22D3EE]" />
+              <div className="space-y-3">
+                <p className="text-sm leading-relaxed text-[#7EA8BD]">
+                  Ze względu na poufność danych firmowych i danych klientów nie udostępniam
+                  publicznego logowania do panelu pracownika oraz administratora. Zamiast tego
+                  przygotowałem zanonimizowane widoki systemu, które pokazują najważniejsze elementy
+                  workflow: obsługę zgłoszeń, Kanban pracownika, szczegóły naprawy, historię zmian,
+                  dashboard administratora i zarządzanie procesem serwisowym.
+                </p>
+                <p className="text-sm leading-relaxed text-[#7EA8BD]">
+                  Podczas rozmowy technicznej mogę przejść przez architekturę systemu, kod oraz
+                  wybrane widoki panelu w formie prezentacji lub screen share.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {PROKOM_SCREENSHOTS.map((screen, i) => (
+              <motion.article
+                key={screen.src}
+                {...fadeUp(i * 0.04)}
+                className="group overflow-hidden rounded-2xl border border-[rgba(34,211,238,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(34,211,238,0.28)] hover:shadow-[0_18px_50px_rgba(34,211,238,0.08)]"
+                style={{ backgroundColor: '#081420' }}
+              >
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-[rgba(34,211,238,0.08)] bg-[#050D12]">
+                  <Image
+                    src={screen.src}
+                    alt={screen.alt}
+                    fill
+                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050D12]/35 via-transparent to-transparent opacity-70" />
+                </div>
+                <div className="p-5">
+                  <h3 className="mb-2 font-semibold text-[#F0F9FF]">{screen.title}</h3>
+                  <p className="text-sm leading-relaxed text-[#7EA8BD]">{screen.desc}</p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          <motion.div
+            {...fadeUp(0.12)}
+            className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl border border-[rgba(34,211,238,0.12)] p-6 sm:flex-row sm:items-center"
+            style={{ backgroundColor: '#081420' }}
+          >
+            <p className="max-w-2xl text-sm leading-relaxed text-[#7EA8BD]">
+              Mam przygotowaną pełną galerię ponad 30 widoków panelu pracownika i administratora —
+              od zgłoszenia naprawy po dashboard, historię zmian i zarządzanie serwisem.
+            </p>
+            <Link
+              href={GALLERY_PATH}
+              className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-3 text-sm font-semibold text-[#050D12] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,211,238,0.25)]"
+            >
+              Zobacz pełną galerię widoków
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── WYZWANIA ── */}
       <section className="py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
             <p
-              className="mb-2 text-xs uppercase tracking-widest text-[#22D3EE]"
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
               WYZWANIA
@@ -486,35 +550,38 @@ export default function ProkomCaseStudy() {
             >
               Najtrudniejsze problemy
             </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
+              Miejsca, w których projekt wymagał najwięcej decyzji architektonicznych.
+            </p>
           </motion.div>
 
           <div className="space-y-4">
             {[
               {
                 num: '01',
-                title: 'Modelowanie złożonego lifecycle naprawy',
+                title: 'Modelowanie lifecycle naprawy',
                 problem:
-                  'Naprawa przechodzi przez wiele stanów z różnymi regułami przejść, deadlines i automatycznymi akcjami przy każdej zmianie.',
+                  'Naprawa przechodzi przez wiele stanów, a każdy status może uruchamiać inne akcje: powiadomienia, przypomnienia, zmianę widoczności dla klienta lub aktualizację kolejki pracownika.',
                 solution:
-                  '→ Django signals do wyzwalania Celery tasków przy zmianie statusu. Enum-based status field z jawną logiką dozwolonych przejść.',
+                  '→ Enum-based status field, jawna logika dozwolonych przejść oraz zadania Celery uruchamiane przy zmianach statusu.',
                 delay: 0,
               },
               {
                 num: '02',
                 title: 'RBAC z trzema różnymi UX flows',
                 problem:
-                  'Klient, pracownik i admin mają zupełnie inne potrzeby i uprawnienia. Ten sam zasób (naprawa) musi się inaczej prezentować każdej roli.',
+                  'Klient, pracownik i administrator mają różne potrzeby, uprawnienia i widoki tego samego zasobu. Ten sam obiekt naprawy musi być prezentowany inaczej zależnie od roli.',
                 solution:
-                  '→ Custom permission classes w DRF. Serializery z metodą to_representation zwracającą różne pola per rola. Trzy osobne sekcje Next.js.',
+                  '→ Custom permission classes w DRF, osobne serializery i kontrolowana reprezentacja danych dla każdej roli.',
                 delay: 0.05,
               },
               {
                 num: '03',
-                title: 'Implementacja bez wcześniejszego wzorca',
+                title: 'Implementacja bez gotowego wzorca',
                 problem:
-                  'To był mój pierwszy duży projekt z pełnym stack Django + Next.js + Docker. Wiele decyzji architektonicznych podejmowałem bez gotowego szablonu.',
+                  'To był mój pierwszy duży projekt z pełnym stackiem Django + Next.js + Docker, dlatego wiele decyzji architektonicznych musiałem podjąć samodzielnie.',
                 solution:
-                  '→ Czysty Kod i Software Craftsman jako przewodniki. Selectors/Services/Serializers jako pattern. Regularne code review z pomocą AI.',
+                  '→ Modularna architektura, wydzielenie logiki do services/selectors/serializers oraz regularny code review z wykorzystaniem AI jako wsparcia.',
                 delay: 0.1,
               },
             ].map(({ num, title, problem, solution, delay }) => (
@@ -526,7 +593,7 @@ export default function ProkomCaseStudy() {
               >
                 <div className="mb-3 flex items-start gap-4">
                   <span
-                    className="shrink-0 text-4xl font-bold leading-none"
+                    className="shrink-0 text-4xl leading-none font-bold"
                     style={{
                       fontFamily: 'var(--font-dm-mono)',
                       color: 'rgba(34,211,238,0.2)',
@@ -554,7 +621,7 @@ export default function ProkomCaseStudy() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
             <p
-              className="mb-2 text-xs uppercase tracking-widest text-[#22D3EE]"
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
               WNIOSKI
@@ -569,12 +636,12 @@ export default function ProkomCaseStudy() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              'Jak przełożyć realne procesy biznesowe na model danych i lifecycle stanów',
+              'Jak przełożyć realne procesy biznesowe na model danych i lifecycle statusów',
               'Modułowa architektura Django — każda app ma jedną odpowiedzialność',
               'Clean Architecture w praktyce: selectors, services, serializers',
-              'Docker + Nginx + Certbot — deployment produkcyjny od A do Z',
-              'Zarządzanie złożonymi uprawnieniami RBAC i ABAC w DRF',
-              'Budowanie z perspektywy użytkownika — 2,5 roku w serwisie to bezcenny kontekst',
+              'Docker + Nginx + Certbot — pełny proces wdrożenia aplikacji webowej',
+              'Zarządzanie złożonymi uprawnieniami RBAC w DRF',
+              'Budowanie z perspektywy użytkownika — doświadczenie w serwisie dało mi realny kontekst',
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -587,6 +654,46 @@ export default function ProkomCaseStudy() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── DEMO CHECKLIST ── */}
+      <section className="py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            {...fadeUp()}
+            className="rounded-2xl border border-[rgba(34,211,238,0.12)] p-8"
+            style={{ backgroundColor: '#081420' }}
+          >
+            <p
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
+              style={{ fontFamily: 'var(--font-dm-mono)' }}
+            >
+              DEMO
+            </p>
+            <h2
+              className="mb-6 text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
+              style={{ fontFamily: 'var(--font-sora)' }}
+            >
+              Co możesz sprawdzić w demo
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                'zgłoszenie naprawy jako klient',
+                'panel statusu naprawy',
+                'Kanban board dla pracownika',
+                'zmianę statusów i przypisań',
+                'panel administratora',
+                'historię zmian i audit log',
+                'dokumentację API w repo / w kodzie',
+              ].map((item, i) => (
+                <motion.div key={item} {...fadeUp(i * 0.03)} className="flex items-start gap-3">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#22D3EE]" />
+                  <p className="text-sm leading-relaxed text-[#7EA8BD]">{item}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -605,7 +712,8 @@ export default function ProkomCaseStudy() {
               Zaciekawił Cię ten projekt?
             </h2>
             <p className="mb-8 text-[#7EA8BD]">
-              Chętnie opowiem więcej o decyzjach technicznych i architekturze.
+              Chętnie opowiem więcej o architekturze, procesie serwisowym i decyzjach technicznych,
+              które podjąłem podczas budowy.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
@@ -618,7 +726,7 @@ export default function ProkomCaseStudy() {
                 href="/projects/staymap-polska"
                 className="inline-flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.4)] px-6 py-3 text-sm text-[#22D3EE] transition-colors hover:bg-[rgba(34,211,238,0.08)]"
               >
-                ← Zobacz StayMap Polska
+                Zobacz drugi projekt →
               </Link>
             </div>
           </motion.div>
@@ -648,7 +756,6 @@ export default function ProkomCaseStudy() {
           </motion.div>
         </div>
       </section>
-
     </div>
   )
 }

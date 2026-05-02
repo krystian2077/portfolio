@@ -131,13 +131,13 @@ export const projects = {
     badge: 'Business Solution',
     title: 'PRO-KOM Serwis System',
     description:
-      'System zarządzania naprawami elektroniki dla serwisów. Panele klienta, pracownika i administratora, tablica Kanban, zadania asynchroniczne Celery i automatyzacja procesu.',
-    stats: '3 panele użytkownika · RBAC · Dziennik audytu · SSL/TLS',
+      'System do zarządzania procesem napraw sprzętu elektronicznego: panele klienta, pracownika i administratora, Kanban, zadania asynchroniczne Celery i automatyzacja workflow.',
+    stats: '3 panele użytkownika · RBAC · Dziennik audytu · HTTPS/TLS',
     hero: {
       badge: 'Business Solution',
       title: 'PRO-KOM Serwis System',
       subtitle:
-        'System zarządzania naprawami sprzętu elektronicznego: klient, pracownik, administrator, automatyzacja.',
+        'System do zarządzania procesem napraw sprzętu elektronicznego — od przyjęcia zgłoszenia, przez diagnozę i statusy, aż po odbiór przez klienta.',
       cta: {
         live: 'Live demo',
         github: 'GitHub',
@@ -233,9 +233,47 @@ export const projects = {
       ],
     },
     screens: {
-      title: 'Screeny / makiety',
-      placeholder: 'Wkrótce — finalne zrzuty systemu serwisowego.',
-      items: ['Panel klienta', 'Kanban pracownika', 'Panel administratora', 'Widok harmonogramu'],
+      title: 'System w praktyce',
+      placeholder: 'Zanonimizowane widoki panelu klienta, pracownika i administratora.',
+      galleryPath: '/projects/prokom-system/gallery',
+      items: [
+        {
+          title: 'Strona wej�ciowa serwisu',
+          desc: 'Publiczny widok startowy pokazuje ofert� serwisu, g��wne CTA zg�oszenia naprawy i sp�jny branding PRO-KOM.',
+          src: '/projects/prokom/prokom-public-home.png',
+          alt: 'PRO-KOM Serwis System - publiczna strona g��wna serwisu z przyciskiem zg�oszenia naprawy',
+        },
+        {
+          title: 'Formularz zg�oszenia naprawy',
+          desc: 'Pi�cioetapowy formularz zbiera dane kontaktowe, informacje o urz�dzeniu, dostawie i podsumowaniu zg�oszenia.',
+          src: '/projects/prokom/prokom-repair-form.png',
+          alt: 'PRO-KOM Serwis System - formularz zg�oszenia naprawy online z podgl�dem zg�oszenia',
+        },
+        {
+          title: 'Analityka pracownika',
+          desc: 'Widok KPI prezentuje przych�d, liczb� zako�czonych napraw, prace w toku, zaleg�o�ci i rozk�ad status�w.',
+          src: '/projects/prokom/prokom-employee-analytics.png',
+          alt: 'PRO-KOM Serwis System - panel pracownika ze statystykami i analityk� napraw',
+        },
+        {
+          title: 'Moje naprawy',
+          desc: 'Tabela napraw pozwala szybko filtrowa� przypisane zg�oszenia, statusy, klient�w, urz�dzenia i akcje wymagaj�ce reakcji.',
+          src: '/projects/prokom/prokom-employee-repairs.png',
+          alt: 'PRO-KOM Serwis System - lista napraw przypisanych do pracownika z filtrami status�w',
+        },
+        {
+          title: 'Dashboard pracownika',
+          desc: 'Panel operacyjny ��czy licznik aktywnych napraw, najbli�sze dzia�ania, czas pracy i szybkie wej�cie w obs�ug� zg�osze�.',
+          src: '/projects/prokom/prokom-employee-dashboard.png',
+          alt: 'PRO-KOM Serwis System - dashboard pracownika z licznikami napraw i kartami kolejnych dzia�a�',
+        },
+        {
+          title: 'Dashboard administratora',
+          desc: 'Widok zarz�dczy pokazuje pipeline status�w, obci��enie technik�w, przych�d miesi�czny i alerty procesowe.',
+          src: '/projects/prokom/prokom-admin-dashboard.png',
+          alt: 'PRO-KOM Serwis System - dashboard administratora z KPI, pipeline status�w i obci��eniem technik�w',
+        },
+      ],
     },
     whatILearned: {
       title: 'Czego się nauczyłem',

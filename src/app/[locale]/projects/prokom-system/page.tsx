@@ -1,10 +1,13 @@
 import ProkomCaseStudy from '@/components/projects/ProkomCaseStudy'
+import ProkomCaseStudyEn from '@/components/projects/ProkomCaseStudyEn'
 import type { Metadata } from 'next'
 import { routing } from '@/i18n/routing'
 import { siteUrl } from '@/lib/site'
 
-export default function Page() {
-  return <ProkomCaseStudy />
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+
+  return locale === 'en' ? <ProkomCaseStudyEn /> : <ProkomCaseStudy />
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {

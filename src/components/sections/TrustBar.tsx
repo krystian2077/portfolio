@@ -1,50 +1,77 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Rocket, BookOpen, GraduationCap, Bot, Briefcase } from 'lucide-react'
+import { useLocale } from 'next-intl'
 
 const ITEMS = [
-  { icon: Rocket, text: '2 projekty z live demo' },
-  { icon: BookOpen, text: '7 książek technicznych' },
-  { icon: GraduationCap, text: 'Python+Django+AI (600h+)' },
-  { icon: Bot, text: 'Ready4AI — LLM & Agents' },
-  { icon: Briefcase, text: '2,5 roku w środowisku IT' },
+  { emoji: '🚀', text: '2 projekty z live demo' },
+  { emoji: '⚙️', text: 'Django / DRF / PostgreSQL' },
+  { emoji: '🧠', text: '600h+ Python + Django + AI' },
+  { emoji: '🤖', text: 'AI-assisted workflow' },
+  { emoji: '💼', text: '2,5 roku w środowisku IT' },
 ]
 
+const ITEMS_EN = [
+  { emoji: '🚀', text: '2 projects with live demos' },
+  { emoji: '⚙️', text: 'Django / DRF / PostgreSQL' },
+  { emoji: '🧠', text: '600h+ Python + Django + AI' },
+  { emoji: '🤖', text: 'AI-assisted workflow' },
+  { emoji: '💼', text: '2.5 years in an IT environment' },
+]
+
+const Separator = () => (
+  <div className="hidden w-px flex-shrink-0 bg-[rgba(34,211,238,0.15)] md:block" style={{ height: '24px' }} />
+)
+
 export function TrustBar() {
+  const locale = useLocale()
+  const items = locale === 'en' ? ITEMS_EN : ITEMS
+
   return (
-    <section className="border-t border-b border-[rgba(34,211,238,0.08)] bg-[#081420] py-4">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="w-full border-t border-b border-[rgba(34,211,238,0.08)] bg-[#081420] py-6">
+      <div className="mx-auto max-w-7xl px-6">
+        {/* Desktop: flex row with separators */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-          className="grid grid-cols-2 items-center gap-4 xl:flex xl:justify-between"
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="hidden items-center justify-center md:flex"
         >
-          {ITEMS.map((item, index) => {
-            const Icon = item.icon
-            const isLast = index === ITEMS.length - 1
-            return (
-              <div
-                key={item.text}
-                className={`flex items-center gap-2 ${
-                  isLast ? 'col-span-2 justify-center xl:col-span-1 xl:justify-start' : ''
-                }`}
-              >
-                <Icon className="h-4 w-4 shrink-0 text-[#22D3EE]" />
-                <span
-                  className="whitespace-nowrap text-xs text-[#7EA8BD]"
-                  style={{ fontFamily: 'var(--font-dm-mono)' }}
-                >
+          {items.map((item, index) => (
+            <div key={item.text} className="flex items-center">
+              <div className="flex items-center gap-2.5 px-8 py-2">
+                <span className="text-xl">{item.emoji}</span>
+                <span className="whitespace-nowrap text-sm font-medium tracking-wide text-[#C8E0EC]">
                   {item.text}
                 </span>
-                {!isLast && (
-                  <span className="ml-4 hidden h-4 border-r border-[rgba(34,211,238,0.1)] xl:block" />
-                )}
               </div>
-            )
-          })}
+              {index < items.length - 1 && <Separator />}
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Mobile: 2-column grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
+          className="grid grid-cols-2 gap-4 md:hidden"
+        >
+          {items.map((item, index) => (
+            <div
+              key={item.text}
+              className={`flex items-center gap-2.5 px-6 py-4 ${
+                index === items.length - 1 ? 'col-span-2 justify-center' : ''
+              }`}
+            >
+              <span className="text-lg">{item.emoji}</span>
+              <span className="whitespace-nowrap text-sm font-medium tracking-wide text-[#C8E0EC]">
+                {item.text}
+              </span>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
