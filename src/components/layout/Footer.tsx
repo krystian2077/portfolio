@@ -1,23 +1,35 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { ExternalLink, Moon, Sun } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
+import { Moon, Sun } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import { useTheme } from 'next-themes'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
-import { Section } from '@/components/ui/Section'
-import { cn } from '@/lib/utils'
 
-const SOCIAL_LINKS = [
-  { label: 'GitHub', href: 'https://github.com/krystian2077' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/krystianpotaczek' },
+const NAV_LINKS = [
+  { label: 'O mnie', href: '#about' },
+  { label: 'Projekty', href: '#projects' },
+  { label: 'Stack', href: '#stack' },
+  { label: 'Doświadczenie', href: '#experience' },
+  { label: 'Kontakt', href: '#contact' },
 ] as const
 
-const PORTFOLIO_REPO = 'https://github.com/krystian2077/portfolio'
+const PROJECT_LINKS = [
+  { label: 'StayMap Polska', href: '/projects/staymap-polska', internal: true },
+  { label: 'PRO-KOM System', href: '/projects/prokom-system', internal: true },
+  { label: 'Portfolio', href: 'https://github.com/krystian2077/portfolio', internal: false },
+] as const
+
+const SOCIAL_LINKS = [
+  { label: 'GitHub', href: 'https://github.com/krystian2077', external: true },
+  { label: 'LinkedIn', href: '#', external: false },
+  { label: 'Email', href: '#', external: false },
+] as const
+
+const linkClass =
+  'text-sm text-[#7EA8BD] transition-colors hover:text-[#22D3EE]'
 
 export function Footer() {
-  const tFoot = useTranslations('footer')
-  const tNav = useTranslations('nav')
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
@@ -36,74 +48,131 @@ export function Footer() {
   const isDark = mounted ? theme === 'dark' : true
 
   return (
-    <footer className="border-t border-[var(--border)] py-10">
-      <Section as="div" className="flex flex-col gap-8">
-        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between sm:gap-8">
-          <div className="flex flex-col items-center gap-1 sm:items-start">
+    <footer className="border-t border-[rgba(34,211,238,0.08)] bg-[#050D12] py-12">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+
+        {/* Top section */}
+        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
+
+          {/* Left: Logo + tagline + description */}
+          <div className="max-w-xs">
             <Link
               href="/"
-              className="font-dm-mono text-base font-medium text-[var(--accent-cyan)] transition-opacity hover:opacity-80"
+              className="font-dm-mono text-xl font-bold text-[#22D3EE] transition-opacity hover:opacity-80"
             >
               KP
             </Link>
-            <p className="max-w-xs text-center text-xs text-[var(--text-muted)] sm:text-left">{tFoot('tagline')}</p>
+            <p className="mt-1 text-sm text-[#7EA8BD]">Junior Python / Django Developer</p>
+            <p className="mt-2 text-xs leading-relaxed text-[#3A5F73]">
+              Buduję aplikacje webowe oparte na realnych problemach biznesowych.
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
-            {SOCIAL_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-xs text-[var(--text-muted)] transition-colors hover:text-[var(--text-primary)]"
-              >
-                {label}
-                <ExternalLink size={11} />
-              </a>
-            ))}
-          </div>
+          {/* Right: 3-column links */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
 
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-end">
-            <span className="sr-only">{tFoot('toggleLang')}</span>
+            {/* Column 1: Navigation */}
+            <div>
+              <h4 className="mb-4 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
+                Nawigacja
+              </h4>
+              <ul className="space-y-2">
+                {NAV_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className={linkClass}>
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 2: Projects */}
+            <div>
+              <h4 className="mb-4 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
+                Projekty
+              </h4>
+              <ul className="space-y-2">
+                {PROJECT_LINKS.map((link) =>
+                  link.internal ? (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href as '/'}
+                        className={linkClass}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ) : (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={linkClass}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            {/* Column 3: Social */}
+            <div>
+              <h4 className="mb-4 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
+                Social
+              </h4>
+              <ul className="space-y-2">
+                {SOCIAL_LINKS.map((link) => (
+                  <li key={link.label}>
+                    <a
+                      href={link.href}
+                      target={link.external ? '_blank' : undefined}
+                      rel={link.external ? 'noopener noreferrer' : undefined}
+                      className={linkClass}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom section */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[rgba(34,211,238,0.05)] pt-8 sm:flex-row">
+          <p className="font-dm-mono text-xs text-[#3A5F73]">© {year} Krystian Potaczek</p>
+
+          <p className="text-center text-xs text-[#3A5F73]">
+            Built with Next.js 15 · TypeScript · Tailwind CSS v4 · Deployed on Vercel
+          </p>
+
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={toggleLocale}
-              className="inline-flex rounded-md border border-[var(--border)] bg-[var(--bg-card)] px-3 py-1.5 font-dm-mono text-[11px] text-[var(--text-secondary)] transition-colors hover:border-[var(--accent-cyan)]/40 hover:text-[var(--accent-cyan)]"
-              aria-label={locale === 'pl' ? tNav('switchToEn') : tNav('switchToPl')}
+              className="rounded-md border border-[rgba(34,211,238,0.15)] bg-[#081420] px-3 py-1.5 font-dm-mono text-xs text-[#7EA8BD] transition-colors hover:border-[rgba(34,211,238,0.4)] hover:text-[#22D3EE]"
             >
               PL / EN
             </button>
             <button
               type="button"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className={cn(
-                'inline-flex h-9 w-9 items-center justify-center rounded-md border border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-muted)] transition-colors hover:border-[var(--accent-cyan)]/40 hover:text-[var(--accent-cyan)]',
-              )}
-              aria-label={isDark ? tNav('themeLight') : tNav('themeDark')}
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              className="flex h-8 w-8 items-center justify-center rounded-md border border-[rgba(34,211,238,0.15)] bg-[#081420] text-[#7EA8BD] transition-colors hover:border-[rgba(34,211,238,0.4)] hover:text-[#22D3EE]"
+              aria-label={isDark ? 'Przełącz na jasny motyw' : 'Przełącz na ciemny motyw'}
             >
-              {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
+              {mounted ? (
+                isDark ? <Sun size={14} /> : <Moon size={14} />
+              ) : (
+                <span className="h-3.5 w-3.5" />
+              )}
             </button>
           </div>
         </div>
-
-        <div className="flex flex-col items-center gap-3 border-t border-[var(--border)] pt-6 text-center text-xs text-[var(--text-muted)] sm:flex-row sm:justify-between sm:text-left">
-          <p>{tFoot('builtWith')}</p>
-          <a
-            href={PORTFOLIO_REPO}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[var(--text-muted)] underline-offset-4 transition-colors hover:text-[var(--accent-cyan)] hover:underline"
-          >
-            {tFoot('repoCta')}
-            <ExternalLink size={11} />
-          </a>
-        </div>
-
-        <p className="text-center text-xs text-[var(--text-muted)] sm:text-left">
-          © {year} {tFoot('copyright')}
-        </p>
-      </Section>
+      </div>
     </footer>
   )
 }

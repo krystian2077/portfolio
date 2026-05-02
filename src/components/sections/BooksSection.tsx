@@ -1,40 +1,86 @@
-import { useTranslations } from 'next-intl'
-import { Card, Section } from '@/components/ui'
+'use client'
 
-const BOOK_KEYS = ['cleanCode', 'pragmatic', 'craftsman', 'cleanCoder', 'tdd', 'algorithms', 'cpp'] as const
+import { motion } from 'framer-motion'
+import { BookOpen } from 'lucide-react'
+
+const BOOKS = [
+  {
+    title: 'Czysty Kod',
+    author: 'Robert C. Martin',
+    lesson: 'Kod piszemy dla ludzi, nie dla maszyn. Czytelność to profesjonalizm.',
+  },
+  {
+    title: 'Pragmatyczny Programista',
+    author: 'Hunt & Thomas',
+    lesson: 'Weź odpowiedzialność za swój craft. Nie narzekaj — napraw.',
+  },
+  {
+    title: 'Software Craftsman',
+    author: 'Sandro Mancuso',
+    lesson: 'Profesjonalizm to coś więcej niż tylko działający kod.',
+  },
+  {
+    title: 'Mistrz Czystego Kodu',
+    author: 'Robert C. Martin',
+    lesson: 'Architektura to decyzje których koszt zmian rośnie z czasem.',
+  },
+  {
+    title: 'TDD: Sztuka Dobrego Kodu',
+    author: 'Robert C. Martin',
+    lesson: 'Testy to dokumentacja żywego kodu. Piszą się przed, nie po.',
+  },
+  {
+    title: 'Algorytmy',
+    author: 'Sedgewick & Wayne',
+    lesson: 'Fundamenty pod każdy framework. Bez nich budujesz na piasku.',
+  },
+  {
+    title: 'C++ Opus Magnum',
+    author: 'Jerzy Grębosz',
+    lesson: 'Tu zaczyna się rozumienie jak działa komputer od środka.',
+  },
+] as const
 
 export function BooksSection() {
-  const t = useTranslations('books')
-
   return (
-    <Section className="py-20">
-      <div className="space-y-10">
-        <div className="space-y-4">
-          <p className="font-dm-mono text-xs uppercase tracking-[0.2em] text-(--accent-cyan)">
-            {t('eyebrow')}
+    <section className="py-20">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-10 space-y-3"
+        >
+          <p className="font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
+            BIBLIOTEKA
           </p>
-          <h2 className="text-3xl font-semibold leading-tight text-(--text-primary) md:text-4xl">
-            {t('title')}
+          <h2 className="text-3xl font-semibold text-[#F0F9FF]">
+            Czytam bo chcę, nie bo muszę
           </h2>
-          <p className="max-w-3xl text-base leading-relaxed text-(--text-secondary) md:text-lg">
-            {t('subtitle')}
+          <p className="max-w-xl text-[#7EA8BD]">
+            7 książek technicznych które ukształtowały moje podejście do programowania.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {BOOK_KEYS.map((bookKey) => (
-            <Card key={bookKey} padding="md" className="space-y-3">
-              <h3 className="text-lg font-semibold text-(--text-primary)">{t(`items.${bookKey}.title`)}</h3>
-              <p className="font-dm-mono text-xs uppercase tracking-wide text-(--accent-cyan)">
-                {t(`items.${bookKey}.author`)}
-              </p>
-              <p className="text-sm leading-relaxed text-(--text-secondary)">
-                {t(`items.${bookKey}.insight`)}
-              </p>
-            </Card>
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+          {BOOKS.map((book, i) => (
+            <motion.div
+              key={book.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              className="flex h-full flex-col rounded-xl border border-[rgba(34,211,238,0.1)] bg-[#081420] p-5 transition-all duration-200 hover:-translate-y-1 hover:border-[rgba(34,211,238,0.25)]"
+            >
+              <BookOpen className="mb-3 h-8 w-8 shrink-0 text-[#22D3EE]" />
+              <h3 className="mb-1 text-sm font-semibold text-[#F0F9FF]">{book.title}</h3>
+              <p className="mb-3 font-dm-mono text-xs text-[#3A5F73]">{book.author}</p>
+              <p className="text-xs italic leading-relaxed text-[#7EA8BD]">{book.lesson}</p>
+            </motion.div>
           ))}
         </div>
       </div>
-    </Section>
+    </section>
   )
 }

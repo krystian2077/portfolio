@@ -1,40 +1,60 @@
 'use client'
 
 import { useState } from 'react'
-import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
-import { BriefcaseBusiness, FolderGit2, IdCard } from 'lucide-react'
-import { buttonVariants } from '@/components/ui/Button'
-import { Card, Section } from '@/components/ui'
-import { cn } from '@/lib/utils'
+import { Download, FolderGit2, IdCard, Loader2, Mail } from 'lucide-react'
 
-const ContactSchema = z.object({
-  name: z.string().min(1, 'required'),
-  email: z.string().email('invalid_email'),
+const schema = z.object({
+  name: z.string().min(2, 'Min. 2 znaki'),
+  email: z.string().email('Nieprawidłowy email'),
   company: z.string().optional(),
-  message: z.string().min(10, 'min_message'),
+  message: z.string().min(10, 'Min. 10 znaków'),
   hp: z.string().optional(),
 })
 
-type ContactForm = z.infer<typeof ContactSchema>
+type FormValues = z.infer<typeof schema>
 
-const SIDEBAR_LINKS = [
+const CONTACT_LINKS = [
   {
     icon: FolderGit2,
+    label: 'GitHub',
+    value: 'github.com/krystian2077',
     href: 'https://github.com/krystian2077',
-    labelKey: 'connectGithub' as const,
+    external: true,
+    highlight: false,
   },
   {
     icon: IdCard,
-    href: 'https://linkedin.com/in/krystianpotaczek',
-    labelKey: 'connectLinkedin' as const,
+    label: 'LinkedIn',
+    value: 'Profil wkrótce',
+    href: '#',
+    external: false,
+    highlight: false,
+  },
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'kontakt wkrótce',
+    href: '#',
+    external: false,
+    highlight: false,
+  },
+  {
+    icon: Download,
+    label: 'Curriculum Vitae',
+    value: 'Pobierz PDF',
+    href: '#',
+    external: false,
+    highlight: true,
   },
 ] as const
 
+const inputClass =
+  'w-full rounded-lg border border-[rgba(34,211,238,0.15)] bg-[#081420] px-4 py-3 text-sm text-[#F0F9FF] placeholder-[#3A5F73] outline-none transition focus:border-[rgba(34,211,238,0.5)] focus:ring-1 focus:ring-[rgba(34,211,238,0.2)]'
+
 export function ContactSection() {
-  const t = useTranslations('contact')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
 
   const {
@@ -42,9 +62,9 @@ export function ContactSection() {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ContactForm>({ resolver: zodResolver(ContactSchema) })
+  } = useForm<FormValues>({ resolver: zodResolver(schema) })
 
-  async function onSubmit(data: ContactForm) {
+  async function onSubmit(data: FormValues) {
     if (data.hp) return
     setStatus('sending')
     try {
@@ -64,122 +84,156 @@ export function ContactSection() {
     }
   }
 
+  const submitLabel =
+    status === 'sending' ? null
+    : status === 'success' ? '✓ Wiadomość wysłana!'
+    : status === 'error' ? 'Błąd wysyłania — spróbuj ponownie'
+    : 'Wyślij wiadomość →'
+
+  const submitBg =
+    status === 'success' ? 'bg-green-400'
+    : status === 'error' ? 'bg-red-400'
+    : 'bg-[#22D3EE] hover:bg-[#67E8F9]'
+
   return (
-    <Section id="contact" className="border-t border-(--border) py-20">
+    <section id="contact" className="border-t border-[rgba(34,211,238,0.08)] py-20">
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 space-y-4">
-          <p className="font-dm-mono text-xs uppercase tracking-[0.2em] text-(--accent-cyan)">{t('eyebrow')}</p>
-          <h2 className="text-3xl font-semibold leading-tight text-(--text-primary) md:text-4xl">{t('title')}</h2>
-          <p className="max-w-2xl text-base text-(--text-secondary)">{t('subtitle')}</p>
+
+        {/* Centered header */}
+        <div className="mb-12 flex flex-col items-center text-center">
+          <p className="mb-3 font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
+            KONTAKT
+          </p>
+          <h2 className="mb-3 text-4xl font-semibold text-[#F0F9FF]">
+            Szukasz juniora który dowiezie projekt?
+          </h2>
+          <p className="mb-4 text-xl font-medium text-[#22D3EE]">Porozmawiajmy.</p>
+          <p className="mb-6 max-w-lg text-[#7EA8BD]">
+            Otwarty na propozycje: Junior Python / Django Developer, remote lub hybrid. Odpowiem w
+            ciągu 24 godzin.
+          </p>
+          <div className="flex items-center gap-2 rounded-full border border-[rgba(74,222,128,0.2)] bg-[rgba(74,222,128,0.1)] px-4 py-2 font-dm-mono text-sm text-[#4ADE80]">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4ADE80] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[#4ADE80]" />
+            </span>
+            Open to work
+          </div>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(280px,320px)] lg:gap-14">
-          <Card padding="lg" className="space-y-6">
-            <p className="text-sm leading-relaxed text-(--text-secondary)">{t('description')}</p>
+        {/* Two-column layout */}
+        <div className="grid gap-10 lg:grid-cols-[3fr_2fr]">
 
-            <form onSubmit={handleSubmit(onSubmit)} className="grid gap-4">
-              <input type="text" {...register('hp')} className="hidden" tabIndex={-1} autoComplete="off" />
+          {/* Left: Form */}
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Honeypot */}
+            <input
+              type="text"
+              {...register('hp')}
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
 
-              <label className="flex flex-col gap-1">
-                <span className="text-sm text-(--text-secondary)">{t('name')}</span>
-                <input
-                  {...register('name')}
-                  className="rounded-lg border border-(--border) bg-(--bg-card) px-3 py-2.5 text-(--text-primary) outline-none ring-(--accent-cyan)/0 transition-[box-shadow] focus:ring-2 focus:ring-(--accent-cyan)/35"
-                  autoComplete="name"
-                />
-                {errors.name && <span className="text-xs text-rose-400">{t(errors.name.message as string)}</span>}
-              </label>
+            <div>
+              <label className="mb-1 block text-sm text-[#7EA8BD]">Imię i nazwisko *</label>
+              <input
+                {...register('name')}
+                placeholder="Jan Kowalski"
+                className={inputClass}
+                autoComplete="name"
+              />
+              {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name.message}</p>}
+            </div>
 
-              <label className="flex flex-col gap-1">
-                <span className="text-sm text-(--text-secondary)">{t('email')}</span>
-                <input
-                  {...register('email')}
-                  type="email"
-                  className="rounded-lg border border-(--border) bg-(--bg-card) px-3 py-2.5 text-(--text-primary) outline-none ring-(--accent-cyan)/0 transition-[box-shadow] focus:ring-2 focus:ring-(--accent-cyan)/35"
-                  autoComplete="email"
-                />
-                {errors.email && <span className="text-xs text-rose-400">{t(errors.email.message as string)}</span>}
-              </label>
+            <div>
+              <label className="mb-1 block text-sm text-[#7EA8BD]">Email *</label>
+              <input
+                {...register('email')}
+                type="email"
+                placeholder="jan@firma.pl"
+                className={inputClass}
+                autoComplete="email"
+              />
+              {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email.message}</p>}
+            </div>
 
-              <label className="flex flex-col gap-1">
-                <span className="text-sm text-(--text-secondary)">{t('company')}</span>
-                <input
-                  {...register('company')}
-                  className="rounded-lg border border-(--border) bg-(--bg-card) px-3 py-2.5 text-(--text-primary) outline-none ring-(--accent-cyan)/0 transition-[box-shadow] focus:ring-2 focus:ring-(--accent-cyan)/35"
-                />
-              </label>
+            <div>
+              <label className="mb-1 block text-sm text-[#7EA8BD]">Firma</label>
+              <input
+                {...register('company')}
+                placeholder="Nazwa firmy (opcjonalne)"
+                className={inputClass}
+              />
+            </div>
 
-              <label className="flex flex-col gap-1">
-                <span className="text-sm text-(--text-secondary)">{t('message')}</span>
-                <textarea
-                  {...register('message')}
-                  rows={6}
-                  className="rounded-lg border border-(--border) bg-(--bg-card) px-3 py-2.5 text-(--text-primary) outline-none ring-(--accent-cyan)/0 transition-[box-shadow] focus:ring-2 focus:ring-(--accent-cyan)/35"
-                />
-                {errors.message && (
-                  <span className="text-xs text-rose-400">{t(errors.message.message as string)}</span>
-                )}
-              </label>
+            <div>
+              <label className="mb-1 block text-sm text-[#7EA8BD]">Wiadomość *</label>
+              <textarea
+                {...register('message')}
+                rows={5}
+                placeholder="Cześć, chciałbym..."
+                className={inputClass}
+              />
+              {errors.message && (
+                <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
+              )}
+            </div>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <button
-                  type="submit"
-                  className={cn(buttonVariants({ variant: 'primary', size: 'md' }), 'inline-flex items-center')}
-                  disabled={status === 'sending'}
-                >
-                  {status === 'sending' ? t('sending') : t('send')}
-                </button>
-                {status === 'success' && <span className="text-sm text-emerald-400">{t('success')}</span>}
-                {status === 'error' && <span className="text-sm text-rose-400">{t('error')}</span>}
-              </div>
-            </form>
-          </Card>
-
-          <aside className="flex flex-col gap-6">
-            <Card
-              padding="md"
-              className="space-y-4 border border-(--accent-cyan)/15 bg-(--bg-card) [--card-shine:rgba(34,211,238,0.04)] shadow-[inset_0_1px_0_0_var(--card-shine)]"
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              className={`w-full rounded-lg py-3 font-semibold text-[#050D12] transition disabled:opacity-70 ${submitBg}`}
             >
-              <div className="flex items-start gap-3 rounded-lg border border-emerald-400/25 bg-emerald-400/5 px-3 py-3">
-                <BriefcaseBusiness className="mt-0.5 size-5 shrink-0 text-emerald-300" aria-hidden />
-                <p className="text-sm leading-relaxed text-(--text-secondary)">{t('openBadge')}</p>
-              </div>
+              {status === 'sending' ? (
+                <span className="flex items-center justify-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Wysyłanie...
+                </span>
+              ) : (
+                submitLabel
+              )}
+            </button>
+          </form>
 
-              <div>
-                <h3 className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-(--accent-cyan)">
-                  {t('sidebarTitle')}
-                </h3>
-                <p className="text-sm leading-relaxed text-(--text-muted)">{t('sidebarIntro')}</p>
-              </div>
+          {/* Right: Contact info */}
+          <aside>
+            <h3 className="mb-4 text-sm font-semibold text-[#F0F9FF]">Szybki kontakt</h3>
 
-              <div className="space-y-2">
-                {SIDEBAR_LINKS.map(({ href, icon: Icon, labelKey }) => (
-                  <a
-                    key={href}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(
-                      buttonVariants({ variant: 'secondary', size: 'md' }),
-                      'flex w-full items-center justify-between gap-2',
-                    )}
-                  >
-                    <span className="inline-flex items-center gap-2">
-                      <Icon size={18} aria-hidden />
-                      {t(labelKey)}
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </Card>
+            <div className="space-y-3">
+              {CONTACT_LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target={link.external ? '_blank' : undefined}
+                  rel={link.external ? 'noopener noreferrer' : undefined}
+                  className={`flex items-center gap-3 rounded-xl border p-4 transition hover:border-[rgba(34,211,238,0.25)] ${
+                    link.highlight
+                      ? 'border-[rgba(34,211,238,0.3)] bg-[rgba(34,211,238,0.08)]'
+                      : 'border-[rgba(34,211,238,0.1)] bg-[#081420]'
+                  }`}
+                >
+                  <link.icon className="h-4 w-4 shrink-0 text-[#22D3EE]" />
+                  <div>
+                    <p className="text-xs text-[#7EA8BD]">{link.label}</p>
+                    <p className="text-sm text-[#F0F9FF]">{link.value}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
 
-            <Card padding="md" className="space-y-2 border border-dashed border-(--border-hover) bg-(--bg-card)/80">
-              <p className="text-sm font-medium text-(--text-primary)">{t('cvLabel')}</p>
-              <p className="text-xs leading-relaxed text-(--text-muted)">{t('cvHint')}</p>
-            </Card>
+            <div className="mt-3 rounded-xl border border-[rgba(74,222,128,0.15)] bg-[#081420] p-4">
+              <p className="text-sm leading-relaxed text-[#7EA8BD]">
+                🟢 Dostępny do pracy
+                <br />
+                Remote lub hybrid · Polska
+                <br />
+                Odpowiem w ciągu 24h
+              </p>
+            </div>
           </aside>
         </div>
       </div>
-    </Section>
+    </section>
   )
 }
