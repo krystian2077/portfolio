@@ -1,67 +1,137 @@
-import { useTranslations } from 'next-intl'
-import { Card, Section } from '@/components/ui'
+'use client'
 
-const GROUP_KEYS = [
-  'backend',
-  'database',
-  'frontend',
-  'devops',
-  'authSecurity',
-  'testing',
-  'aiTools',
-  'devTools',
-] as const
+import { motion } from 'framer-motion'
+import { Server, Database, Monitor, Cloud, Shield, Bot, type LucideIcon } from 'lucide-react'
+import { Section } from '@/components/ui'
 
-const GROUP_ITEMS: Record<(typeof GROUP_KEYS)[number], string[]> = {
-  backend: ['python', 'django', 'drf', 'fastapi', 'flask', 'geodjango', 'celery', 'sqlalchemy'],
-  database: ['postgres', 'redis', 'alembic'],
-  frontend: ['next', 'react', 'typescript', 'tailwind', 'framer'],
-  devops: ['docker', 'nginx', 'ghactions', 'aws', 'vercel', 'render'],
-  authSecurity: ['jwt', 'googleOAuth', 'csrf', 'rateLimiting', 'tls'],
-  testing: ['pytest', 'playwright', 'coverage', 'faker'],
-  aiTools: ['openai', 'langchain', 'ollama', 'mcp', 'prompt'],
-  devTools: ['git', 'cursor', 'claude', 'copilot', 'postman', 'swagger'],
+interface TechGroup {
+  icon: LucideIcon
+  title: string
+  tags: string[]
 }
 
-export function TechStackSection() {
-  const t = useTranslations('techStack')
+const groups: TechGroup[] = [
+  {
+    icon: Server,
+    title: 'Backend',
+    tags: [
+      'Python 3.12',
+      'Django 5',
+      'DRF',
+      'FastAPI',
+      'Flask',
+      'GeoDjango',
+      'Celery',
+      'SQLAlchemy',
+      'Alembic',
+    ],
+  },
+  {
+    icon: Database,
+    title: 'Bazy danych',
+    tags: ['PostgreSQL', 'PostGIS', 'Redis', 'SQLite', 'Alembic migrations'],
+  },
+  {
+    icon: Monitor,
+    title: 'Frontend',
+    tags: [
+      'Next.js 15',
+      'React 18',
+      'TypeScript',
+      'Tailwind CSS',
+      'Framer Motion',
+      'Zustand',
+      'React Query',
+      'Radix UI',
+    ],
+  },
+  {
+    icon: Cloud,
+    title: 'DevOps & Infra',
+    tags: [
+      'Docker',
+      'Docker Compose',
+      'Nginx',
+      'GitHub Actions',
+      'AWS (EC2/S3/RDS)',
+      'Vercel',
+      'Render',
+      'Certbot SSL',
+    ],
+  },
+  {
+    icon: Shield,
+    title: 'Auth & Testing',
+    tags: [
+      'JWT',
+      'Google OAuth',
+      'SimpleJWT',
+      'pytest',
+      'pytest-django',
+      'Playwright',
+      'Coverage',
+      'Faker',
+    ],
+  },
+  {
+    icon: Bot,
+    title: 'AI & Narzędzia',
+    tags: [
+      'OpenAI API',
+      'LangChain',
+      'Ollama',
+      'MCP servers',
+      'Claude',
+      'GitHub Copilot',
+      'Cursor',
+      'Git',
+      'Postman',
+      'Swagger',
+    ],
+  },
+]
 
+export function TechStackSection() {
   return (
     <Section id="stack" className="py-20">
       <div className="space-y-10">
         <div className="space-y-4">
-          <p className="font-dm-mono text-xs uppercase tracking-[0.2em] text-(--accent-cyan)">
-            {t('eyebrow')}
+          <p className="font-dm-mono text-xs uppercase tracking-widest text-[#22D3EE]">
+            TECH STACK
           </p>
-          <h2 className="text-3xl font-semibold leading-tight text-(--text-primary) md:text-4xl">
-            {t('title')}
+          <h2 className="font-sora text-3xl font-semibold text-[#F0F9FF]">
+            Technologie których używam
           </h2>
-          <p className="max-w-3xl text-base leading-relaxed text-(--text-secondary) md:text-lg">
-            {t('subtitle')}
+          <p className="text-base text-[#7EA8BD]">
+            Nie lista do CV — narzędzia z których korzystam w realnych projektach.
           </p>
         </div>
 
-        <div className="grid gap-4 lg:grid-cols-2">
-          {GROUP_KEYS.map((groupKey) => (
-            <Card key={groupKey} padding="md" className="space-y-4">
-              <h3 className="text-base font-semibold text-(--text-primary)">
-                {t(`groups.${groupKey}.title`)}
-              </h3>
-
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {groups.map((group, i) => (
+            <motion.div
+              key={group.title}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="rounded-xl border border-[rgba(34,211,238,0.1)] bg-[#081420] p-5"
+            >
+              <div className="mb-3 flex items-center gap-2">
+                <group.icon className="h-5 w-5 text-[#22D3EE]" />
+                <span className="text-sm font-semibold text-[#F0F9FF]">{group.title}</span>
+              </div>
               <div className="flex flex-wrap gap-2">
-                {GROUP_ITEMS[groupKey].map((itemKey) => (
-                  <div key={itemKey} className="group relative">
-                    <span className="font-dm-mono inline-flex cursor-default rounded-md border border-(--border) bg-(--bg-card) px-2.5 py-1 text-[11px] text-(--text-secondary) transition-colors group-hover:border-(--border-hover) group-hover:text-(--text-primary)">
-                      {t(`groups.${groupKey}.items.${itemKey}.label`)}
-                    </span>
-                    <div className="pointer-events-none absolute left-1/2 top-full z-20 mt-2 hidden w-64 -translate-x-1/2 rounded-lg border border-(--border-hover) bg-(--bg-primary) px-3 py-2 text-xs text-(--text-secondary) shadow-lg group-hover:block">
-                      <span className="font-semibold text-(--text-primary)">{t('usedIn')}:</span>{' '}
-                      {t(`groups.${groupKey}.items.${itemKey}.usedIn`)}
-                    </div>
-                  </div>
+                {group.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="font-dm-mono cursor-default rounded-md border border-[rgba(34,211,238,0.15)] bg-[#0C2030] px-2 py-1 text-xs text-[#7EA8BD] transition-colors duration-150 hover:border-[rgba(34,211,238,0.3)] hover:text-[#22D3EE]"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
-            </Card>
+            </motion.div>
           ))}
         </div>
       </div>
