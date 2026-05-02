@@ -1,13 +1,13 @@
 import {
-  AboutSection,
+  About,
   AiWorkflowSection,
   BooksSection,
-  FeaturedProjectsSection,
+  Projects,
   HeroSection,
   ProofOfWorkSection,
   TechStackSection,
   TimelineSection,
-  TrustBarSection,
+  TrustBar,
   ContactSection,
 } from '@/components/sections'
 import type { Metadata } from 'next'
@@ -56,9 +56,9 @@ export default async function HomePage({
   return (
     <>
       <HeroSection />
-      <TrustBarSection />
-      <AboutSection />
-      <FeaturedProjectsSection />
+      <TrustBar />
+      <About />
+      <Projects />
       <ProofOfWorkSection />
       <TechStackSection />
       <TimelineSection />
