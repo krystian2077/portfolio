@@ -27,14 +27,11 @@ const messages = {
     toggleTheme: 'Motyw',
   },
   hero: {
-    badge: 'Dostępny do współpracy (Junior)',
+    badge: 'Dostępny do pracy',
     headline: 'Junior Python / Django Developer',
-    lead:
-      'Łączę backend w Pythonie, zrozumienie procesów biznesowych i świadomy workflow z AI — żeby dostarczać aplikacje, które mają sens dla użytkownika, nie tylko „działają”.',
-    subheadline:
-      'Buduję aplikacje webowe wokół realnych problemów biznesowych — nie wokół trendy technologicznych.',
-    description:
-      'Od backendu przez API po widoki frontowe: pewny fundament w Django, świadomy full-stack.',
+    lead: 'Buduję aplikacje webowe oparte na realnych problemach biznesowych.',
+    subheadline: 'Backend-focused · Full-stack aware · AI-assisted workflow',
+    description: '',
     headline1: 'Junior Python',
     headlineAccent: '/ Django',
     headline2: 'Developer',
@@ -45,8 +42,7 @@ const messages = {
       primary: 'Zobacz projekty',
       secondary: 'Pobierz CV',
     },
-    trust:
-      '2 projekty z demo online | Student informatyki | Ready4AI | Angielski B1/B2',
+    trust: '2 projekty z live demo  ·  Student informatyki  ·  Ready4AI  ·  EN B1/B2',
   },
   trustBar: {
     fact1: '2 projekty produkcyjne z demo online',

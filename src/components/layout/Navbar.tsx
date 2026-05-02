@@ -122,7 +122,7 @@ export function Navbar() {
         <div className="mx-auto grid h-16 w-full max-w-7xl grid-cols-[auto_1fr_auto] items-center px-6">
           <Link
             href="/"
-            className="font-dm-mono rounded-lg border border-[rgba(34,211,238,0.3)] px-3 py-1 text-xl font-bold text-[#22D3EE] transition hover:bg-[rgba(34,211,238,0.08)]"
+            className="font-dm-mono text-xl font-bold text-[#22D3EE] transition-[filter] hover:[filter:drop-shadow(0_0_8px_rgba(34,211,238,0.55))]"
             aria-label={ariaHome}
           >
             KP
@@ -145,21 +145,7 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div className="flex items-center justify-end gap-2">
-            <div className="hidden items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 md:inline-flex">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
-              </span>
-              <span className="font-dm-mono text-[11px] text-emerald-300">{t('available')}</span>
-            </div>
-
-            <span
-              className="inline-flex size-2 rounded-full bg-emerald-400 md:hidden"
-              aria-label={t('available')}
-              title={t('available')}
-            />
-
+          <div className="flex items-center justify-end gap-6">
             <button
               onClick={toggleLocale}
               className="hidden font-dm-mono text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE] md:inline-flex"
@@ -170,10 +156,10 @@ export function Navbar() {
 
             <button
               onClick={toggleTheme}
-              className="hidden h-8 w-8 items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE] md:inline-flex"
+              className="hidden items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE] md:inline-flex"
               aria-label={isDark ? t('themeLight') : t('themeDark')}
             >
-              {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
+              {mounted ? isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" /> : <span className="h-5 w-5" />}
             </button>
 
             <Link
@@ -222,13 +208,6 @@ export function Navbar() {
               ))}
 
               <div className="flex items-center gap-4 border-t border-[rgba(34,211,238,0.08)] pt-4">
-                <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1">
-                  <span className="relative flex size-2">
-                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
-                  </span>
-                  <span className="font-dm-mono text-[11px] text-emerald-300">{t('available')}</span>
-                </div>
                 <button
                   onClick={toggleLocale}
                   className="font-dm-mono text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"

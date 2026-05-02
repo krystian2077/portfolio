@@ -28,11 +28,9 @@ const messages = {
   hero: {
     badge: 'Available for hire',
     headline: 'Junior Python / Django Developer',
-    lead:
-      'I pair Python backends, pragmatic business awareness, and a deliberate AI-assisted workflow — to ship apps that remain sensible for users, not just “working”.',
-    subheadline:
-      'I build web apps around messy, real-world business problems rather than trending buzzwords.',
-    description: 'Backend-first, full-stack fluent, with opinionated tooling when it earns its place.',
+    lead: 'I build web apps grounded in real business problems.',
+    subheadline: 'Backend-focused · Full-stack aware · AI-assisted workflow',
+    description: '',
     headline1: 'Junior Python',
     headlineAccent: '/ Django',
     headline2: 'Developer',
@@ -42,7 +40,7 @@ const messages = {
       primary: 'View projects',
       secondary: 'Download CV',
     },
-    trust: '2 live projects | CS student | Ready4AI | EN B1/B2',
+    trust: '2 projects with live demo  ·  CS student  ·  Ready4AI  ·  EN B1/B2',
   },
   trustBar: {
     fact1: '2 production-ready projects with live demos',

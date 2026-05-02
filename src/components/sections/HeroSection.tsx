@@ -174,7 +174,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-center overflow-hidden"
+      className="relative flex min-h-screen items-center overflow-hidden pt-16"
       style={{ backgroundColor: '#050D12' }}
     >
       {/* Background grid */}
@@ -199,7 +199,7 @@ export function HeroSection() {
       />
 
       {/* Main grid */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
           {/* ── Left column: terminal ── */}
@@ -228,7 +228,7 @@ export function HeroSection() {
               </span>
               <span
                 className="text-sm"
-                style={{ fontFamily: 'var(--font-dm-mono)', color: '#7EA8BD' }}
+                style={{ fontFamily: 'var(--font-dm-mono)', color: '#4ADE80' }}
               >
                 {t('badge')}
               </span>
@@ -240,33 +240,24 @@ export function HeroSection() {
               className="text-4xl font-bold leading-tight xl:text-5xl"
               style={{ color: '#F0F9FF', fontFamily: 'var(--font-sora)' }}
             >
-              {t('headline')}
+              Junior Python /<br />
+              Django Developer
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="max-w-xl text-base leading-relaxed md:text-lg"
-              style={{ color: '#CBDCE6', fontFamily: 'var(--font-sora)' }}
+              className="max-w-xl text-lg font-medium"
+              style={{ color: '#F0F9FF' }}
             >
               {t('lead')}
             </motion.p>
 
-            {/* Subheadline */}
             <motion.p
               variants={itemVariants}
-              className="text-lg"
-              style={{ color: '#7EA8BD' }}
+              className="mt-2 text-base"
+              style={{ color: '#7EA8BD', fontFamily: 'var(--font-dm-mono)' }}
             >
               {t('subheadline')}
-            </motion.p>
-
-            {/* Description */}
-            <motion.p
-              variants={itemVariants}
-              className="text-base"
-              style={{ color: '#7EA8BD', opacity: 0.8 }}
-            >
-              {t('description')}
             </motion.p>
 
             {/* Tech tags */}
@@ -280,8 +271,8 @@ export function HeroSection() {
                   style={{
                     fontFamily: 'var(--font-dm-mono)',
                     backgroundColor: '#081420',
-                    borderColor: 'rgba(34,211,238,0.2)',
-                    color: '#7EA8BD',
+                    borderColor: 'rgba(34,211,238,0.25)',
+                    color: '#A0C4D4',
                   }}
                 >
                   {tag}
@@ -300,8 +291,8 @@ export function HeroSection() {
               </Link>
               <Link
                 href="#cv"
-                className="rounded-lg border px-6 py-3 text-sm transition-colors hover:bg-[rgba(34,211,238,0.05)] active:bg-[rgba(34,211,238,0.08)]"
-                style={{ borderColor: 'rgba(34,211,238,0.3)', color: '#22D3EE' }}
+                className="rounded-lg border bg-transparent px-6 py-3 text-sm transition-colors hover:bg-[rgba(34,211,238,0.08)] active:bg-[rgba(34,211,238,0.12)]"
+                style={{ borderColor: 'rgba(34,211,238,0.4)', color: '#22D3EE' }}
               >
                 {t('cta.secondary')}
               </Link>
