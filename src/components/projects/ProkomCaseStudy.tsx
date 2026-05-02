@@ -11,7 +11,6 @@ import {
   Package,
   BarChart2,
   Lock,
-  ArrowRight,
   ArrowLeft,
   CheckCircle2,
   Server,
@@ -174,7 +173,9 @@ export default function ProkomCaseStudy() {
           {/* Action buttons */}
           <motion.div {...fadeUp(0.25)} className="mb-6 flex flex-wrap gap-3">
             <a
-              href="#"
+              href="https://prokomserwis.pl/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-2.5 text-sm font-semibold text-[#050D12] transition-opacity hover:opacity-90"
             >
               🚀 Live Demo
@@ -191,7 +192,7 @@ export default function ProkomCaseStudy() {
               href="#"
               className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm text-[#7EA8BD] transition-colors hover:text-[#F0F9FF]"
             >
-              📖 Swagger
+              📖 API Docs
             </a>
           </motion.div>
 

@@ -28,9 +28,9 @@ const CONTACT_LINKS = [
   {
     icon: IdCard,
     label: 'LinkedIn',
-    value: 'Profil wkrótce',
-    href: '#',
-    external: false,
+    value: 'linkedin.com/in/krystian-potaczek',
+    href: 'https://www.linkedin.com/in/krystian-potaczek-952968257/',
+    external: true,
     highlight: false,
   },
   {

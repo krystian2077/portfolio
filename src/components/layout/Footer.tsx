@@ -22,7 +22,7 @@ const PROJECT_LINKS = [
 
 const SOCIAL_LINKS = [
   { label: 'GitHub', href: 'https://github.com/krystian2077', external: true },
-  { label: 'LinkedIn', href: '#', external: false },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/krystian-potaczek-952968257/', external: true },
   { label: 'Email', href: '#', external: false },
 ] as const
 

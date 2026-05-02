@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Lightbulb, Bot } from 'lucide-react'
 
@@ -62,6 +63,26 @@ export function About() {
             transition={{ duration: 0.6, ease: EASE }}
             className="space-y-6"
           >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-[rgba(34,211,238,0.3)] flex-shrink-0">
+                <Image
+                  src="/images/krystian-potaczek.jpg"
+                  alt="Krystian Potaczek"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-[#F0F9FF]">
+                  Krystian Potaczek
+                </div>
+                <div className="text-xs text-[#7EA8BD] font-['DM_Mono']">
+                  Junior Python / Django Developer
+                </div>
+              </div>
+            </div>
+
             <p className="text-base leading-relaxed text-[#7EA8BD]">
               Nie trafiłem do programowania przypadkowo. Interesuje mnie od technikum — zacząłem od
               podstaw sieci i sprzętu, potem coraz głębiej w kod. Przez ponad 2 lata pracowałem w PRO-KOM
