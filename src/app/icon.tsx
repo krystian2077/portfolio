@@ -21,10 +21,10 @@ export default function Icon() {
         <span
           style={{
             color: '#22D3EE',
-            fontSize: '13px',
-            fontWeight: 700,
+            fontSize: '17px',
+            fontWeight: 800,
             fontFamily: 'monospace',
-            letterSpacing: '-0.5px',
+            letterSpacing: '-1px',
           }}
         >
           KP
