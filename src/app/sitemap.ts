@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths = [
     '',
     '/contact',
+    '/learnit',
     '/projects/staymap-polska',
     '/projects/prokom-system',
     '/projects/prokom-system/gallery',

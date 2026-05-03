@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import {
   MapPin,
   TrendingUp,
@@ -25,6 +24,7 @@ import {
 import Link from 'next/link'
 import type { ProjectArchitectureContent } from '@/content/projectArchitecture'
 import { ProjectArchitecture } from './ProjectArchitecture'
+import { ScreenshotLightboxGrid } from './ScreenshotLightboxGrid'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -60,34 +60,45 @@ const PRODUCT_SCREENS_EN = [
   {
     title: 'Homepage and quick search',
     image: '/images/staymap-home.png',
+    desc: 'The first product touchpoint: users choose location, dates and guests, then move straight into map-based results.',
     alt: 'StayMap Polska — homepage with accommodation search form',
   },
   {
     title: 'Search results on the map',
     image: '/images/staymap-search-map.png',
+    desc: 'Map-first search combines offers, pins, filters and location context so users can judge where they actually want to stay.',
     alt: 'StayMap Polska — accommodation search results in map view',
   },
   {
     title: 'Host panel',
     image: '/images/staymap-host-panel.png',
+    desc: 'The host panel keeps offers, bookings and availability management in one workflow instead of scattering them across separate tools.',
     alt: 'StayMap Polska — host panel',
   },
   {
     title: 'Offer details and booking',
     image: '/images/staymap-offer-details.png',
+    desc: 'The offer view leads users from photos and place details through price calculation and the booking decision.',
     alt: 'StayMap Polska — accommodation offer details and booking flow',
   },
   {
     title: 'Offer comparison',
     image: '/images/staymap-compare.png',
+    desc: 'The comparison view helps users evaluate several stays side by side when price alone is not enough to decide.',
     alt: 'StayMap Polska — comparison of selected accommodation offers',
   },
   {
     title: 'Polish AI search',
     image: '/images/staymap-ai-search.png',
+    desc: 'Natural Polish-language queries support search when users describe what they need instead of clicking through a full filter set.',
     alt: 'StayMap Polska — accommodation search with AI assistance',
   },
 ]
+
+const PRODUCT_SCREEN_ITEMS_EN = PRODUCT_SCREENS_EN.map(({ image, ...screen }) => ({
+  ...screen,
+  src: image,
+}))
 
 const DEMO_CHECKLIST_EN = [
   'accommodation search on the map',
@@ -186,7 +197,7 @@ export default function StaymapCaseStudyEn() {
           {/* Breadcrumb */}
           <motion.div {...fadeUp(0)} className="mb-8">
             <Link
-              href="/#projekty"
+              href="/#projects"
               className="inline-flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
@@ -331,29 +342,18 @@ export default function StaymapCaseStudyEn() {
             </p>
           </motion.div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {PRODUCT_SCREENS_EN.map((screen, index) => (
-              <motion.div
-                key={screen.title}
-                {...fadeUp(index * 0.05)}
-                className="overflow-hidden rounded-xl border border-[rgba(34,211,238,0.1)]"
-                style={{ backgroundColor: '#081420' }}
-              >
-                <div className="relative aspect-[16/10] w-full bg-[#050D12]">
-                  <Image
-                    src={screen.image}
-                    alt={screen.alt ?? screen.title}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-[#F0F9FF]">{screen.title}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <ScreenshotLightboxGrid
+            items={PRODUCT_SCREEN_ITEMS_EN}
+            className="grid gap-4 sm:grid-cols-2"
+            imageSizes="(min-width: 640px) 50vw, 100vw"
+            labels={{
+              enlargeAria: 'Enlarge screenshot',
+              enlarge: 'Enlarge',
+              closeAria: 'Close preview',
+              previewHeading: 'View preview',
+              note: 'The screenshot shows a selected part of the StayMap Polska product. The demo is publicly available, and the technical architecture is described later in this case study.',
+            }}
+          />
 
           <motion.div
             {...fadeUp(0.2)}
@@ -435,7 +435,7 @@ export default function StaymapCaseStudyEn() {
         </div>
       </section>
 
-      {/* ── MOJA ROLA ── */}
+      {/* ── MY ROLE ── */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
@@ -502,7 +502,7 @@ export default function StaymapCaseStudyEn() {
 
       <ProjectArchitecture content={staymapArchitectureEn} labels={architectureLabelsEn} />
 
-      {/* ── KLUCZOWE FEATURES ── */}
+      {/* ── KEY FEATURES ── */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
@@ -588,10 +588,10 @@ export default function StaymapCaseStudyEn() {
               className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Najtrudniejsze problemy do rozwiązania
+              Hardest problems to solve
             </h2>
             <p className="mt-2 text-sm text-[#7EA8BD]">
-              Miejsca, w których projekt wymagał prawdziwych decyzji technicznych.
+              Areas where the project required real technical decisions.
             </p>
           </motion.div>
 
@@ -601,27 +601,27 @@ export default function StaymapCaseStudyEn() {
                 num: '01',
                 title: 'Redis in 3 roles',
                 problem:
-                  'Redis musi działać jako cache aplikacji, broker wiadomości Celery i channel layer dla Django Channels — wszystko jednocześnie, z odpowiednią konfiguracją baz danych Redis żeby nie mieszać danych.',
+                  'Redis had to work as application cache, Celery message broker and Django Channels layer at the same time, with proper database separation to avoid mixing data.',
                 solution:
-                  'Osobne bazy Redis: db=0 dla cache, db=1 dla Celery, db=2 dla Channels. Docker Compose z health checks zapewnia, że Redis startuje przed aplikacją.',
+                  'Separate Redis databases: db=0 for cache, db=1 for Celery, db=2 for Channels. Docker Compose health checks ensure Redis starts before the application.',
                 delay: 0,
               },
               {
                 num: '02',
                 title: 'ASGI + WSGI',
                 problem:
-                  'Przejście z WSGI (Gunicorn) na ASGI (Daphne) wymagało zrozumienia jak routing żądań HTTP i WebSocket działa jednocześnie w jednym procesie.',
+                  'Moving from WSGI to ASGI required understanding how HTTP request routing and WebSocket routing can work together in one application process.',
                 solution:
-                  'Konfiguracja asgi.py z URLRouter dla Channels i Django WSGI wrapper dla standardowych requestów. Daphne jako główny serwer aplikacji.',
+                  'asgi.py configuration with URLRouter for Channels and Django application wrapper for standard HTTP requests. Daphne as the main application server.',
                 delay: 0.05,
               },
               {
                 num: '03',
                 title: 'Dynamic pricing',
                 problem:
-                  'Wiele reguł cenowych może nakładać się na ten sam termin (sezon + święto + weekend + long-stay). Kolejność aplikowania reguł wpływa na finalną cenę.',
+                  'Multiple pricing rules can overlap for the same date range: season, holiday, weekend and long-stay. The order of applying rules affects the final price.',
                 solution:
-                  'System priorytetów reguł z jawnie zdefiniowaną kolejnością: base → season → holiday → extra guests → long-stay discount. Snapshot ceny zapisywany atomowo przy tworzeniu rezerwacji.',
+                  'Rule priority system with explicit order: base → season → holiday → extra guests → long-stay discount. Price snapshot saved atomically when creating a booking.',
                 delay: 0.1,
               },
             ].map(({ num, title, problem, solution, delay }) => (
@@ -656,7 +656,7 @@ export default function StaymapCaseStudyEn() {
         </div>
       </section>
 
-      {/* ── CZEGO SIĘ NAUCZYŁEM ── */}
+      {/* Learnings */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
@@ -670,18 +670,18 @@ export default function StaymapCaseStudyEn() {
               className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Czego się nauczyłem
+              What I learned
             </h2>
           </motion.div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              'Architektura ASGI vs WSGI i kiedy używać każdej z nich',
-              'Zapytania geospatial z PostGIS — od teorii do indeksów przestrzennych',
-              'Wzorzec BFF w Next.js jako proxy layer między frontendem a API',
-              'Zarządzanie złożonym stanem rezerwacji, deadline’ami i lifecycle',
-              'Redis jako wielofunkcyjne narzędzie — cache, broker i channel layer',
-              'Monitoring błędów, structured logging i myślenie o obserwowalności aplikacji',
+              'ASGI vs WSGI architecture and when to use each of them',
+              'Geospatial queries with PostGIS — from theory to spatial indexes',
+              'BFF pattern in Next.js as a proxy layer between frontend and API',
+              'Managing complex booking state, deadlines and lifecycle',
+              'Redis as a multi-purpose tool — cache, broker and channel layer',
+              'Error monitoring, structured logging and thinking about application observability',
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -714,17 +714,16 @@ export default function StaymapCaseStudyEn() {
               Planned product extensions
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
-              Funkcje, które naturalnie rozwijają StayMap w stronę bardziej kompletnego produktu
-              turystycznego.
+              Features that naturally develop StayMap into a more complete travel product.
             </p>
           </motion.div>
 
           <motion.div {...fadeUp(0.1)} className="flex flex-wrap gap-3">
             {[
-              "AI 'Kiedy jechać?' — rekomendacja terminu",
-              'Izochrony — wyszukiwanie po czasie dojazdu',
-              'Stripe — płatności online',
-              'Pamiętnik podróży — zdjęcia po pobycie',
+              'AI “When to go?” — date recommendation',
+              'Isochrones — search by travel time',
+              'Stripe — online payments',
+              'Travel diary — photos after the stay',
             ].map((item) => (
               <span
                 key={item}
@@ -751,15 +750,15 @@ export default function StaymapCaseStudyEn() {
               className="mb-3 text-2xl font-bold text-[#F0F9FF]"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Zaciekawił Cię ten projekt?
+              Interested in this project?
             </h2>
             <p className="mb-8 text-[#7EA8BD]">
-              Chętnie opowiem więcej o decyzjach technicznych, architekturze i problemach, które
-              rozwiązałem podczas budowy.
+              I would be happy to talk more about the technical decisions, architecture and problems
+              I solved while building it.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
-                href="/#kontakt"
+                href="/#contact"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-6 py-3 text-sm font-semibold text-[#050D12] transition-opacity hover:opacity-90"
               >
                 Contact me
@@ -768,7 +767,7 @@ export default function StaymapCaseStudyEn() {
                 href="/projects/prokom-system"
                 className="inline-flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.4)] px-6 py-3 text-sm text-[#22D3EE] transition-colors hover:bg-[rgba(34,211,238,0.08)]"
               >
-                Zobacz drugi projekt →
+                View the other project →
               </Link>
             </div>
           </motion.div>
@@ -789,7 +788,7 @@ export default function StaymapCaseStudyEn() {
                   className="mb-0.5 text-xs text-[#3A5F73]"
                   style={{ fontFamily: 'var(--font-dm-mono)' }}
                 >
-                  Następny projekt
+                  Next project
                 </p>
                 <p className="text-sm font-semibold text-[#F0F9FF]">PRO-KOM Serwis System</p>
               </div>

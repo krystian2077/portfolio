@@ -34,11 +34,12 @@ export function ContactSection() {
         error: 'Something went wrong. Please try again.',
         submit: 'Send message →',
         label: 'CONTACT',
-        heading: 'Looking for a junior who understands code and business?',
-        subheading: "Let's talk.",
+        heading: "Let's talk about working together",
+        subheading:
+          'I am looking for a Junior Python / Django Developer, Junior Backend Developer, or Junior Full Stack Python Developer role with React / Next.js. I want to grow on real projects, learn from more experienced developers, and build applications that solve concrete business problems.',
         description:
-          'I am open to Junior Python / Django Developer and Junior Backend Developer roles - remote, hybrid or on-site in Poland. I usually reply within 24 hours.',
-        badge: 'Available for hire',
+          'I am open to remote, hybrid, or on-site work in Poland. I usually reply within 24 hours.',
+        badge: 'Available for work',
         name: 'Full name *',
         namePlaceholder: 'John Smith',
         email: 'Email *',
@@ -66,10 +67,11 @@ export function ContactSection() {
         error: 'Błąd wysyłania - spróbuj ponownie',
         submit: 'Wyślij wiadomość →',
         label: 'KONTAKT',
-        heading: 'Szukasz juniora, który rozumie kod i biznes?',
-        subheading: 'Porozmawiajmy.',
+        heading: 'Porozmawiajmy o współpracy',
+        subheading:
+          'Chcę rozwijać się przy realnych projektach, uczyć się od bardziej doświadczonych osób i budować aplikacje, które rozwiązują konkretne problemy biznesowe.',
         description:
-          'Jestem otwarty na role Junior Python / Django Developer oraz Junior Backend Developer - zdalnie, hybrydowo lub stacjonarnie w Polsce. Odpowiadam zwykle w ciągu 24 godzin.',
+          'Jestem otwarty na pracę zdalną, hybrydową lub stacjonarną w Polsce. Odpowiadam zwykle w ciągu 24 godzin.',
         badge: 'Dostępny do pracy',
         name: 'Imię i nazwisko *',
         namePlaceholder: 'Jan Kowalski',
@@ -107,8 +109,8 @@ export function ContactSection() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'krystian.potaczek07@gmail.com',
-      href: 'mailto:krystian.potaczek07@gmail.com',
+      value: 'krystianpotaczek.dev@gmail.com',
+      href: 'mailto:krystianpotaczek.dev@gmail.com',
       external: false,
       highlight: false,
     },

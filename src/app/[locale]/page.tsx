@@ -4,6 +4,7 @@ import {
   BooksSection,
   Projects,
   HeroSection,
+  LearnItSection,
   ProofOfWorkSection,
   TechStackSection,
   TimelineSection,
@@ -60,6 +61,7 @@ export default async function HomePage({
       <About />
       <Projects />
       <ProofOfWorkSection />
+      <LearnItSection />
       <TechStackSection />
       <TimelineSection />
       <BooksSection />

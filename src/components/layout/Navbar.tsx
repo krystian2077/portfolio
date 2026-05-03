@@ -108,7 +108,6 @@ export function Navbar() {
   }
 
   function navHref(sectionId: NavSectionId): string {
-    if (sectionId === 'contact') return '/contact'
     return `/#${sectionId}`
   }
 
@@ -199,16 +198,16 @@ export function Navbar() {
             {/* Theme toggle — desktop only */}
             <button
               onClick={toggleTheme}
-              title="Zmień motyw"
+              title={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
               className="hidden items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE] md:inline-flex ml-1"
-              aria-label="Zmień motyw"
+              aria-label={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
             >
               {mounted ? isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" /> : <span className="h-5 w-5" />}
             </button>
 
             {/* CTA — desktop only */}
             <Link
-              href="/contact"
+              href="/#contact"
               className="hidden items-center gap-2 rounded-lg bg-[#22D3EE] px-4 py-2 text-sm font-semibold text-[#050D12] transition hover:bg-[#67E8F9] md:inline-flex"
             >
               {t('hire')}
@@ -265,14 +264,14 @@ export function Navbar() {
                 </button>
                 <button
                   onClick={toggleTheme}
-                  title="Zmień motyw"
+                  title={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
                   className="inline-flex h-8 w-8 items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE]"
-                  aria-label="Zmień motyw"
+                  aria-label={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
                 >
                   {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
                 </button>
                 <Link
-                  href="/contact"
+                  href="/#contact"
                   onClick={() => setIsMobileOpen(false)}
                   className="ml-auto inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-4 py-2 text-sm font-semibold text-[#050D12] transition hover:bg-[#67E8F9]"
                 >

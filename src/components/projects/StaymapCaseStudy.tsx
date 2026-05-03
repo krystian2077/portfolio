@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import {
   MapPin,
   TrendingUp,
@@ -25,6 +24,7 @@ import {
 import Link from 'next/link'
 import { staymapArchitecture } from '@/content/projectArchitecture'
 import { ProjectArchitecture } from './ProjectArchitecture'
+import { ScreenshotLightboxGrid } from './ScreenshotLightboxGrid'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -60,34 +60,45 @@ const PRODUCT_SCREENS = [
   {
     title: 'Strona główna i szybkie wyszukiwanie',
     image: '/images/staymap-home.png',
+    desc: 'Pierwszy kontakt z produktem: szybki wybór lokalizacji, terminu i liczby gości, z przejściem bezpośrednio do wyników opartych o mapę.',
     alt: 'StayMap Polska - strona główna z formularzem wyszukiwania noclegów',
   },
   {
     title: 'Wyniki wyszukiwania na mapie',
     image: '/images/staymap-search-map.png',
+    desc: 'Map-first search łączy listę ofert, piny, filtry i kontekst lokalizacji, dzięki czemu użytkownik szybciej ocenia, gdzie faktycznie chce nocować.',
     alt: 'StayMap Polska - wyniki wyszukiwania noclegów w widoku mapy',
   },
   {
     title: 'Panel hosta',
     image: '/images/staymap-host-panel.png',
+    desc: 'Panel dla gospodarza pokazuje zarządzanie ofertami, rezerwacjami i dostępnością w jednym miejscu, bez przełączania się między oddzielnymi narzędziami.',
     alt: 'StayMap Polska - panel hosta',
   },
   {
     title: 'Szczegóły oferty i rezerwacja',
     image: '/images/staymap-offer-details.png',
+    desc: 'Widok szczegółów prowadzi użytkownika od zdjęć i informacji o miejscu do kalkulacji ceny oraz decyzji rezerwacyjnej.',
     alt: 'StayMap Polska - szczegóły oferty noclegu i proces rezerwacji',
   },
   {
     title: 'Porównanie ofert',
     image: '/images/staymap-compare.png',
+    desc: 'Porównywarka pomaga zestawić kilka noclegów obok siebie, gdy sama cena nie wystarcza do podjęcia decyzji.',
     alt: 'StayMap Polska - porównanie wybranych ofert noclegów',
   },
   {
     title: 'AI search po polsku',
     image: '/images/staymap-ai-search.png',
+    desc: 'Naturalne zapytania po polsku wspierają wyszukiwanie, gdy użytkownik opisuje potrzebę zamiast klikać zestaw klasycznych filtrów.',
     alt: 'StayMap Polska - wyszukiwanie noclegów z pomocą AI',
   },
 ]
+
+const PRODUCT_SCREEN_ITEMS = PRODUCT_SCREENS.map(({ image, ...screen }) => ({
+  ...screen,
+  src: image,
+}))
 
 const DEMO_CHECKLIST = [
   'wyszukiwanie noclegów na mapie',
@@ -285,29 +296,18 @@ export default function StaymapCaseStudy() {
             </p>
           </motion.div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {PRODUCT_SCREENS.map((screen, index) => (
-              <motion.div
-                key={screen.title}
-                {...fadeUp(index * 0.05)}
-                className="overflow-hidden rounded-xl border border-[rgba(34,211,238,0.1)]"
-                style={{ backgroundColor: '#081420' }}
-              >
-                <div className="relative aspect-[16/10] w-full bg-[#050D12]">
-                  <Image
-                    src={screen.image}
-                    alt={screen.alt ?? screen.title}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-cover object-top"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-sm font-semibold text-[#F0F9FF]">{screen.title}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <ScreenshotLightboxGrid
+            items={PRODUCT_SCREEN_ITEMS}
+            className="grid gap-4 sm:grid-cols-2"
+            imageSizes="(min-width: 640px) 50vw, 100vw"
+            labels={{
+              enlargeAria: 'Powiększ screen',
+              enlarge: 'Powiększ',
+              closeAria: 'Zamknij podgląd',
+              previewHeading: 'Podgląd widoku',
+              note: 'Screen pokazuje wybrany fragment produktu StayMap Polska. Demo możesz sprawdzić publicznie, a techniczne szczegóły architektury są opisane niżej w case study.',
+            }}
+          />
 
           <motion.div
             {...fadeUp(0.2)}

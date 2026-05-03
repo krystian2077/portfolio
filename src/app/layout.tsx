@@ -1,5 +1,20 @@
 import type { Metadata, Viewport } from 'next'
+import { Sora, DM_Mono } from 'next/font/google'
 import { siteUrl } from '@/lib/site'
+import './globals.css'
+
+const sora = Sora({
+  subsets: ['latin'],
+  variable: '--font-sora',
+  display: 'swap',
+})
+
+const dmMono = DM_Mono({
+  subsets: ['latin'],
+  weight: ['300', '400', '500'],
+  variable: '--font-dm-mono',
+  display: 'swap',
+})
 
 export const viewport: Viewport = {
   themeColor: [
@@ -38,5 +53,9 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return children
+  return (
+    <html lang="pl" suppressHydrationWarning>
+      <body className={`${sora.variable} ${dmMono.variable}`}>{children}</body>
+    </html>
+  )
 }

@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import {
   ClipboardList,
   Calendar,
@@ -24,6 +23,7 @@ import Link from 'next/link'
 import { projects as projectsContent } from '@/content/pl/projects'
 import { prokomArchitecture } from '@/content/projectArchitecture'
 import { ProjectArchitecture } from './ProjectArchitecture'
+import { ScreenshotLightboxGrid } from './ScreenshotLightboxGrid'
 
 const EASE: [number, number, number, number] = [0.25, 0.1, 0.25, 1]
 
@@ -222,19 +222,70 @@ export default function ProkomCaseStudy() {
         </div>
       </section>
 
-      {/* ── SCREENSHOT ── */}
-      <section className="py-8">
+      {/* DEMO VIEWS */}
+      <section className="py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeUp(0.1)}>
-            <div className="relative h-80 w-full overflow-hidden rounded-xl border border-[rgba(34,211,238,0.1)]">
-              <Image
-                src="/images/main.png"
-                alt="PRO-KOM Serwis System"
-                fill
-                sizes="100vw"
-                className="object-cover object-top"
-              />
+          <motion.div {...fadeUp()} className="mb-8">
+            <p
+              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
+              style={{ fontFamily: 'var(--font-dm-mono)' }}
+            >
+              DEMO
+            </p>
+            <h2
+              className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
+              style={{ fontFamily: 'var(--font-sora)' }}
+            >
+              System w praktyce
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
+              Najważniejsze widoki panelu pracownika i administratora pokazujące realny workflow
+              serwisu: obsługę zgłoszeń, Kanban, szczegóły naprawy, historię zmian, dashboard oraz
+              zarządzanie procesem.
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...fadeUp(0.05)}
+            className="mb-8 rounded-2xl border border-[rgba(34,211,238,0.14)] p-6 shadow-[0_0_40px_rgba(34,211,238,0.05)]"
+            style={{ backgroundColor: '#081420' }}
+          >
+            <div className="flex gap-4">
+              <Lock className="mt-1 h-5 w-5 shrink-0 text-[#22D3EE]" />
+              <div className="space-y-3">
+                <p className="text-sm leading-relaxed text-[#7EA8BD]">
+                  Ze względu na poufność danych firmowych i danych klientów nie udostępniam
+                  publicznego logowania do panelu pracownika oraz administratora. Zamiast tego
+                  przygotowałem zanonimizowane widoki systemu, które pokazują najważniejsze elementy
+                  workflow: obsługę zgłoszeń, Kanban pracownika, szczegóły naprawy, historię zmian,
+                  dashboard administratora i zarządzanie procesem serwisowym.
+                </p>
+                <p className="text-sm leading-relaxed text-[#7EA8BD]">
+                  Podczas rozmowy technicznej mogę przejść przez architekturę systemu, kod oraz
+                  wybrane widoki panelu w formie prezentacji lub screen share.
+                </p>
+              </div>
             </div>
+          </motion.div>
+
+          <ScreenshotLightboxGrid items={PROKOM_SCREENSHOTS} />
+
+          <motion.div
+            {...fadeUp(0.12)}
+            className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl border border-[rgba(34,211,238,0.12)] p-6 sm:flex-row sm:items-center"
+            style={{ backgroundColor: '#081420' }}
+          >
+            <p className="max-w-2xl text-sm leading-relaxed text-[#7EA8BD]">
+              Mam przygotowaną pełną galerię ponad 30 widoków panelu pracownika i administratora —
+              od zgłoszenia naprawy po dashboard, historię zmian i zarządzanie serwisem.
+            </p>
+            <Link
+              href={GALLERY_PATH}
+              className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-3 text-sm font-semibold text-[#050D12] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,211,238,0.25)]"
+            >
+              Zobacz pełną galerię widoków
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -439,98 +490,6 @@ export default function ProkomCaseStudy() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* DEMO VIEWS */}
-      <section className="py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeUp()} className="mb-8">
-            <p
-              className="mb-2 text-xs tracking-widest text-[#22D3EE] uppercase"
-              style={{ fontFamily: 'var(--font-dm-mono)' }}
-            >
-              DEMO
-            </p>
-            <h2
-              className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
-              style={{ fontFamily: 'var(--font-sora)' }}
-            >
-              System w praktyce
-            </h2>
-            <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
-              Najważniejsze widoki panelu pracownika i administratora pokazujące realny workflow
-              serwisu: obsługę zgłoszeń, Kanban, szczegóły naprawy, historię zmian, dashboard oraz
-              zarządzanie procesem.
-            </p>
-          </motion.div>
-
-          <motion.div
-            {...fadeUp(0.05)}
-            className="mb-8 rounded-2xl border border-[rgba(34,211,238,0.14)] p-6 shadow-[0_0_40px_rgba(34,211,238,0.05)]"
-            style={{ backgroundColor: '#081420' }}
-          >
-            <div className="flex gap-4">
-              <Lock className="mt-1 h-5 w-5 shrink-0 text-[#22D3EE]" />
-              <div className="space-y-3">
-                <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                  Ze względu na poufność danych firmowych i danych klientów nie udostępniam
-                  publicznego logowania do panelu pracownika oraz administratora. Zamiast tego
-                  przygotowałem zanonimizowane widoki systemu, które pokazują najważniejsze elementy
-                  workflow: obsługę zgłoszeń, Kanban pracownika, szczegóły naprawy, historię zmian,
-                  dashboard administratora i zarządzanie procesem serwisowym.
-                </p>
-                <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                  Podczas rozmowy technicznej mogę przejść przez architekturę systemu, kod oraz
-                  wybrane widoki panelu w formie prezentacji lub screen share.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {PROKOM_SCREENSHOTS.map((screen, i) => (
-              <motion.article
-                key={screen.src}
-                {...fadeUp(i * 0.04)}
-                className="group overflow-hidden rounded-2xl border border-[rgba(34,211,238,0.1)] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(34,211,238,0.28)] hover:shadow-[0_18px_50px_rgba(34,211,238,0.08)]"
-                style={{ backgroundColor: '#081420' }}
-              >
-                <div className="relative aspect-[16/10] overflow-hidden border-b border-[rgba(34,211,238,0.08)] bg-[#050D12]">
-                  <Image
-                    src={screen.src}
-                    alt={screen.alt}
-                    fill
-                    sizes="(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw"
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050D12]/35 via-transparent to-transparent opacity-70" />
-                </div>
-                <div className="p-5">
-                  <h3 className="mb-2 font-semibold text-[#F0F9FF]">{screen.title}</h3>
-                  <p className="text-sm leading-relaxed text-[#7EA8BD]">{screen.desc}</p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-
-          <motion.div
-            {...fadeUp(0.12)}
-            className="mt-8 flex flex-col items-start justify-between gap-5 rounded-2xl border border-[rgba(34,211,238,0.12)] p-6 sm:flex-row sm:items-center"
-            style={{ backgroundColor: '#081420' }}
-          >
-            <p className="max-w-2xl text-sm leading-relaxed text-[#7EA8BD]">
-              Mam przygotowaną pełną galerię ponad 30 widoków panelu pracownika i administratora —
-              od zgłoszenia naprawy po dashboard, historię zmian i zarządzanie serwisem.
-            </p>
-            <Link
-              href={GALLERY_PATH}
-              className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-3 text-sm font-semibold text-[#050D12] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,211,238,0.25)]"
-            >
-              Zobacz pełną galerię widoków
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
         </div>
       </section>
 

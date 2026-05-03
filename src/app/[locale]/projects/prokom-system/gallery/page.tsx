@@ -1,9 +1,84 @@
-import Image from 'next/image'
-import Link from 'next/link'
+﻿import Link from 'next/link'
 import type { Metadata } from 'next'
 import { ArrowLeft } from 'lucide-react'
+import { ScreenshotLightboxGrid } from '@/components/projects/ScreenshotLightboxGrid'
 
-const galleryGroups = [
+type GalleryGroup = {
+  title: string
+  desc: string
+  items: {
+    title: string
+    desc: string
+    src: string
+    alt?: string
+  }[]
+}
+
+const gallerySources = {
+  client: [
+    'main.png',
+    'formularz.png',
+    'panel-klienta.png',
+    'mobile.png',
+    'historia-klienta-w-naprawie.png',
+    'komunikacja-z-klientem.png',
+    'komunikacja-z-klientem2.png',
+    'komunikacja-zklientem-do-naprawy.png',
+  ],
+  staff: [
+    'panel-pracownika-main.png',
+    'panel-pracownika-dalsza-czesc.png',
+    'moje-naprawy.png',
+    'kanban.png',
+    'nieprzypisane-naprawy.png',
+    'powiadomienia.png',
+    'kalendarz.png',
+    'wyszukiwanie-globalne.png',
+  ],
+  admin: [
+    'panel-admina-dashbord.png',
+    'panel-admina-dasbord-dalej3.png',
+    'panel-admina-dashbord-dalej.png',
+    'panel-admina-dashbord-dalej4.png',
+    'zespol.png',
+    'zespol-dzisiaj.png',
+    'klioenci.png',
+    'wszystkie-naprawy.png',
+  ],
+  service: [
+    'szczegoly-naprawy.png',
+    'szczegoly-naprawy2.png',
+    'zmiana-statusu-naprawy.png',
+    'wycena-w-naprawie.png',
+    'czesci.png',
+    'czesci-do-naprawy.png',
+    'hurtownie.png',
+    'hurtownie2.png',
+    'przyjecie-stacjonarne.png',
+    'przyjecie-stacjonarne-dalej.png',
+    'przyjecie-stacjonarne-dalej3.png',
+    'przyjecie-stacjonarne-dalej4.png',
+    'przyjecie-reklamacyjne.png',
+    'reklamacje.png',
+    'odbiory-wydania.png',
+    'kurier-w-naprawie.png',
+  ],
+  analytics: [
+    'statystyki.png',
+    'statystyki-dalej.png',
+    'statystyki-dalej2.png',
+    'historia-napraw.png',
+    'zadania.png',
+    'zadania2.png',
+    'zadania-do-naprawy.png',
+  ],
+}
+
+function src(fileName: string) {
+  return `/projects/prokom/gallery/${fileName}`
+}
+
+const galleryGroupsPl: GalleryGroup[] = [
   {
     title: 'Panel klienta',
     desc: 'Widoki wejścia klienta do procesu: strona publiczna, formularz zgłoszenia, status naprawy i mobile.',
@@ -271,13 +346,121 @@ const galleryGroups = [
   },
 ]
 
-export const metadata: Metadata = {
-  title: 'PRO-KOM Serwis System - Galeria widoków',
-  description:
-    'Pełna galeria zanonimizowanych widoków systemu PRO-KOM: panel klienta, pracownika, administratora, operacje serwisowe, analityka i audyt.',
+const galleryGroupsEn: GalleryGroup[] = [
+  {
+    title: 'Customer Panel',
+    desc: 'Entry points for customers: public landing page, repair request form, repair status and mobile view.',
+    items: [
+      { title: 'Service landing page', desc: 'Public service landing page with the main repair request CTA and cards for the key services.' },
+      { title: 'Online repair request form', desc: 'A multi-step form guides the customer through contact details, device information, delivery, add-ons and summary.' },
+      { title: 'Customer status panel', desc: 'Customers can see the request status, service activity, active repairs and quick contact actions.' },
+      { title: 'Mobile request view', desc: 'The responsive form keeps the full repair request flow usable on a phone.' },
+      { title: 'Customer repair history', desc: 'This view shows the customer devices, related requests and service history in the repair context.' },
+      { title: 'Customer communication', desc: 'The message panel keeps the repair conversation attached to the relevant request.' },
+      { title: 'Conversation thread', desc: 'A detailed conversation view shows message history, replies and communication status.' },
+      { title: 'Messages inside a repair card', desc: 'Messages are also available directly from the service request view.' },
+    ].map((item, index) => ({ ...item, src: src(gallerySources.client[index]) })),
+  },
+  {
+    title: 'Staff Panel',
+    desc: 'Daily technician workflow: dashboard, repair list, Kanban board, notifications, calendar and tasks.',
+    items: [
+      { title: 'Staff dashboard', desc: 'The technician start view combines active repair counters, alerts and next-action cards.' },
+      { title: 'Dashboard continuation', desc: 'The lower dashboard area adds today tasks, a quick repair overview and parts status.' },
+      { title: 'My repairs', desc: 'A table of assigned repairs with filters for statuses, customers, devices and costs.' },
+      { title: 'Staff Kanban board', desc: 'Repairs are arranged in status columns, making it easier to switch work context quickly.' },
+      { title: 'Unassigned repairs', desc: 'A queue of requests without an assigned technician, with takeover actions and priorities that need attention.' },
+      { title: 'Notifications', desc: 'A staff alert center grouped by message type and requests that require action.' },
+      { title: 'Calendar', desc: 'The calendar view shows deadlines, pickups, tasks and the service work plan.' },
+      { title: 'Global search', desc: 'Search helps find repairs by customer, reference number, model or contact details.' },
+    ].map((item, index) => ({ ...item, src: src(gallerySources.staff[index]) })),
+  },
+  {
+    title: 'Administrator Panel',
+    desc: 'Management views for process control, team work, technician workload, requests and service operations.',
+    items: [
+      { title: 'Admin dashboard', desc: 'Management KPIs, status pipeline, technician workload and alerts that require team attention.' },
+      { title: 'Team list', desc: 'The administrator sees staff members, roles, work statuses and basic operational team data.' },
+      { title: 'Attention center', desc: 'A dashboard section collecting alerts, unassigned requests and process notifications.' },
+      { title: 'Team activity data', desc: 'This view helps compare technician activity and quickly open the work details for specific people.' },
+      { title: 'Team', desc: 'The team panel shows staff statuses, active task counts and service availability.' },
+      { title: 'Team today', desc: 'Daily work schedule, attendance and tasks assigned to staff members.' },
+      { title: 'Customers', desc: 'Customer list with filters, quick request previews and access to repair history.' },
+      { title: 'All repairs', desc: 'A global repair table for administrators with full filtering and process preview.' },
+    ].map((item, index) => ({ ...item, src: src(gallerySources.admin[index]) })),
+  },
+  {
+    title: 'Service Operations',
+    desc: 'Detailed repair handling: intake, parts, estimates, statuses, pickups, complaints and courier delivery.',
+    items: [
+      { title: 'Repair details', desc: 'A full service request card with device data, customer details, status, costs and service actions.' },
+      { title: 'Repair details - technical data', desc: 'An expanded request view showing configuration, problem description and information needed by the technician.' },
+      { title: 'Repair status change', desc: 'The status modal limits process transitions and saves each change as part of the service history.' },
+      { title: 'Repair estimate', desc: 'The estimate section lets staff add labor cost, parts and a customer-facing message.' },
+      { title: 'Parts inventory', desc: 'The inventory view shows parts, stock levels, categories and items that need ordering.' },
+      { title: 'Parts assigned to a repair', desc: 'The repair card lets staff assign parts, quantities and reservation status to a specific request.' },
+      { title: 'Suppliers', desc: 'A supplier list with basic details and quick access to orders.' },
+      { title: 'Supplier orders', desc: 'This panel organizes parts orders, delivery statuses and shortages blocking repairs.' },
+      { title: 'In-store intake', desc: 'The in-store intake workflow guides staff through customer details, device data and problem description.' },
+      { title: 'Intake - device data', desc: 'The next form step collects model, serial number, device condition and accessories.' },
+      { title: 'Intake - fault description', desc: 'This view helps clarify the problem, symptoms and information provided by the customer.' },
+      { title: 'Intake - summary', desc: 'The summary gathers data before creating the request and helps catch missing information.' },
+      { title: 'Complaint intake', desc: 'A separate complaint flow splits warranty context, post-repair issues and follow-up customer handling.' },
+      { title: 'Complaints', desc: 'The complaint list shows statuses, related repairs and items that need a service decision.' },
+      { title: 'Pickups and releases', desc: 'This panel tracks devices ready for pickup, delays and customer communication.' },
+      { title: 'Courier in repair flow', desc: 'The delivery section stores shipping data, pickup method and device transport status.' },
+    ].map((item, index) => ({ ...item, src: src(gallerySources.service[index]) })),
+  },
+  {
+    title: 'Analytics and Audit',
+    desc: 'Reporting, change history and tasks that support quality control and reconstructing the service process.',
+    items: [
+      { title: 'Statistics', desc: 'KPI cards show revenue, completed repairs, work in progress, overdue items and average completion time.' },
+      { title: 'Statistics charts', desc: 'The analytics continuation shows repair trends, revenue trends and status distribution.' },
+      { title: 'Workload distribution', desc: 'This view compares statuses, device types, technician results and areas that need attention.' },
+      { title: 'Repair history', desc: 'The audit log records status changes, user activity and the service request history.' },
+      { title: 'Tasks', desc: 'The task list connects service actions with repairs, deadlines and responsible people.' },
+      { title: 'Task planning', desc: 'The task detail view shows calendar context, priority and connection to a specific repair.' },
+      { title: 'Repair tasks', desc: 'The request card allows staff to add technical tasks, mark progress and control completion.' },
+    ].map((item, index) => ({ ...item, src: src(gallerySources.analytics[index]) })),
+  },
+]
+
+const galleryLabelsEn = {
+  enlargeAria: 'Enlarge screenshot',
+  enlarge: 'Enlarge',
+  closeAria: 'Close preview',
+  previewHeading: 'View preview',
+  note: 'This view contains test or anonymized data. Public login to staff and administrator panels is not available for security reasons.',
 }
 
-export default function ProkomGalleryPage() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+
+  return {
+    title: isEn
+      ? 'PRO-KOM Serwis System - View Gallery'
+      : 'PRO-KOM Serwis System - Galeria widoków',
+    description: isEn
+      ? 'Full gallery of anonymized PRO-KOM system views: customer panel, staff panel, administrator panel, service operations, analytics and audit.'
+      : 'Pełna galeria zanonimizowanych widoków systemu PRO-KOM: panel klienta, pracownika, administratora, operacje serwisowe, analityka i audyt.',
+  }
+}
+
+export default async function ProkomGalleryPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  const galleryGroups = isEn ? galleryGroupsEn : galleryGroupsPl
+
   return (
     <main className="min-h-screen bg-[#050D12] text-[#F0F9FF]">
       <section className="border-b border-[rgba(34,211,238,0.1)] py-10">
@@ -288,25 +471,24 @@ export default function ProkomGalleryPage() {
             style={{ fontFamily: 'var(--font-dm-mono)' }}
           >
             <ArrowLeft className="h-3.5 w-3.5" />
-            Powrót do case study
+            {isEn ? 'Back to case study' : 'Powrót do case study'}
           </Link>
           <p
             className="mb-3 text-xs tracking-widest text-[#22D3EE] uppercase"
             style={{ fontFamily: 'var(--font-dm-mono)' }}
           >
-            PRO-KOM / GALERIA
+            {isEn ? 'PRO-KOM / GALLERY' : 'PRO-KOM / GALERIA'}
           </p>
           <h1
             className="max-w-3xl text-4xl font-bold sm:text-5xl"
             style={{ fontFamily: 'var(--font-sora)' }}
           >
-            Pełna galeria widoków systemu
+            {isEn ? 'Full system view gallery' : 'Pełna galeria widoków systemu'}
           </h1>
           <p className="mt-5 max-w-3xl text-sm leading-relaxed text-[#7EA8BD] sm:text-base">
-            Zanonimizowane screenshoty pokazują najważniejsze części workflow: zgłoszenie naprawy,
-            panel klienta, pracę technika, zarządzanie procesem, magazyn, komunikację, analitykę i
-            historię zmian. Publiczne logowanie do panelu pracownika i administratora nie jest
-            udostępniane ze względów bezpieczeństwa oraz poufności danych.
+            {isEn
+              ? 'Anonymized screenshots show the most important parts of the workflow: repair request, customer panel, technician work, process management, inventory, communication, analytics and change history. Public login to staff and administrator panels is not available for security and confidentiality reasons.'
+              : 'Zanonimizowane screenshoty pokazują najważniejsze części workflow: zgłoszenie naprawy, panel klienta, pracę technika, zarządzanie procesem, magazyn, komunikację, analitykę i historię zmian. Publiczne logowanie do panelu pracownika i administratora nie jest udostępniane ze względów bezpieczeństwa oraz poufności danych.'}
           </p>
         </div>
       </section>
@@ -320,31 +502,16 @@ export default function ProkomGalleryPage() {
               </h2>
               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">{group.desc}</p>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {group.items.map((item) => (
-                <article
-                  key={item.src}
-                  className="overflow-hidden rounded-2xl border border-[rgba(34,211,238,0.1)] bg-[#081420] transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(34,211,238,0.28)] hover:shadow-[0_18px_50px_rgba(34,211,238,0.08)]"
-                >
-                  <div className="relative aspect-[16/10] overflow-hidden border-b border-[rgba(34,211,238,0.08)] bg-[#050D12]">
-                    <Image
-                      src={item.src}
-                      alt={`PRO-KOM Serwis System - ${item.title}`}
-                      fill
-                      sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="mb-2 font-semibold">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-[#7EA8BD]">{item.desc}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <ScreenshotLightboxGrid
+              items={group.items}
+              labels={isEn ? galleryLabelsEn : undefined}
+              imageSizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+            />
           </section>
         ))}
       </div>
     </main>
   )
 }
+
+

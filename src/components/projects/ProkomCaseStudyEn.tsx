@@ -181,12 +181,12 @@ export default function ProkomCaseStudyEn() {
           {/* Breadcrumb */}
           <motion.div {...fadeUp(0)} className="mb-8">
             <Link
-              href="/#projekty"
+              href="/#projects"
               className="inline-flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
               style={{ fontFamily: 'var(--font-dm-mono)' }}
             >
               <ArrowLeft className="h-3.5 w-3.5" />
-              Powrót do projektów
+              Back to projects
             </Link>
           </motion.div>
 
@@ -217,17 +217,17 @@ export default function ProkomCaseStudyEn() {
             {...fadeUp(0.15)}
             className="mb-8 max-w-2xl text-xl leading-relaxed text-[#7EA8BD]"
           >
-            System do zarządzania procesem napraw sprzętu elektronicznego — od przyjęcia zgłoszenia,
-            przez diagnozę i statusy, aż po odbiór przez klienta. Projekt inspirowany 2,5-letnim
-            doświadczeniem w realnym środowisku serwisowym.
+            A system for managing electronics repair workflows — from device intake, through
+            diagnosis and status updates, to customer pickup. Inspired by 2.5 years of experience in
+            a real service environment.
           </motion.p>
 
           {/* Stats */}
           <motion.div {...fadeUp(0.2)} className="mb-8 flex flex-wrap gap-3">
             {[
-              { value: '3', label: 'panele użytkownika' },
-              { value: 'RBAC', label: 'system uprawnień' },
-              { value: '8+', label: 'zadań Celery async' },
+              { value: '3', label: 'user panels' },
+              { value: 'RBAC', label: 'permission system' },
+              { value: '8+', label: 'Celery async tasks' },
               { value: 'HTTPS', label: "Let's Encrypt" },
             ].map((stat) => (
               <div
@@ -263,7 +263,7 @@ export default function ProkomCaseStudyEn() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-2.5 text-sm font-semibold text-[#050D12] transition-opacity hover:opacity-90"
             >
-              🚀 Live Demo
+              Live Demo
             </a>
             <a
               href="https://github.com/krystian2077/prokom-system"
@@ -271,7 +271,7 @@ export default function ProkomCaseStudyEn() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.4)] px-5 py-2.5 text-sm text-[#22D3EE] transition-colors hover:bg-[rgba(34,211,238,0.08)]"
             >
-              📂 GitHub
+              GitHub
             </a>
             <a
               href="https://github.com/krystian2077/prokom-system"
@@ -279,7 +279,7 @@ export default function ProkomCaseStudyEn() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm text-[#7EA8BD] transition-colors hover:text-[#F0F9FF]"
             >
-              📖 API w repo
+              API in repo
             </a>
           </motion.div>
 
@@ -333,7 +333,7 @@ export default function ProkomCaseStudyEn() {
               className="mb-8 text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Problem, który rozwiązuję
+              Problem I wanted to solve
             </h2>
           </motion.div>
 
@@ -344,10 +344,10 @@ export default function ProkomCaseStudyEn() {
             style={{ backgroundColor: '#081420' }}
           >
             <p className="text-sm leading-relaxed text-[#7EA8BD]">
-              Ten projekt zbudowałem z perspektywy osoby, która przez{' '}
-              <span className="text-[#F0F9FF]">2,5 roku pracowała w serwisie elektroniki</span>.
-              Dzięki temu dobrze rozumiałem, gdzie w codziennym procesie napraw ginie informacja, co
-              spowalnia obsługę i czego realnie potrzebuje klient, pracownik oraz właściciel.
+              I built this project from the perspective of someone who worked in an electronics
+              service environment for <span className="text-[#F0F9FF]">2.5 years</span>. That helped
+              me understand where information gets lost in the daily repair process, what slows down
+              service work and what customers, staff and business owners actually need.
             </p>
           </motion.div>
 
@@ -360,18 +360,18 @@ export default function ProkomCaseStudyEn() {
               {[
                 {
                   Icon: ClipboardList,
-                  title: 'Brak samoobsługowego statusu naprawy',
-                  desc: 'Klient musiał kontaktować się telefonicznie, żeby dowiedzieć się, co dzieje się z jego urządzeniem. System rozwiązuje to przez panel statusu, powiadomienia i przejrzystą historię zgłoszenia.',
+                  title: 'No self-service repair status',
+                  desc: 'Customers had to call the service to ask what was happening with their device. The system solves this with a status panel, notifications and a clear repair history.',
                 },
                 {
                   Icon: Calendar,
-                  title: 'Ręczne zarządzanie pracą serwisu',
-                  desc: 'Proces opierał się na notatkach, arkuszach i ręcznym pilnowaniu priorytetów. Panel pracownika porządkuje naprawy w widoku Kanban, pokazuje statusy, przypisania i zadania wymagające reakcji.',
+                  title: 'Manual service workflow management',
+                  desc: 'The process relied on notes, spreadsheets and manually tracking priorities. The staff panel organizes repairs in a Kanban view with statuses, assignments and items that require action.',
                 },
                 {
                   Icon: BarChart,
                   title: 'No single operational data view',
-                  desc: 'Właściciel potrzebuje szybkiego dostępu do danych: czasu napraw, obciążenia pracowników, popularnych usterek, przychodów i stanu magazynu. Panel admina zbiera te informacje w jednym miejscu.',
+                  desc: 'The business owner needs quick access to repair times, technician workload, common issues, revenue and inventory status. The admin panel brings these data points into one place.',
                 },
               ].map(({ Icon, title, desc }) => (
                 <div key={title} className="space-y-3">
@@ -385,7 +385,7 @@ export default function ProkomCaseStudyEn() {
         </div>
       </section>
 
-      {/* ── MOJA ROLA ── */}
+      {/* ── MY ROLE ── */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
@@ -402,7 +402,7 @@ export default function ProkomCaseStudyEn() {
               My role in the project
             </h2>
             <p className="mt-2 text-sm text-[#7EA8BD]">
-              Projekt indywidualny. Pomysł, architektura, implementacja — całość samodzielnie.
+              Individual project. Idea, architecture and implementation — built fully by me.
             </p>
           </motion.div>
 
@@ -411,25 +411,25 @@ export default function ProkomCaseStudyEn() {
               {
                 Icon: Server,
                 title: 'Domain modeling',
-                desc: 'Przełożyłem realny proces serwisowy na model danych Django: zgłoszenia, urządzenia, klienci, statusy, wyceny, części, historia zmian i lifecycle naprawy.',
+                desc: 'I translated a real repair workflow into a Django data model: repair tickets, devices, customers, statuses, quotes, parts, change history and repair lifecycle.',
                 delay: 0,
               },
               {
                 Icon: Layers,
-                title: 'Trzy panele użytkownika',
-                desc: 'Zaprojektowałem osobne przepływy dla klienta, pracownika i administratora: self-service dla klienta, Kanban dla staffu oraz panel zarządczy dla admina.',
+                title: 'Three user panels',
+                desc: 'I designed separate flows for customers, staff and administrators: self-service for customers, Kanban for staff and a management dashboard for admins.',
                 delay: 0.05,
               },
               {
                 Icon: Zap,
                 title: 'Async tasks and notifications',
-                desc: 'Wykorzystałem Celery i Redis do obsługi powiadomień, automatycznych przypomnień, backupów oraz zadań wykonywanych poza głównym request-response cycle.',
+                desc: 'I used Celery and Redis to handle notifications, automatic reminders, backups and tasks executed outside the main request-response cycle.',
                 delay: 0.1,
               },
               {
                 Icon: ShieldAlert,
-                title: 'Bezpieczeństwo i audyt',
-                desc: 'Zaimplementowałem system ról i uprawnień, JWT auth, historię zmian, audit log oraz mechanizmy wspierające kontrolę dostępu do danych.',
+                title: 'Security and audit',
+                desc: 'I implemented roles and permissions, JWT auth, change history, audit log and mechanisms supporting controlled access to data.',
                 delay: 0.15,
               },
             ].map(({ Icon, title, desc, delay }) => (
@@ -450,7 +450,7 @@ export default function ProkomCaseStudyEn() {
 
       <ProjectArchitecture content={prokomArchitectureEn} labels={architectureLabelsEn} />
 
-      {/* ── KLUCZOWE FEATURES ── */}
+      {/* ── KEY FEATURES ── */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
@@ -472,38 +472,38 @@ export default function ProkomCaseStudyEn() {
             {[
               {
                 Icon: LayoutDashboard,
-                title: 'Kanban Board dla pracowników',
-                desc: 'Drag-and-drop zmiana statusów napraw. Kolumny: Przyjęte → W trakcie → Gotowe → Odebrane. Widok priorytetów, przypisań i zgłoszeń wymagających reakcji.',
+                title: 'Staff Kanban Board',
+                desc: 'Drag-and-drop repair status changes. Columns: Accepted → In progress → Ready → Picked up. View of priorities, assignments and tickets requiring action.',
                 delay: 0,
               },
               {
                 Icon: Bell,
                 title: 'Automatic notifications',
-                desc: 'Celery Beat uruchamia zadania związane ze zmianą statusów, przypomnieniami i komunikacją z klientem. Klient może śledzić naprawę bez telefonowania do serwisu.',
+                desc: 'Celery Beat triggers tasks related to status changes, reminders and customer communication. Customers can track repair progress without calling the service.',
                 delay: 0.05,
               },
               {
                 Icon: ShieldCheck,
                 title: 'RBAC + Audit Log',
-                desc: 'Role: klient, pracownik, administrator. System zapisuje historię zmian statusów, edycji zgłoszeń i działań użytkowników, co ułatwia kontrolę oraz audyt.',
+                desc: 'Roles: customer, staff member and administrator. The system records status changes, ticket edits and user actions, making control and audit easier.',
                 delay: 0.1,
               },
               {
                 Icon: Package,
-                title: 'Zarządzanie magazynem',
-                desc: 'Katalog części zamiennych, rezerwacja części pod naprawę, stany magazynowe, zamówienia hurtowni oraz powiadomienia o niskim stanie.',
+                title: 'Inventory management',
+                desc: 'Spare parts catalog, reserving parts for repairs, stock levels, supplier orders and low-stock notifications.',
                 delay: 0.15,
               },
               {
                 Icon: BarChart2,
                 title: 'Analytics and reports',
-                desc: 'Dashboard admina pokazuje czas napraw, obciążenie pracowników, przychody, najpopularniejsze usterki i dane potrzebne do podejmowania decyzji.',
+                desc: 'The admin dashboard shows repair times, staff workload, revenue, most common issues and data needed for operational decisions.',
                 delay: 0.2,
               },
               {
                 Icon: Lock,
-                title: 'Bezpieczeństwo i wdrożenie',
-                desc: "HTTPS przez Let's Encrypt, ochrona CSRF/XSS, rate limiting, walidacja danych, autoryzacja po rolach oraz hashowanie haseł po stronie Django.",
+                title: 'Security and deployment',
+                desc: 'HTTPS with Let’s Encrypt, CSRF/XSS protection, rate limiting, data validation, role-based authorization and Django password hashing.',
                 delay: 0.25,
               },
             ].map(({ Icon, title, desc, delay }) => (
@@ -539,9 +539,8 @@ export default function ProkomCaseStudyEn() {
               System in practice
             </h2>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
-              Najważniejsze widoki panelu pracownika i administratora pokazujące realny workflow
-              serwisu: obsługę zgłoszeń, Kanban, szczegóły naprawy, historię zmian, dashboard oraz
-              zarządzanie procesem.
+              Key staff and admin panel views showing the real repair workflow: ticket handling,
+              Kanban, repair details, change history, dashboard and service process management.
             </p>
           </motion.div>
 
@@ -554,15 +553,14 @@ export default function ProkomCaseStudyEn() {
               <Lock className="mt-1 h-5 w-5 shrink-0 text-[#22D3EE]" />
               <div className="space-y-3">
                 <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                  Ze względu na poufność danych firmowych i danych klientów nie udostępniam
-                  publicznego logowania do panelu pracownika oraz administratora. Zamiast tego
-                  przygotowałem zanonimizowane widoki systemu, które pokazują najważniejsze elementy
-                  workflow: obsługę zgłoszeń, Kanban pracownika, szczegóły naprawy, historię zmian,
-                  dashboard administratora i zarządzanie procesem serwisowym.
+                  For confidentiality reasons, I do not provide public login access to the staff and
+                  administrator panels. Instead, I prepared anonymized system views that show the most
+                  important workflow elements: ticket handling, staff Kanban, repair details, change
+                  history, admin dashboard and service process management.
                 </p>
                 <p className="text-sm leading-relaxed text-[#7EA8BD]">
-                  Podczas rozmowy technicznej mogę przejść przez architekturę systemu, kod oraz
-                  wybrane widoki panelu w formie prezentacji lub screen share.
+                  During a technical interview, I can walk through the system architecture, code and
+                  selected panel views via presentation or screen share.
                 </p>
               </div>
             </div>
@@ -600,14 +598,14 @@ export default function ProkomCaseStudyEn() {
             style={{ backgroundColor: '#081420' }}
           >
             <p className="max-w-2xl text-sm leading-relaxed text-[#7EA8BD]">
-              Mam przygotowaną pełną galerię ponad 30 widoków panelu pracownika i administratora —
-              od zgłoszenia naprawy po dashboard, historię zmian i zarządzanie serwisem.
+              I prepared a full gallery of over 30 staff and admin panel views — from repair intake
+              to dashboards, change history and service management.
             </p>
             <Link
               href={GALLERY_PATH}
               className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-3 text-sm font-semibold text-[#050D12] transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(34,211,238,0.25)]"
             >
-              Zobacz pełną galerię widoków
+              View full gallery →
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
@@ -631,7 +629,7 @@ export default function ProkomCaseStudyEn() {
               Hardest problems
             </h2>
             <p className="mt-3 max-w-3xl text-sm leading-relaxed text-[#7EA8BD]">
-              Miejsca, w których projekt wymagał najwięcej decyzji architektonicznych.
+              Areas where the project required the most architectural decisions.
             </p>
           </motion.div>
 
@@ -641,27 +639,27 @@ export default function ProkomCaseStudyEn() {
                 num: '01',
                 title: 'Modeling the repair lifecycle',
                 problem:
-                  'Naprawa przechodzi przez wiele stanów, a każdy status może uruchamiać inne akcje: powiadomienia, przypomnienia, zmianę widoczności dla klienta lub aktualizację kolejki pracownika.',
+                  'A repair ticket goes through many states, and each status can trigger different actions: notifications, reminders, customer visibility changes or staff queue updates.',
                 solution:
-                  '→ Enum-based status field, jawna logika dozwolonych przejść oraz zadania Celery uruchamiane przy zmianach statusu.',
+                  'Enum-based status field, explicit transition rules and Celery tasks triggered on status changes.',
                 delay: 0,
               },
               {
                 num: '02',
-                title: 'RBAC z trzema różnymi UX flows',
+                title: 'RBAC with three different UX flows',
                 problem:
-                  'Klient, pracownik i administrator mają różne potrzeby, uprawnienia i widoki tego samego zasobu. Ten sam obiekt naprawy musi być prezentowany inaczej zależnie od roli.',
+                  'Customers, staff members and administrators have different needs, permissions and views of the same resource. The same repair object must be represented differently depending on the user role.',
                 solution:
-                  '→ Custom permission classes w DRF, osobne serializery i kontrolowana reprezentacja danych dla każdej roli.',
+                  'Custom DRF permission classes, separate serializers and controlled data representation for each role.',
                 delay: 0.05,
               },
               {
                 num: '03',
                 title: 'Implementation without a ready-made pattern',
                 problem:
-                  'To był mój pierwszy duży projekt z pełnym stackiem Django + Next.js + Docker, dlatego wiele decyzji architektonicznych musiałem podjąć samodzielnie.',
+                  'This was my first large project with the full Django + Next.js + Docker stack, so many architectural decisions had to be made independently.',
                 solution:
-                  '→ Modularna architektura, wydzielenie logiki do services/selectors/serializers oraz regularny code review z wykorzystaniem AI jako wsparcia.',
+                  'Modular architecture, moving logic into services/selectors/serializers and regular code review with AI as support.',
                 delay: 0.1,
               },
             ].map(({ num, title, problem, solution, delay }) => (
@@ -696,7 +694,7 @@ export default function ProkomCaseStudyEn() {
         </div>
       </section>
 
-      {/* ── CZEGO SIĘ NAUCZYŁEM ── */}
+      {/* Learnings */}
       <section className="py-16" style={{ backgroundColor: '#050D12' }}>
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <motion.div {...fadeUp()} className="mb-8">
@@ -710,18 +708,18 @@ export default function ProkomCaseStudyEn() {
               className="text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Czego się nauczyłem
+              What I learned
             </h2>
           </motion.div>
 
           <div className="grid gap-4 sm:grid-cols-2">
             {[
-              'Jak przełożyć realne procesy biznesowe na model danych i lifecycle statusów',
-              'Modułowa architektura Django — każda app ma jedną odpowiedzialność',
+              'How to translate real business processes into a data model and status lifecycle',
+              'Modular Django architecture — each app has a clear responsibility',
               'Clean Architecture in practice: selectors, services and serializers',
-              'Docker + Nginx + Certbot — pełny proces wdrożenia aplikacji webowej',
-              'Zarządzanie złożonymi uprawnieniami RBAC w DRF',
-              'Budowanie z perspektywy użytkownika — doświadczenie w serwisie dało mi realny kontekst',
+              'Docker + Nginx + Certbot — full web application deployment process',
+              'Managing complex RBAC permissions in DRF',
+              'Building from the user’s perspective — service experience gave me real context',
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -755,17 +753,17 @@ export default function ProkomCaseStudyEn() {
               className="mb-6 text-2xl font-bold text-[#F0F9FF] sm:text-3xl"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Co możesz sprawdzić w demo
+              What you can check in the demo
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {[
-                'zgłoszenie naprawy jako klient',
+                'repair request as a customer',
                 'repair status panel',
                 'staff Kanban board',
-                'zmianę statusów i przypisań',
+                'status and assignment changes',
                 'administrator panel',
-                'historię zmian i audit log',
-                'dokumentację API w repo / w kodzie',
+                'change history and audit log',
+                'API documentation in the repo / code',
               ].map((item, i) => (
                 <motion.div key={item} {...fadeUp(i * 0.03)} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#22D3EE]" />
@@ -789,15 +787,15 @@ export default function ProkomCaseStudyEn() {
               className="mb-3 text-2xl font-bold text-[#F0F9FF]"
               style={{ fontFamily: 'var(--font-sora)' }}
             >
-              Zaciekawił Cię ten projekt?
+              Interested in this project?
             </h2>
             <p className="mb-8 text-[#7EA8BD]">
-              Chętnie opowiem więcej o architekturze, procesie serwisowym i decyzjach technicznych,
-              które podjąłem podczas budowy.
+              I would be happy to talk more about the architecture, service process and technical
+              decisions I made while building it.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link
-                href="/#kontakt"
+                href="/#contact"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-6 py-3 text-sm font-semibold text-[#050D12] transition-opacity hover:opacity-90"
               >
                 Contact me
@@ -806,7 +804,7 @@ export default function ProkomCaseStudyEn() {
                 href="/projects/staymap-polska"
                 className="inline-flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.4)] px-6 py-3 text-sm text-[#22D3EE] transition-colors hover:bg-[rgba(34,211,238,0.08)]"
               >
-                Zobacz drugi projekt →
+                View the other project →
               </Link>
             </div>
           </motion.div>

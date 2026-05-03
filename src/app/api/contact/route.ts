@@ -11,6 +11,15 @@ const ContactSchema = z.object({
   hp: z.string().optional(),
 })
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json()
@@ -25,7 +34,8 @@ export async function POST(request: Request) {
     }
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY
-    const CONTACT_TO = process.env.CONTACT_EMAIL || 'krystian@example.com'
+    const CONTACT_TO = process.env.CONTACT_EMAIL || 'krystianpotaczek.dev@gmail.com'
+    const CONTACT_FROM = process.env.CONTACT_FROM || 'Krystian Potaczek <onboarding@resend.dev>'
 
     if (!RESEND_API_KEY) {
       // do not fail loudly in development; return success to avoid exposing key absence
@@ -36,22 +46,28 @@ export async function POST(request: Request) {
     const resend = new Resend(RESEND_API_KEY)
 
     const html = `
-      <p><strong>Name:</strong> ${parsed.data.name}</p>
-      <p><strong>Email:</strong> ${parsed.data.email}</p>
-      <p><strong>Company:</strong> ${parsed.data.company ?? '-'}</p>
-      <p><strong>Subject:</strong> ${parsed.data.subject ?? '-'}</p>
+      <p><strong>Name:</strong> ${escapeHtml(parsed.data.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(parsed.data.email)}</p>
+      <p><strong>Company:</strong> ${escapeHtml(parsed.data.company ?? '-')}</p>
+      <p><strong>Subject:</strong> ${escapeHtml(parsed.data.subject ?? '-')}</p>
       <p><strong>Message:</strong></p>
-      <p>${parsed.data.message.replace(/\n/g, '<br/>')}</p>
+      <p>${escapeHtml(parsed.data.message).replace(/\n/g, '<br/>')}</p>
     `
 
-    await resend.emails.send({
-      from: 'Krystian Potaczek <no-reply@krystianpotaczek.dev>',
+    const { error } = await resend.emails.send({
+      from: CONTACT_FROM,
       to: CONTACT_TO,
+      replyTo: parsed.data.email,
       subject: parsed.data.subject
         ? `Portfolio contact: ${parsed.data.subject}`
         : `Portfolio contact from ${parsed.data.name}`,
       html,
     })
+
+    if (error) {
+      console.error('Resend email error', error)
+      return NextResponse.json({ error: 'email_failed' }, { status: 502 })
+    }
 
     return NextResponse.json({ ok: true })
   } catch (e) {

@@ -233,7 +233,7 @@ export function HeroSection() {
             variants={colVariants}
             initial="hidden"
             animate="show"
-            className="order-2 flex flex-col gap-5"
+            className="order-2 flex flex-col items-center gap-5 text-center lg:items-start lg:text-left"
           >
             {/* Available badge */}
             <motion.div variants={itemVariants} className="flex items-center gap-2">
@@ -268,7 +268,7 @@ export function HeroSection() {
             {/* Headline */}
             <motion.h1
               variants={itemVariants}
-              className="text-5xl font-bold leading-tight xl:text-6xl"
+              className="text-4xl font-bold leading-tight sm:text-5xl xl:text-6xl"
               style={{ color: '#F0F9FF', fontFamily: 'var(--font-sora)' }}
             >
               Junior Python /<br />
@@ -292,7 +292,7 @@ export function HeroSection() {
             </motion.p>
 
             {/* Tech tags */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-2">
+            <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-2 lg:justify-start">
               {TECH_TAGS.map((tag) => (
                 <motion.span
                   key={tag}
@@ -312,7 +312,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* CTA buttons */}
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+            <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-3 lg:justify-start">
               <Link
                 href="#projects"
                 className="rounded-lg px-6 py-3 text-sm font-semibold transition-opacity hover:opacity-90 active:opacity-75"
@@ -330,12 +330,15 @@ export function HeroSection() {
             </motion.div>
 
             {/* Social links */}
-            <motion.div variants={itemVariants} className="mt-4 flex items-center gap-4">
+            <motion.div
+              variants={itemVariants}
+              className="mt-4 flex max-w-full flex-wrap items-center justify-center gap-x-3 gap-y-2 sm:gap-x-4 lg:justify-start"
+            >
               <a
                 href="https://github.com/krystian2077"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                className="flex min-w-0 items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
                 style={{ fontFamily: 'var(--font-dm-mono)' }}
               >
                 <IconGithub className="h-3.5 w-3.5" />
@@ -346,7 +349,7 @@ export function HeroSection() {
                 href="https://www.linkedin.com/in/krystian-potaczek-952968257/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                className="flex min-w-0 items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
                 style={{ fontFamily: 'var(--font-dm-mono)' }}
               >
                 <IconLinkedin className="h-3.5 w-3.5" />
@@ -354,8 +357,8 @@ export function HeroSection() {
               </a>
               <span style={{ color: '#1E3A4A' }}>·</span>
               <a
-                href="mailto:placeholder@email.pl"
-                className="flex items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
+                href="mailto:krystianpotaczek.dev@gmail.com"
+                className="flex min-w-0 items-center gap-1.5 text-xs text-[#3A5F73] transition-colors hover:text-[#22D3EE]"
                 style={{ fontFamily: 'var(--font-dm-mono)' }}
               >
                 <Mail className="h-3.5 w-3.5" />
@@ -366,7 +369,7 @@ export function HeroSection() {
             {/* Trust stats */}
             <motion.p
               variants={itemVariants}
-              className="mt-2 text-xs"
+              className="mt-2 max-w-sm text-balance text-xs leading-6 sm:max-w-xl"
               style={{ fontFamily: 'var(--font-dm-mono)', color: '#5B8EA6' }}
             >
               {t('trust')}
