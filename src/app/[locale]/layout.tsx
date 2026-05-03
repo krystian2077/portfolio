@@ -70,7 +70,7 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+    <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" disableTransitionOnChange>
       <NextIntlClientProvider messages={messages}>
         <Navbar />
         <main>{children}</main>

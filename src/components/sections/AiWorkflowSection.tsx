@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FileText, GraduationCap, GitBranch, MessageSquare, RefreshCw } from 'lucide-react'
+import { Download, Eye, FileText, GraduationCap, GitBranch, MessageSquare, RefreshCw } from 'lucide-react'
 import { useLocale } from 'next-intl'
 
 const AI_TOOLS = ['Claude', 'ChatGPT', 'Codex', 'GitHub Copilot', 'Cursor'] as const
@@ -72,10 +72,39 @@ const applicationsPl = [
   },
 ] as const
 
+const ready4aiChipsPl = [
+  'LLM',
+  'Prompt Engineering',
+  'AI Code Review',
+  'Chatboty',
+  'Agenci AI',
+  'Lokalne modele',
+  'MCP Servers',
+  'Dokumentacja techniczna',
+  'Claude',
+  'Cursor',
+  'Codex',
+] as const
+
+const ready4aiChipsEn = [
+  'LLM',
+  'Prompt Engineering',
+  'AI Code Review',
+  'Chatbots',
+  'AI Agents',
+  'Local Models',
+  'MCP Servers',
+  'Technical Documentation',
+  'Claude',
+  'Cursor',
+  'Codex',
+] as const
+
 export function AiWorkflowSection() {
   const locale = useLocale()
   const isEn = locale === 'en'
   const applications = isEn ? applicationsEn : applicationsPl
+  const ready4aiChips = isEn ? ready4aiChipsEn : ready4aiChipsPl
 
   return (
     <section className="py-20">
@@ -159,6 +188,70 @@ export function AiWorkflowSection() {
             ))}
           </div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-8 w-full rounded-xl border border-[rgba(34,211,238,0.15)] border-l-4 border-l-[#22D3EE] bg-[#081420] p-6"
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <span className="font-dm-mono mb-3 block w-fit rounded-md border border-[rgba(34,211,238,0.2)] bg-[rgba(34,211,238,0.08)] px-2 py-1 text-xs text-[#22D3EE]">
+                {isEn ? 'CERTIFICATE' : 'CERTYFIKAT'}
+              </span>
+              <h3 className="font-sora mb-2 text-base font-semibold text-[#F0F9FF]">
+                {isEn
+                  ? 'Ready4AI — practical AI usage in software development'
+                  : 'Ready4AI — praktyczne wykorzystanie AI w tworzeniu oprogramowania'}
+              </h3>
+              <p className="mb-3 text-sm leading-relaxed text-[#7EA8BD]">
+                {isEn
+                  ? 'The course helped me structure how I use LLMs in the development process: prompt engineering, AI-assisted code review, chatbots, AI agents, local models, MCP servers, technical documentation (BRD/PRD/SDD/TSD), and AI-supported application prototyping.'
+                  : 'Kurs pomógł mi uporządkować pracę z LLM w procesie developmentu: prompt engineering, code review z AI, chatboty, agenci AI, lokalne modele, MCP servers, dokumentacja techniczna BRD/PRD/SDD/TSD oraz prototypowanie aplikacji z wykorzystaniem AI.'}
+              </p>
+              <p className="mb-4 border-l-2 border-[rgba(34,211,238,0.3)] pl-3 text-sm font-medium italic text-[#22D3EE]">
+                {isEn
+                  ? 'I use AI to support research, analysis, documentation and debugging — not as a replacement for thinking or responsibility for the code.'
+                  : 'AI traktuję jako narzędzie wspierające research, analizę, dokumentację i debugowanie — nie jako zamiennik myślenia ani odpowiedzialności za kod.'}
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {ready4aiChips.map((chip) => (
+                  <span
+                    key={chip}
+                    className="font-dm-mono rounded-md border border-[rgba(34,211,238,0.15)] bg-[#0C2030] px-2 py-1 text-xs text-[#7EA8BD]"
+                  >
+                    {chip}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-5 flex flex-wrap gap-3">
+                <a
+                  href="/Certyfikat_Krystian_Potaczek.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-dm-mono inline-flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.25)] bg-[rgba(34,211,238,0.06)] px-4 py-2 text-xs text-[#22D3EE] transition-colors hover:bg-[rgba(34,211,238,0.12)]"
+                >
+                  <Eye className="h-3.5 w-3.5" />
+                  {isEn ? 'View certificate' : 'Podgląd certyfikatu'}
+                </a>
+                <a
+                  href="/Certyfikat_Krystian_Potaczek.pdf"
+                  download="Certyfikat_Krystian_Potaczek.pdf"
+                  className="font-dm-mono inline-flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.15)] bg-[#0C2030] px-4 py-2 text-xs text-[#7EA8BD] transition-colors hover:text-[#22D3EE]"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  {isEn ? 'Download PDF' : 'Pobierz PDF'}
+                </a>
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <GraduationCap className="h-12 w-12 shrink-0 text-[rgba(34,211,238,0.15)]" />
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

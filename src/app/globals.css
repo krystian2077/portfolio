@@ -30,22 +30,6 @@
   --border-hover: rgba(34, 211, 238, 0.25);
 }
 
-.light {
-  --bg-primary: #f0f9ff;
-  --bg-card: #ffffff;
-  --bg-hover: #e0f2fe;
-  --bg-accent: #bae6fd;
-  --bg-accent-deep: #bae6fd;
-  --accent-cyan: #0891b2;
-  --accent-cyan-light: #0e7490;
-  --accent-cyan-glow: rgba(8, 145, 178, 0.12);
-  --text-primary: #0c2333;
-  --text-secondary: #3a6b82;
-  --text-muted: #6b9eb5;
-  --border: rgba(8, 145, 178, 0.15);
-  --border-hover: rgba(8, 145, 178, 0.3);
-}
-
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);

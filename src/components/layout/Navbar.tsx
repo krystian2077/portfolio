@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { useTheme } from 'next-themes'
-import { ArrowRight, Menu, Moon, Sun, X } from 'lucide-react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
@@ -31,8 +30,6 @@ export function Navbar() {
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<NavSectionId | null>('about')
@@ -46,10 +43,6 @@ export function Navbar() {
       { id: 'contact' as const, label: t('contact') },
     ]
   }, [t])
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   useEffect(() => {
     function computeActiveFromScroll() {
@@ -103,10 +96,6 @@ export function Navbar() {
     router.replace(pathname, { locale: next })
   }
 
-  function toggleTheme() {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
-
   function navHref(sectionId: NavSectionId): string {
     return `/#${sectionId}`
   }
@@ -121,7 +110,6 @@ export function Navbar() {
     return false
   }
 
-  const isDark = mounted ? theme === 'dark' : true
   const ariaHome = t('homeAria')
 
   return (
@@ -195,16 +183,6 @@ export function Navbar() {
               <span className={locale === 'en' ? 'font-medium text-[#22D3EE]' : 'text-[#3A5F73] hover:text-[#7EA8BD]'}>EN</span>
             </button>
 
-            {/* Theme toggle — desktop only */}
-            <button
-              onClick={toggleTheme}
-              title={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
-              className="hidden items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE] md:inline-flex ml-1"
-              aria-label={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
-            >
-              {mounted ? isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" /> : <span className="h-5 w-5" />}
-            </button>
-
             {/* CTA — desktop only */}
             <Link
               href="/#contact"
@@ -261,14 +239,6 @@ export function Navbar() {
                   <span className={locale === 'pl' ? 'font-medium text-[#22D3EE]' : 'text-[#3A5F73]'}>PL</span>
                   <span className="text-[#3A5F73]">·</span>
                   <span className={locale === 'en' ? 'font-medium text-[#22D3EE]' : 'text-[#3A5F73]'}>EN</span>
-                </button>
-                <button
-                  onClick={toggleTheme}
-                  title={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
-                  className="inline-flex h-8 w-8 items-center justify-center text-[#7EA8BD] transition-colors hover:text-[#22D3EE]"
-                  aria-label={locale === 'en' ? 'Change theme' : 'Zmień motyw'}
-                >
-                  {mounted ? isDark ? <Sun size={16} /> : <Moon size={16} /> : <span className="h-4 w-4" />}
                 </button>
                 <Link
                   href="/#contact"

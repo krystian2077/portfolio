@@ -9,9 +9,14 @@ export default function NotFound() {
     <div className="min-h-[100svh] bg-[var(--bg-primary)] px-4 py-24 text-[var(--text-primary)]">
       <div className="mx-auto flex w-full max-w-2xl flex-col gap-6">
         <p className="font-dm-mono text-xs uppercase tracking-[0.2em] text-[var(--accent-cyan)]">404</p>
-        <h1 className="text-3xl font-semibold leading-tight md:text-4xl">Nie znaleziono tej strony</h1>
+        <h1 className="text-3xl font-semibold leading-tight md:text-4xl">
+          Nie znaleziono tej strony
+          <span className="mt-1 block text-xl font-normal text-[var(--text-secondary)]">Page not found</span>
+        </h1>
         <p className="text-base leading-relaxed text-[var(--text-secondary)]">
-          Link moze byc nieaktualny albo adres zostal wpisany z literowka.
+          Link może być nieaktualny lub adres zawiera literówkę.
+          <br />
+          <span className="text-sm">The link may be outdated or the address contains a typo.</span>
         </p>
 
         <div className="flex flex-wrap gap-3">

@@ -1,9 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Moon, Sun } from 'lucide-react'
 import { useLocale } from 'next-intl'
-import { useTheme } from 'next-themes'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 
 const NAV_LINKS = [
@@ -47,22 +44,14 @@ export function Footer() {
   const locale = useLocale()
   const pathname = usePathname()
   const router = useRouter()
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
   const year = new Date().getFullYear()
   const isEn = locale === 'en'
   const navLinks = isEn ? NAV_LINKS_EN : NAV_LINKS
   const projectLinks = isEn ? PROJECT_LINKS_EN : PROJECT_LINKS
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
   function toggleLocale() {
     router.replace(pathname, { locale: locale === 'pl' ? 'en' : 'pl' })
   }
-
-  const isDark = mounted ? theme === 'dark' : true
 
   return (
     <footer className="border-t border-[rgba(34,211,238,0.08)] bg-[#050D12] py-12">
@@ -176,26 +165,6 @@ export function Footer() {
               className="rounded-md border border-[rgba(34,211,238,0.15)] bg-[#081420] px-3 py-1.5 font-dm-mono text-xs text-[#7EA8BD] transition-colors hover:border-[rgba(34,211,238,0.4)] hover:text-[#22D3EE]"
             >
               PL / EN
-            </button>
-            <button
-              type="button"
-              onClick={() => setTheme(isDark ? 'light' : 'dark')}
-              className="flex h-8 w-8 items-center justify-center rounded-md border border-[rgba(34,211,238,0.15)] bg-[#081420] text-[#7EA8BD] transition-colors hover:border-[rgba(34,211,238,0.4)] hover:text-[#22D3EE]"
-              aria-label={
-                isEn
-                  ? isDark
-                    ? 'Switch to light theme'
-                    : 'Switch to dark theme'
-                  : isDark
-                    ? 'Przełącz na jasny motyw'
-                    : 'Przełącz na ciemny motyw'
-              }
-            >
-              {mounted ? (
-                isDark ? <Sun size={14} /> : <Moon size={14} />
-              ) : (
-                <span className="h-3.5 w-3.5" />
-              )}
             </button>
           </div>
         </div>
