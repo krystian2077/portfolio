@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
-import { ArrowRight, Menu, X } from 'lucide-react'
+import { ArrowRight, FileDown, Menu, X } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Link, usePathname, useRouter } from '@/i18n/navigation'
 import { cn } from '@/lib/utils'
@@ -146,6 +146,16 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href="/Krystian_Potaczek_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={t('cvAria')}
+              className="flex items-center gap-1.5 rounded-md border border-[rgba(34,211,238,0.25)] px-2.5 py-1 text-sm text-[#22D3EE] transition-colors hover:border-[rgba(34,211,238,0.5)] hover:text-[#67E8F9]"
+            >
+              <FileDown size={13} />
+              {t('cv')}
+            </a>
           </nav>
 
           <div className="flex items-center justify-end gap-4">
@@ -229,6 +239,17 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
+              <a
+                href="/Krystian_Potaczek_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={t('cvAria')}
+                onClick={() => setIsMobileOpen(false)}
+                className="flex w-fit items-center gap-1.5 rounded-md border border-[rgba(34,211,238,0.25)] px-2.5 py-1 text-sm text-[#22D3EE]"
+              >
+                <FileDown size={13} />
+                {t('cv')}
+              </a>
 
               <div className="flex items-center gap-4 border-t border-[rgba(34,211,238,0.08)] pt-4">
                 <button

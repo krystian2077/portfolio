@@ -16,6 +16,8 @@ const messages = {
     themeDark: 'Switch to dark theme',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
+    cv: 'CV',
+    cvAria: 'Open Curriculum Vitae (PDF)',
   },
   footer: {
     copyright: 'Krystian Potaczek. All rights reserved.',

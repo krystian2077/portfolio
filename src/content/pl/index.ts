@@ -17,6 +17,8 @@ const messages = {
     themeDark: 'Włącz ciemny motyw',
     openMenu: 'Otwórz menu',
     closeMenu: 'Zamknij menu',
+    cv: 'CV',
+    cvAria: 'Otwórz Curriculum Vitae (PDF)',
   },
   footer: {
     copyright: 'Krystian Potaczek. Wszystkie prawa zastrzeżone.',

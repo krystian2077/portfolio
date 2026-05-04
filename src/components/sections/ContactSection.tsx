@@ -53,7 +53,7 @@ export function ContactSection() {
         legal:
           'By sending this message, you agree to be contacted back regarding your inquiry.',
         quick: 'Quick contact',
-        cv: 'coming soon',
+        cv: 'Download PDF',
         availability: 'Availability',
         availabilityValue: 'Remote / hybrid / Poland',
         response: 'I usually reply within 24h',
@@ -86,7 +86,7 @@ export function ContactSection() {
         legal:
           'Wysyłając wiadomość, zgadzasz się na kontakt zwrotny w sprawie przesłanego zapytania.',
         quick: 'Szybki kontakt',
-        cv: 'wkrótce dostępne',
+        cv: 'Pobierz PDF',
         availability: 'Dostępność',
         availabilityValue: 'Zdalnie / hybrydowo / Polska',
         response: 'Odpowiadam zwykle w ciągu 24h',
@@ -134,8 +134,8 @@ export function ContactSection() {
       icon: Download,
       label: 'Curriculum Vitae',
       value: copy.cv,
-      href: null,
-      external: false,
+      href: '/Krystian_Potaczek_CV.pdf',
+      external: true,
       highlight: true,
     },
     {
