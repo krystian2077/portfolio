@@ -151,7 +151,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t('cvAria')}
-              className="flex items-center gap-1.5 rounded-md border border-[rgba(34,211,238,0.25)] px-2.5 py-1 text-sm text-[#22D3EE] transition-colors hover:border-[rgba(34,211,238,0.5)] hover:text-[#67E8F9]"
+              className="flex items-center gap-2 rounded-lg border border-[rgba(34,211,238,0.25)] px-4 py-1.5 text-sm font-medium text-[#22D3EE] transition-colors hover:border-[rgba(34,211,238,0.5)] hover:bg-[rgba(34,211,238,0.06)] hover:text-[#67E8F9]"
             >
               <FileDown size={13} />
               {t('cv')}
