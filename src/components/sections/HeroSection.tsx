@@ -320,13 +320,15 @@ export function HeroSection() {
               >
                 {t('cta.primary')}
               </Link>
-              <Link
-                href="#cv"
+              <a
+                href="/Krystian_Potaczek_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="rounded-lg border bg-transparent px-6 py-3 text-sm transition-colors hover:bg-[rgba(34,211,238,0.08)] active:bg-[rgba(34,211,238,0.12)]"
                 style={{ borderColor: 'rgba(34,211,238,0.4)', color: '#22D3EE' }}
               >
                 {t('cta.secondary')}
-              </Link>
+              </a>
             </motion.div>
 
             {/* Social links */}
