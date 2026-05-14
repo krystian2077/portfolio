@@ -106,7 +106,7 @@ export function FeaturedProjectsSection() {
             <p className="font-dm-mono text-xs text-(--text-muted)">{t('staymap.stats')}</p>
 
             <div className="flex flex-wrap gap-3">
-              <ExternalButton href="https://staymap-polska.vercel.app/" label={t('actions.liveDemo')} />
+              <ExternalButton href="https://www.staymap-polska.pl/" label={t('actions.liveDemo')} />
               <ExternalButton href="https://github.com/krystian2077/staymap-polska" label={t('actions.github')} />
               <Link href="/projects/staymap-polska" className={cn(buttonVariants({ variant: 'ghost', size: 'md' }))}>
                 {t('actions.caseStudy')}

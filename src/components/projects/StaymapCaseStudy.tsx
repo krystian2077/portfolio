@@ -227,7 +227,7 @@ export default function StaymapCaseStudy() {
           {/* Action buttons */}
           <motion.div {...fadeUp(0.25)} className="mb-6 flex flex-wrap gap-3">
             <a
-              href="https://staymap-polska.vercel.app/"
+              href="https://www.staymap-polska.pl/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-[#22D3EE] px-5 py-2.5 text-sm font-semibold text-[#050D12] transition-opacity hover:opacity-90"
@@ -245,7 +245,7 @@ export default function StaymapCaseStudy() {
               GitHub
             </a>
             <a
-              href="https://staymap-polska.vercel.app/api/schema/swagger-ui/"
+              href="https://www.staymap-polska.pl/api/schema/swagger-ui/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm text-[#7EA8BD] transition-colors hover:text-[#F0F9FF]"

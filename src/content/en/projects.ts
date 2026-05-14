@@ -27,7 +27,7 @@ export const projects = {
         github: 'GitHub',
       },
       links: {
-        live: 'https://staymap-polska.vercel.app/',
+        live: 'https://www.staymap-polska.pl/',
         github: 'https://github.com/krystian2077/staymap-polska',
       },
     },

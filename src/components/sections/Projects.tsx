@@ -141,7 +141,7 @@ export function Projects() {
 
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href="https://staymap-polska.vercel.app/"
+                    href="https://www.staymap-polska.pl/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="rounded-lg bg-[#22D3EE] px-5 py-2.5 text-sm font-semibold text-[#050D12] transition-opacity hover:opacity-90 active:opacity-75"
